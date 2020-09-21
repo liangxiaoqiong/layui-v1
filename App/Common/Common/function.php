@@ -3401,6 +3401,24 @@ function getDayRange($timestamp = NOW_TIME, $type = '')
     }
 }
 
+/**
+ * json序列化
+ * @param $param
+ * @return string
+ * User: hjun
+ * Date: 2018-08-22 15:05:55
+ * Update: 2018-08-22 15:05:55
+ * Version: 1.00
+ */
+function jsonEncode($param)
+{
+    if (empty($param)) return '';
+    $data = json_encode($param, 256);
+    if ($data === 'null' || $data === '[]' || $data === '{}') {
+        return '';
+    }
+    return $data;
+}
 
 /**
  * 将列表按照某个值分组
