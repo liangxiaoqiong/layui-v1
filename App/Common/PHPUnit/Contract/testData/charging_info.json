@@ -1,0 +1,40 @@
+[
+  {
+    "result": true,
+    "error": "",
+    "data": [
+      {
+        "item_id": 0,
+        "item_name": "23",
+        "fee": "12"
+      }
+    ]
+  },
+  {
+    "result": false,
+    "error": "杂费信息：测试的金额格式不正确",
+    "data": [
+      {
+        "item_id": 12,
+        "item_name": "测试",
+        "fee": "我"
+      }
+    ]
+  },
+  {
+    "result": false,
+    "error": "杂费信息：测试2的金额格式不正确",
+    "data": [
+      {
+        "item_id": 12,
+        "item_name": "测试",
+        "fee": "12"
+      },
+      {
+        "item_id": 12,
+        "item_name": "测试2",
+        "fee": "我"
+      }
+    ]
+  }
+]

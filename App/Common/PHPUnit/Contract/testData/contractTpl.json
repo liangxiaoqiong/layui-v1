@@ -1,0 +1,14 @@
+[
+  {
+    "result": true,
+    "tpl_id": 35
+  },
+  {
+    "result": true,
+    "tpl_id": 39
+  },
+  {
+    "result": false,
+    "tpl_id": 1
+  }
+]

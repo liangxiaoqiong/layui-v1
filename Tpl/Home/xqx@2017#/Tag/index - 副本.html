@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title} - <tp:sitename /></title>
+<meta name="keywords" content="{$tagname}" />
+<meta name="description" content="包含标签'{$tagname}'的内容." />
+<link href="__PUBLIC__/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.min.js"></script>
+<!--[if lt IE 9]><script src="__PUBLIC__/js/modernizr.js"></script><![endif]-->
+</head>
+<body>
+<include file="Public:header" />
+<style type="text/css">
+.item{
+	border: 1px solid #888;
+    margin: 0 10px 10px 0;
+    padding: 10px;
+    position: relative;
+    width: 750px;
+}
+.category{
+	text-indent: 14px;
+	line-height: 24px;
+	background: #FFD77C;
+	font-size: 14px;
+}
+</style>
+
+<div class="clear"></div>
+<div class="article">
+<div class="content">
+<h1 class="t_nav"><span>您当前的位置：<tp:position delimiter='&nbsp;&gt;&nbsp;' /></span></h1>
+
+<div class="bloglist">
+<!--广告位-->
+</div>
+<div class="bloglist">
+
+<foreach name="vlist" item="list" key="autoindex">
+<php>
+$vtitle = str_replace($tagname,'<b style="color:red">'.$tagname.'</b>',$list['title']);
+$descr = str_replace($tagname,'<b style="color:red">'.$tagname.'</b>',$list['description']);
+</php>
+<ul>
+<h2><a title="{$list.title}" href="<tp:siteurl />{$list.url}" target="_blank">{$vtitle}</a></h2>
+<figure><img style="float:left;margin-right:10px;" src="<tp:siteurl />{$list.litpic}" width="150" height="115" alt="{$list.title}" /></figure>
+<span class="blog-content">{$descr}...</span>
+<p class="dateview">
+<span>发布时间：{$list.publishtime|date='Y-m-d H:i:s',###}</span>
+<span>分类：<a href="<tp:siteurl />{$list.curl}">{$list.catename}</a></span>
+<span>浏览次数({$list.click})</span>
+<span><a title="{$list.title}" href="<tp:siteurl />{$list.url}" target="_blank">查看详情</a></span>
+</p>
+</ul>
+</foreach>
+
+</div>
+
+<div class="clear"></div>
+<div class="yellow">{$page}</div>
+<div class="clear"></div>
+<div class="blank"></div>
+</div>
+<aside class="navsidebar">
+<h2><p>猜你喜欢</p></h2>
+<ul class="news">
+<!--广告位-->
+<tp:union id='10' />
+</ul>
+
+<h2><p>推荐吉他谱</p></h2>
+<ul class="news">
+<tp:list typeid='0' limit='10' flag='c'>
+<li class="list-group-item"><a href="<tp:siteurl />{$list.url}" title="{$list.title}" target="_blank">{$list.title}</a></li>
+</tp:list>
+</ul>
+
+<h2><p>热门吉他谱</p></h2>
+<ul class="news">
+<tp:list  typeid='0' limit='10' orderby='click DESC'>
+<li class="list-group-item"><a href="<tp:siteurl />{$list.url}" title="{$list.title}" target="_blank">{$list.title}</a></li>
+</tp:list>
+</ul>
+</aside>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+</html>

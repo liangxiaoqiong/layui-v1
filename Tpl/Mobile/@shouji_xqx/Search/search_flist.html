@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=640">
+<title>{$title} - <tp:sitename /></title>
+<meta name="keywords" content="{$keyword}" />
+<meta name="description" content="包含关键词'{$keyword}'的搜索结果." />
+<link href="__PUBLIC__/css/search_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="">
+	<div class="column_wrapper">
+		<div class="vspace" style="height: 50px;"></div>
+		<div class="yuepu_title_0224">
+			<span>{$cate.name}</span>
+			<i>搜索结果</i>
+		</div>
+		<div class="yuepu_input_search">
+			<form action="{:U('Search/search_list')}" method="get">
+			<input type="hidden" name="cid" value="{$cid}" />
+			<input type="text" class="input" name="keyword" value="{$keyword}"/>
+			<input type="submit" class="btn" value="搜索" />
+			</form>
+		</div>
+		<div class="vspace" style="height: 50px;"></div>
+		<div class="yuepu_bread_0224">
+			<h3>找到 “{$keyword}” 相关结果 {$count} 个</h3>
+		</div>
+			<ul class="yuepu_search_result" id="yuepu_search_result">
+			<foreach name="vlist" item="list" key="autoindex">
+                <li class="tiezi">
+                <a href="{$list.url}">
+                <if condition="$list['userid'] gt 0">
+                <php>
+                $userinfo = get_userinfo($list['userid']);
+                $face = $userinfo['face'];
+                if(!$face){
+                $face = "/avatar/system/0.gif";
+                }
+                </php>
+                <img src="{$face}" width="100%" alt="{$userinfo['username']}" />
+                <else />
+                <img src="__ROOT__/avatar/system/0.gif" width="100%" alt="{$userinfo['username']}" />
+                </if>
+                <p>{$list.title}</p>
+                </a>
+                </li>
+            </foreach>
+			</ul>
+	</div>
+    <div class="page">
+		{$page}
+	</div>
+<include file="Public:footer" />
+</body>
+</html>

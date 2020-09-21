@@ -1,0 +1,27 @@
+html{background:#f3f3f3;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-table;}
+*html .clearfix{height:1%;}
+.clearfix{display:block;}
+*+html .clearfix{min-height:1%;}
+
+/* item_list */
+.item_list{position:relative;padding:5px 0 50px;float: left;width: 1240px;}
+.item{width:226px;background:#fff;overflow:hidden;margin: 0 0 15px 0;border-radius:4px 4px 4px 4px;box-shadow:0 1px 3px rgba(34, 25, 25, 0.2); }
+.item_t{padding:10px 8px 0;}
+.item_t .img{background-color:#FFFFFF;margin:0 auto;position:relative;width:210px;min-height:126px;}
+.item_t .img a{display:block;}
+.item_t .img a:hover{background:#none;}
+.item_t .img a:hover img{filter:alpha(opacity=80);-khtml-opacity:0.8;opacity:0.8;-webkit-transition:all 0.3s ease-out;-khtml-transition:all 0.3s ease-out;}
+
+.item .btns{display:none;}
+.item .btns:hover{display:none;color: #f90;background: none;}
+.img_album_btn{top:0px;right:0px;position:absolute;height:20px;line-height:20px;width:26px;text-align: center;top: 10px;right: 10px;color: #fff;}
+.img_album_btn:hover{color: #f90;background: none;}
+.item_t .title{padding:8px 0 0;line-height:18px;}
+.item_b{padding:3px 8px 8px;}
+.item_b .items_comment{margin: 4px 0 0 0;color: #aaa;}
+.item_b .items_comment a{color: #ddd;}
+.item_b .items_likes .like_btn{display:block;float:left;height:23px;width:59px;margin-right:5px;}
+.item_b .items_likes em{line-height:23px;display:block;float:left;padding:0px 2px;color:#ddd;font-weight:800;border-radius:3px;}
+

@@ -1,0 +1,126 @@
+[
+  {
+    "segments": [
+      {
+        "remark": "三个月免租期",
+        "start_time": "2018-08-20",
+        "end_time": "2018-11-19",
+        "value": 0
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-11-20",
+        "end_time": "2019-05-19",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-05-20",
+        "end_time": "2019-11-19",
+        "value": 60
+      }
+    ],
+    "end_time": "2018-12-25",
+    "period": 3,
+    "result": [
+      {
+        "remark": "三个月免租期",
+        "start_time": "2018-08-20",
+        "end_time": "2018-11-19",
+        "value": 0
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-11-20",
+        "end_time": "2018-12-25",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-12-26",
+        "end_time": "2019-03-25",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-03-26",
+        "end_time": "2019-05-19",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-05-20",
+        "end_time": "2019-06-25",
+        "value": 60
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-06-26",
+        "end_time": "2019-09-25",
+        "value": 60
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-09-26",
+        "end_time": "2019-11-19",
+        "value": 60
+      }
+    ]
+  },
+  {
+    "segments": [
+      {
+        "remark": "三个月免租期",
+        "start_time": "2018-08-20",
+        "end_time": "2018-11-19",
+        "value": 0
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-11-20",
+        "end_time": "2019-05-19",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-05-20",
+        "end_time": "2019-11-19",
+        "value": 60
+      }
+    ],
+    "end_time": "",
+    "period": 3,
+    "result": [
+      {
+        "remark": "三个月免租期",
+        "start_time": "2018-08-20",
+        "end_time": "2018-11-19",
+        "value": 0
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-11-20",
+        "end_time": "2019-02-19",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-02-20",
+        "end_time": "2019-05-19",
+        "value": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-05-20",
+        "end_time": "2019-08-19",
+        "value": 60
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-08-20",
+        "end_time": "2019-11-19",
+        "value": 60
+      }
+    ]
+  }
+]

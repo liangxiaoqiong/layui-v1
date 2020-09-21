@@ -1,0 +1,43 @@
+<div class="headerWrap"  title="<tp:sitename />">
+    <div class='header'>
+      <h1><a href="<tp:siteurl />" title="<tp:sitename />" style="background:url(__PUBLIC__/Images/logo.png)  no-repeat center center;"><tp:sitename /></a></h1>
+        <div class="nav">
+           <ul id="nav">
+                <li <if condition="$cid eq ''">class="cur"</if> ><a href="<tp:siteurl />" title="<tp:sitename />">首页</a></li>
+                <tp:catlist typeid='0'>
+                <li <if condition="$cid eq $catlist['id'] or $pid eq $catlist['id']">class="cur"</if> ><a href="{$catlist.url}" title="{$catlist.name}">{$catlist.name}</a>
+                	<if condition="$catlist['child']">
+                    <ul>
+                        <volist name='catlist["child"]' id='v'>
+                        <li><a href="{$v|get_url}" title="{$v.name}">{$v.name}</a></li>
+                        </volist>
+                    </ul>
+                    </if>
+                </li>
+                </tp:catlist>
+            </ul>
+        </div>
+        <div class="navuser">
+            <if condition="!$uid">
+            <a href="javascript:Login('{:U('Public/login')}','登录');" title="登录<tp:sitename />">登录</a>
+            <span></span>
+            <a href="javascript:Login('{:U('Public/register')}','注册');" title="注册<tp:sitename />">注册</a>
+            <else />
+            <div style="float:left;">{:get_nickname($uid)}您好，欢迎回来！</div>
+            <span></span>
+            <a href="{:U('Public/logout')}">退出</a>
+            </if>
+        </div>
+       	<!--<span class="other_login_title">合作登录：</span>
+		<div class="other_login_link">
+        <a href="/Addons-execute-_addons-SyncLogin-_controller-Base-_action-login-type-qq.html" class="other_login other_login_qq"></a>
+            <a href="/Addons-execute-_addons-SyncLogin-_controller-Base-_action-login-type-sina.html" class="other_login other_login_sina"></a>
+        </div>-->
+        <div class="search">
+            <form method="get" action="<tp:searchurl />">
+                <input type="text" class="input" name="keyword"  value="" placeholder="请输入关键字" />
+                <input type="submit" class="submit" value="搜索"/>
+            </form>
+        </div>
+    </div>
+</div>

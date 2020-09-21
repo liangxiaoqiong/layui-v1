@@ -1,0 +1,307 @@
+[
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      }
+    ],
+    "end_time": "2019-03-31",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2019-03-31"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2019-04-01",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      }
+    ],
+    "end_time": "",
+    "result": {
+      "first": [],
+      "rest": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      }
+    ],
+    "end_time": "2019-02-19",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      }
+    ],
+    "end_time": "2020-02-19",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ],
+      "rest": []
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      }
+    ],
+    "end_time": "2018-11-01",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2018-11-01"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2018-11-02",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      },
+      {
+        "start_time": "2020-02-20",
+        "end_time": "2020-12-31"
+      }
+    ],
+    "end_time": "2018-11-01",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2018-11-01"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2018-11-02",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        },
+        {
+          "start_time": "2020-02-20",
+          "end_time": "2020-12-31"
+        }
+      ]
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      },
+      {
+        "start_time": "2020-02-20",
+        "end_time": "2020-12-31"
+      }
+    ],
+    "end_time": "2019-03-01",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2019-03-01"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2019-03-02",
+          "end_time": "2020-02-19"
+        },
+        {
+          "start_time": "2020-02-20",
+          "end_time": "2020-12-31"
+        }
+      ]
+    }
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19"
+      },
+      {
+        "start_time": "2020-02-20",
+        "end_time": "2020-12-31"
+      }
+    ],
+    "end_time": "2020-06-19",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        },
+        {
+          "start_time": "2020-02-20",
+          "end_time": "2020-06-19"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2020-06-20",
+          "end_time": "2020-12-31"
+        }
+      ]
+    }
+  },
+
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2019-02-19",
+        "a": "a"
+      },
+      {
+        "start_time": "2019-02-20",
+        "end_time": "2020-02-19",
+        "a": "a"
+      },
+      {
+        "start_time": "2020-02-20",
+        "end_time": "2020-12-31",
+        "a": "a"
+      }
+    ],
+    "end_time": "2018-08-20",
+    "result": {
+      "first": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2018-08-20",
+          "a": "a"
+        }
+      ],
+      "rest": [
+        {
+          "start_time": "2018-08-21",
+          "end_time": "2019-02-19",
+          "a": "a"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19",
+          "a": "a"
+        },
+        {
+          "start_time": "2020-02-20",
+          "end_time": "2020-12-31",
+          "a": "a"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,106 @@
+[
+  {
+    "error": "",
+    "data": {
+      "property": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2018-09-01",
+          "property_value": "12"
+        },
+        {
+          "start_time": "2018-09-02",
+          "end_time": "2019-02-19",
+          "property_value": "12"
+        }
+      ],
+      "segments": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "error": "物业分段的开始和结束时间必须与租金分段一致",
+    "data": {
+      "property": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2018-09-01",
+          "property_value": "12"
+        },
+        {
+          "start_time": "2018-09-02",
+          "end_time": "2020-12-31",
+          "property_value": "12"
+        }
+      ],
+      "segments": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "error": "物业分段的开始和结束时间必须与租金分段一致",
+    "data": {
+      "property": [
+        {
+          "start_time": "2018-01-01",
+          "end_time": "2018-09-01",
+          "property_value": "12"
+        },
+        {
+          "start_time": "2018-09-02",
+          "end_time": "2020-02-19",
+          "property_value": "12"
+        }
+      ],
+      "segments": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  },
+  {
+    "error": "物业分段的开始和结束时间必须与租金分段一致",
+    "data": {
+      "property": [
+        {
+          "start_time": "2018-01-01",
+          "end_time": "2018-09-01",
+          "property_value": "12"
+        },
+        {
+          "start_time": "2018-09-02",
+          "end_time": "2020-12-31",
+          "property_value": "12"
+        }
+      ],
+      "segments": [
+        {
+          "start_time": "2018-08-20",
+          "end_time": "2019-02-19"
+        },
+        {
+          "start_time": "2019-02-20",
+          "end_time": "2020-02-19"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>{$title}_{$cate.name} - <tp:sitename /></title>
+<link rel="stylesheet" href="__PUBLIC__/js/plyr/plyr.css" />
+<style type="text/css">
+.plyr__controls--right {
+    display: inline; 
+   margin: 10px auto 0;
+}
+body{margin: 0;padding: 0;}
+.plyr__controls {
+ box-shadow: 0px 0px 0px rgba(0,0,0,0.3),0px 0px 0px rgba(0,0,0,0.1) inset;
+}
+</style>
+</head>
+<body bgcolor="#fff">
+<div class="plyr">
+<audio controls>
+    <source src="{$content.downlink}" type="audio/mp3">
+</audio>
+</div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/js/plyr/plyr.js"></script>
+<script type="text/javascript">
+(function(d,u){
+    var a=new XMLHttpRequest(),b=d.body;
+    if("withCredentials" in a){
+        a.open("GET",u,true);
+    a.send();
+    a.onload=function(){
+        var c=d.createElement("div");c.setAttribute("hidden","");
+        c.innerHTML=a.responseText;
+        b.insertBefore(c,b.childNodes[0])
+    }
+   }})(document, "__PUBLIC__/js/plyr/sprite.svg");
+  plyr.setup();
+  // var player = document.querySelector('.js-plyr').plyr;
+  // player.play();
+</script>
+</html>

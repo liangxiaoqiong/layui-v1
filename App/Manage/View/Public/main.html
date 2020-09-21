@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="UTF-8">
+    <title>后台管理模板</title>
+    <link rel="stylesheet" href="__ADMIN__/plugins/layui/css/layui.css?v={$V}" media="all" />
+    <link rel="stylesheet" href="__ADMIN__/css/main.css?v={$V}"  media="all"  />
+    <!--[if lt IE 9]>
+    <script src="__DATA__/static/js/html5shiv.min.js?v={$V}"></script>
+    <script src="__DATA__/static/js/respond.min.js?v={$V}"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__ADMIN__/plugins/layui/layui.js?v={$V}"></script>
+</head>
+<body>
+<!--主体-->
+<div style="margin-bottom:36px;">
+	<div class="tpt—index fly-panel fly-panel-user">
+    	<blockquote style="padding: 10px;border-left: 5px solid #009688;" class="layui-elem-quote">个人信息：</blockquote>
+        <table width="100%">
+            <tr><td width="110px">用户名</td><td>{$Think.session.yang_adm_username}</td></tr>
+            <tr><td>用户组</td><td><if condition="$Think.session.yang_adm_superadmin" >超级管理员<else />管理员</if></td></tr>
+            <tr><td>上次登录时间</td><td>{$Think.session.yang_adm_logintime}</td></tr>
+            <tr><td>上次登录IP</td><td>{$Think.session.yang_adm_loginip}</td></tr>
+            <tr><td>登录次数</td><td>{$Think.session.yang_adm_loginnum}</td></tr>
+        </table>
+        <blockquote style="padding: 10px;border-left: 5px solid #009688;" class="layui-elem-quote">系统信息：</blockquote>
+        <table width="100%">
+            <tr><td width="110px">程序版本</td><td>园区管理系统内容管理系统 （更新日期：2017-09-05）</td></tr>
+            <tr><td>服务器类型</td><td>{$os}</td></tr>
+            <tr><td>服务器软件</td><td>{$software}</td></tr>
+            <tr><td>MySQL版本</td><td>{$mysql_ver}</td></tr>
+            <tr><td>上传文件大小</td><td>{$environment_upload}</td></tr>
+        </table>
+        <blockquote style="padding: 10px;border-left: 5px solid #009688;" class="layui-elem-quote">开发团队：</blockquote>
+        <table width="100%">
+            <tr><td width="110px">版权所有</td><td>yq.w6g.com</td></tr>
+            <tr><td>特别提醒您1</td><td>严禁删除、隐藏或更改版权信息，否则导致的一切损失由使用者自行承担。</td></tr>
+        </table>
+    </div>
+</div>      
+</body>
+</html>

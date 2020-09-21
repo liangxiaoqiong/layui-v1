@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$title}_{$cate.name} - <tp:sitename /></title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<link rel="stylesheet" href="__PUBLIC__/js/plyr/plyr.css" />
+<style type="text/css">
+.musicCommon{width: 100%;height: 140px;}
+.musicCommon .left{width: 140px;height: 100%;float: left;}
+.musicCommon .right{width: 400px;height: 100%;float: right;border-top:1px solid #eee;border-right:1px solid #eee;background: #eee;}
+.musicCommon .right h5{font-family: "微软雅黑";font-weight: 700;font-size: 15px;text-align: center;}
+.musicCommon .right p{font-family: "微软雅黑";font-weight: 500;font-size: 13px;text-align: left;text-indent: 2em;width: 90%;margin: auto;}
+</style>
+</head>
+<body bgcolor="#fff">
+  <div class="musicCommon">
+    <div class="left">
+       <img src="{$content.litpic}" alt="{$content.title}" width="100%">
+    </div>
+    <div class="right">
+      <h5>{$content.title}<h5>
+      <p><span style="display:none;"><tp:click /></span>&nbsp;{:mb_substr($content['description'],0,70,'utf-8')}...<p>
+    </div>
+  </div>
+  <div class="plyr">
+    <audio controls>
+    	<source src="{$content.downlink}" type="audio/mp3">
+    </audio>
+  </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/js/plyr/plyr.js"></script>
+<script type="text/javascript">
+(function(d,u){
+    var a=new XMLHttpRequest(),b=d.body;
+    if("withCredentials" in a){
+        a.open("GET",u,true);
+    a.send();
+    a.onload=function(){
+        var c=d.createElement("div");c.setAttribute("hidden","");
+        c.innerHTML=a.responseText;
+        b.insertBefore(c,b.childNodes[0])
+    }
+   }})(document, "__PUBLIC__/js/plyr/sprite.svg");
+  plyr.setup();
+</script>
+</html>

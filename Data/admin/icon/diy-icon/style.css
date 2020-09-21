@@ -1,0 +1,133 @@
+@font-face {
+  font-family: 'yqicon';
+  src:  url('fonts/yqicon.eot?vanrvk');
+  src:  url('fonts/yqicon.eot?vanrvk#iefix') format('embedded-opentype'),
+    url('fonts/yqicon.ttf?vanrvk') format('truetype'),
+    url('fonts/yqicon.woff?vanrvk') format('woff'),
+    url('fonts/yqicon.svg?vanrvk#yqicon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="yqicon-"], [class*=" yqicon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'yqicon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.yqicon-checked:before {
+  content: "\e900";
+  color: #ff533d;
+}
+.yqicon-clear-cache:before {
+  content: "\e96b";
+  color: #ff9d3d;
+}
+.yqicon-menu-icon-xtgk:before {
+  content: "\e901";
+}
+.yqicon-menu-icon-bbgl:before {
+  content: "\e96c";
+}
+.yqicon-menu-icon-czfgl:before {
+  content: "\e96d";
+}
+.yqicon-menu-icon-fwgl:before {
+  content: "\e96e";
+}
+.yqicon-menu-icon-hygl:before {
+  content: "\e96f";
+}
+.yqicon-menu-icon-khgl:before {
+  content: "\e970";
+}
+.yqicon-menu-icon-tzjl:before {
+  content: "\e971";
+}
+.yqicon-menu-icon-xtsz:before {
+  content: "\e972";
+}
+.yqicon-menu-icon-yggl:before {
+  content: "\e973";
+}
+.yqicon-menu-icon-zdgl:before {
+  content: "\e974";
+}
+.yqicon-menu-icon-zngl:before {
+  content: "\e975";
+}
+.yqicon-menu-icon-zwgl:before {
+  content: "\e976";
+}
+.yqicon-menu-icon-zxgl:before {
+  content: "\e977";
+}
+.yqicon-password:before {
+  content: "\e978";
+  color: #ff9d3d;
+}
+.yqicon-phone:before {
+  content: "\e979";
+  color: #ff9d3d;
+}
+.yqicon-sign-out:before {
+  content: "\e97a";
+  color: #ff9d3d;
+}
+.yqicon-right:before {
+  content: "\e927";
+}
+
+.yqicon-sort-asc:before {
+  content: "\e902";
+}
+.yqicon-sort-desc:before {
+  content: "\e903";
+}
+
+.yqicon-search:before {
+  content: "\e905";
+}
+.yqicon-export:before {
+  content: "\e904";
+}
+.yqicon-building:before {
+  content: "\e906";
+  color: #ff533d;
+}
+
+.yqicon-save:before {
+  content: "\e907";
+  color: #fff;
+}
+.yqicon-checked-2:before {
+  content: "\e908";
+  color: #fff;
+}
+.yqicon-down-1:before {
+  content: "\e909";
+}
+.yqicon-up-1:before {
+  content: "\e909";
+}
+.yqicon-up-1 {
+  transform: rotate(180deg);
+  display: inline-block;
+}
+
+.yqicon-view:before {
+  content: "\e90b";
+}
+.yqicon-t-change-pwd:before {
+  content: "\e90c";
+  color: #ff533d;
+}

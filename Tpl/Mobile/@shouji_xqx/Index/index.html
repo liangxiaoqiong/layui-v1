@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><tp:sitename /> - <tp:sitetitle/></title>
+<meta name="keywords" content="<tp:sitekeywords />" />
+<meta name="description" content="<tp:sitedescription />" />
+<include file="Public:header_com" />
+</head> 
+<body>
+<div id="preloader">
+    <div id="status">
+        <p class="center-text"><tp:sitename /><em>文艺青年的心灵驿站！</em></p>
+    </div>
+</div>
+<div class="all-elements">
+    <include file="Public:header" />
+    
+	<div class="all-elements">
+     <!-- Page Content-->
+         <div id="content" class="snap-content"> 
+         <!-- 幻灯片 -->       
+             <div class="slider-container full-bottom">
+                 <div class="homepage-slider" data-snap-ignore="true">   
+                   <tp:list typeid='0' flag='a,e' limit='5' infolen='90'>
+                   <div>
+                         <div class="overlay"></div>
+                         <div class="homepage-slider-caption homepage-left-caption">
+                             <h3>{$list.title}</h3>
+                             <p>{$list.description}...</p>
+                         </div>
+                         <a href="{$list.url}"><img src="{$list.litpic}" class="responsive-image" alt="{$list.title}"></a>
+                   </div>
+                   </tp:list>
+                 </div>
+             </div><!-- 幻灯片end -->    
+             <div class="content">   
+                <!-- 1fstar -->         
+                 <div class="decoration"></div>
+                 <tp:type typeid='7'>
+                 <a href="{$type.url}">
+                 <div class="content-heading full-bottom">
+                     <h2>{$type.name}</h2>
+                     <em>{$type.description}</em>
+                       <i class="fa fa-music"></i> 
+                 </div>
+                 </tp:type>
+                </a>
+                 <div class="decoration"></div>
+                 <div class="container no-bottom">
+                    <tp:list typeid='7' flag='b' limit='0,1' infolen='50'>
+                    <div class="one-half-responsive">
+                         <p onClick="Mp3('{$list.url}','{$list.title}')" class="thumb-left no-bottom">
+                             <img src="{$list.litpic}" alt="{$list.title}">
+                             <strong>{$list.title}</strong>
+                             <em><br>{$list.description}...</em>
+                         </p>
+                         <div class="thumb-clear"></div>
+                     </div>
+                     </tp:list>
+                    <div class="decoration hide-if-responsive"></div>
+                    <tp:list typeid='7' flag='b' limit='1,1' infolen='50'>
+                    <div class="one-half-responsive last-column">        
+                         <p onClick="Mp3('{$list.url}','{$list.title}')" class="thumb-right no-bottom">
+                             <img src="{$list.litpic}" alt="{$list.title}">
+                             <strong>{$list.title}</strong>
+                             <em><br>{$list.description}...</em>
+                         </p>
+                         <div class="thumb-clear"></div>
+                    </div>
+                    </tp:list>
+                  </div>
+                 <div class="decoration"></div>
+                 <div class="container">
+                     <a href="javascript:" class="next-staff"></a>
+                     <a href="javascript:" class="prev-staff"></a>
+                     <div class="staff-slider" data-snap-ignore="true">
+                        <tp:list typeid='7' limit='6' infolen='50'>
+                        <div>
+                             <div onClick="Mp3('{$list.url}','{$list.title}')" class="staff-item">
+                                 <img src="{$list.litpic}" alt="{$list.title}">
+                                 <h4>{$list.title}</h4>
+                                 <strong>{$list.description}...</strong>
+                                 <a href="javascript:" class="button button-red center-button">播放</a>
+                             </div>
+                         </div>
+                         </tp:list>
+                         
+                     </div>
+                 </div> 
+                <!-- 1fend --> 
+                <!-- 2action -->
+                 <div class="decoration"></div>
+                 <tp:type typeid='8'>
+                 <a href="{$type.url}">
+                 <div class="content-heading full-bottom">
+                     <h2>{$type.name}</h2>
+                     <em>{$type.description}</em>
+                     <i class="fa fa-star"></i>
+                 </div>
+                 </a>
+                 </tp:type>
+                 <div class="decoration"></div>
+                 <tp:list typeid='8' flag='b' limit='0,1' infolen='100'>
+                 <div class="container">
+                     <div class="one-half-responsive">
+                         <!--<iframe width="100%" height="200px" class="responsive-video" src="{$list.url}"></iframe>-->
+                         <a style="margin-bottom:20px;" href="{$list.url}"><img src="{$list.litpic}" width="100%" height="200" alt="{$list.title}"></a>
+                     </div>
+                     <div class="one-half-responsive last-column">
+                         <h3 class="center-if-mobile no-bottom">{$list.title}</h3>
+                         <em class="center-if-mobile small-text half-bottom">播放次数：{$list.click}</em>
+                         <p class="center-if-mobile no-bottom">{$list.description}...</p>
+                     </div>
+                 </div>
+                 </tp:list>
+                 <div class="decoration"></div>
+                <!-- 2end -->
+                <!-- 3faction -->
+                <!--<a href="/Article-lists-category-43.html">
+                 <div class="content-heading full-bottom">
+                     <h2>搞笑视频</h2>
+                     <em>别笑！你笑起来很丑知道不？</em>
+                     <i class="fa fa-quote-right"></i>
+                 </div>
+                </a>
+                 <div class="decoration"></div>-->
+                 <tp:list typeid='8' limit='3' infolen='50'>
+                 <div class="blog-post">
+                     <!--<iframe width="100%" height="200px" class="responsive-video" src="{$list.url}"></iframe>-->
+                     <a style="margin-bottom:20px;" href="{$list.url}"><img src="{$list.litpic}" width="100%" height="200" alt="{$list.title}"></a>
+                     <h3 class="blog-post-title">{$list.title}</h3>
+                     <p class="blog-post-text">{$list.description}...</p>
+                     <p class="blog-post-date"><i class="fa fa-calendar"></i>{$list.publishtime|date='Y-m-d',###}</p>
+                     <p class="blog-post-more">
+                        <a href="{$list.url}">更多<i class="fa fa-angle-right"></i></a>
+                    </p>
+                 </div>
+                 </tp:list>
+                 <!-- 3fend -->
+                 <!-- f4action -->
+                 <div class="decoration"></div>
+                 <tp:type typeid='4'>
+                 <a href="{$type.url}">
+                 <div class="content-heading full-bottom">
+                     <h2>{$type.name}</h2>
+                     <em>{$type.description}</em>
+                     <i class="fa fa-quote-right"></i>
+                 </div>
+                 </a>
+                 </tp:type>
+                 <div class="decoration"></div> 
+                  <div class="quote-slider full-bottom" data-snap-ignore="true">
+                        <tp:list typeid='4' limit='3' infolen='50'>
+                        <div>
+                           <div class="staff-item">
+                               <img style="max-width:350px; border-radius:5px; " src="{$list.litpic}" alt="{$list.title}">
+                               <h4>{$list.title}</h4>
+                               <strong>{$list.description}...</strong>
+                               <a href="{$list.url}" class="button button-red center-button">更多</a>
+                           </div>
+                       </div>
+                       </tp:list>
+                  </div>
+                 <div class="decoration"></div> 
+                 <!-- f4end -->
+                 <!-- f5action -->
+                 <tp:type typeid='6'>
+                 <a href="{$type.url}">
+                 <div class="content-heading full-bottom">
+                     <h2>{$type.name}</h2>
+                     <em>{$type.description}</em>
+                     <i class="fa fa-camera"></i>
+                 </div>
+                 </a>
+                 </tp:type>
+                 <div class="decoration"></div>
+                 <ul class="gallery square-thumb">
+                    <tp:list typeid='6' limit='6' infolen='50'>
+                     <li>
+                          <a href="{$list.url}" title="{$list.title}">
+                           <img src="{$list.litpic}" alt="{$list.title}" />
+                         </a>
+                     </li>
+                     </tp:list>
+                 </ul>
+                 <div class="decoration"></div> 
+                 <!-- f5end -->
+             </div>
+          <!-- Page Footer-->
+        <include file="Public:footer" />          
+        </div>
+    </div>
+</div>
+</body>
+</html>

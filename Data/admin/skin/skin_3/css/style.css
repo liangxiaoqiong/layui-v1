@@ -1,0 +1,277 @@
+/*region 通用 start*/
+.btn-default,
+.btn53-default{border: solid 1px #1890FF;background-color: #1890FF;}
+.btn82-white{border: solid 1px #1890FF;color: #1890FF;}
+.btn-action-edit{background: url("../images/common/action_edit.png")center center /100% 100% no-repeat;}
+.btn-action-del{background: url("../images/common/action_del.png")center center /100% 100% no-repeat}
+.btn-action-add{background: url("../images/common/action_add.png")center center /100% 100% no-repeat}
+.btn-action-edit1{background: url("../images/common/action_edit1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-del1{background: url("../images/common/action_del1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-view1{background: url("../images/common/action_view1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-notice1{background: url("../images/common/action_notice1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-close1{background: url("../images/common/action_close1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-open1{background: url("../images/common/action_open1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-set1{background: url("../images/common/action_set1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-refresh1{background: url("../images/common/action_refresh1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+
+.btn-grey.active
+.btn-grey:active,
+.btn-grey:hover {
+  border-color: #1890FF;
+  color: #1890FF;
+  background-color: #ffffff;
+}
+
+.btn-default.active
+.btn-default:active,
+.btn-default:hover {
+  border-color: #1890FF;
+  background-color: #1890FF;
+}
+
+
+.myicon-switch-1{background: url('../images/common/switch_1.png')center center no-repeat;background-size: 40px 20px}
+
+.myicon-close-default{
+  /*background: url('../../../plugins/layui/css/modules/layer/default/icon.png') no-repeat;
+  background-position: 1px -40px;*/
+  background: url("../../../images/common/close_black.png")center center no-repeat;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+.myicon-close-red {
+  background: url('../images/common/close_2.png')center center no-repeat;
+  background-size: 19px 19px;
+}
+
+.myicon-baobiao{
+  width: 16px;
+  height: 16px;
+  background: url('../images/Statement/baobiao.png')center center no-repeat;background-size: 16px 16px}
+
+.table-row-one .img-div a .myicon-del-img {
+  background: url('../images/common/close_2.png')center center no-repeat;
+  background-size: 19px 19px;
+}
+.myicon-input-date:focus{background: url("../images/common/date_default.png")calc(100% - 14px) center /14px 14px no-repeat;}
+.layui-input:focus,.layui-textarea:focus{border-color: #1890FF!important;}
+.line-left-default:before{background-color:#1890FF}
+    /*region 字体颜色 start*/
+.color-default,
+.tab-default li.active,
+.table-action a,
+.color-default_active:hover,
+.color-default_active:active,
+.color-default_active:visited,
+.color-default_active:focus{color: #1890FF;}
+.color-secondary {
+  color: #FF9D3D;
+} /*副色*/
+    /*endregion 字体颜色 end*/
+
+
+.tab-default li.active font,
+.tab-default li:hover font {
+  background-color: rgba(24,144,255, .1);
+  color: #1890FF;
+}
+.tab-default li:hover {
+  color: #1890FF;
+}
+.tab-default li span {
+  border-bottom: 2px solid transparent;
+}
+.tab-default li.active span{
+  border-bottom: 2px solid #1890FF;
+}
+    /*region layer 弹框 start*/
+body .layer-confirm .layui-layer-close,
+body .layer-open .layui-layer-close{width: 15px;height: 15px;display: inline-block}
+body .layer-confirm .layui-layer-btn .layui-layer-btn0,
+body .layer-open .layui-layer-btn .layui-layer-btn0,
+.common-layer-btn a.btn-default{background-color: #1890FF;color: #ffffff;}
+
+body .layer-confirm .layui-layer-btn .layui-layer-btn0:hover,
+body .layer-open .layui-layer-btn .layui-layer-btn0:hover,
+.common-layer-btn a.btn-default:hover,
+body .layer-confirm .layui-layer-btn .layui-layer-btn0:active,
+body .layer-open .layui-layer-btn .layui-layer-btn0:active,
+.common-layer-btn a.btn-default:active{
+  background-color: rgba(24, 144, 255, .5);
+}
+body .layer-confirm .layui-layer-btn .layui-layer-btn1:hover,
+body .layer-open .layui-layer-btn .layui-layer-btn1:hover,
+.common-layer-btn a.btn-grey:hover,
+body .layer-confirm .layui-layer-btn .layui-layer-btn1:active,
+body .layer-open .layui-layer-btn .layui-layer-btn1:active,
+.common-layer-btn a.btn-grey:active{
+  border: 1px solid #1890FF;
+  color: #1890FF;
+}
+    /*endregion layer 弹框 end*/
+
+    /*region tab+右侧滑出div start*/
+.nav-tab li.active,
+.tab-default-wx li.active{color: #1890FF;}
+.nav-tab li.active {
+  font-weight: bold;
+}
+.tab-default-wx li.active:after,
+.nav-tab li.active:after{background-color: #1890FF;}
+
+    /*endregion tab+右侧滑出div end*/
+
+    /*region 搜索 start*/
+.search-content ul li.search-btn button,
+.search-content3 ul li.search-btn button{border: solid 1px #1890FF;color: #1890FF;}
+    /*endregion 搜索 end*/
+    /*展开、收起按钮*/
+.more-btn a {
+  background-color: rgba(255,83,61,.08);
+  color: #1890FF;
+}
+
+    /*region table start*/
+.table-bill tr th{background-color:#f9f1f1;color: #1890FF;}
+.table-default tbody tr:hover td{background-color: #F2F6FF}
+    /*endregion table end*/
+
+    /*region checkbox start*/
+.layui-form-checked[lay-skin=primary] i, .layui-form-checked[lay-skin=primary]:hover i,
+.checkbox-div input:checked ~ label.checkbox, .checkbox.checked {
+  background: url("../images/common/checkbox.png")center center /14px 14px no-repeat!important;
+}
+.xq-checkbox input[type=checkbox]:checked,
+.xq-checkbox .input-checkbox.checked {
+  background: url("../images/common/checkbox.png") center center no-repeat;
+  background-size: 100% 100%;
+}
+    /*endregion checkbox end*/
+
+    /*region 上传文件 start*/
+.upload-annex ul li.add-annex{color: #1890FF;}
+.upload-div4 .upload-btn{background: url("../images/common/upload_icon.png")center 28px no-repeat;
+  background-size: 44px 35px;
+}
+    /*endregion 上传文件 end*/
+.line-left-1:before{background-color: #1890FF}
+.line-left-2:before{background-color: #F5BF3C}
+.line-left-3:before{background-color: #D5AB74}
+.line-left-4:before{background-color: #78B73A}
+/*endregion 通用 end*/
+
+/*region 登录页*/
+#login{background:url("../images/login/login_bg.png")center center /100% 100% no-repeat;}
+#login .login-bg{background-color: transparent;
+  flex-direction: column;
+}
+.login-bg h2 {
+  margin-bottom: 35px;
+  font-family: "华文宋体 Black";
+  font-size: 30px;
+  color: #1890FF;
+  font-weight: bold;
+}
+.login {
+  background-color: #ffffff;
+}
+.login h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 106px;
+  font-family: "华文宋体 Black";
+  font-size: 26px;
+  color: #333333;
+  font-weight: bold;
+}
+.login form{background-color: transparent;box-shadow:none;}
+.login form .layui-input{
+  padding: 0 20px;
+  background-color: #FAFAFA;
+  border-color: #E9E9E9;
+}
+.login form .layui-input::-webkit-input-placeholder{color: #B9B9B9;}
+.login form .layui-form-item button{
+  font-weight: normal;
+}
+/*endregion 登录页*/
+
+/*region layui框架(顶部+左侧) start*/
+.layui-tab-bar{background-color: #464B59;color: #ffffff;
+  border: none;
+}
+.layui-layout-admin .layui-header{border-color: #393D49}
+.beg-layout-container .beg-layout-header{background-color: #393D49;
+  z-index: initial;
+}
+.beg-layout-container .beg-layout-header .beg-layout-side-toggle:hover{background-color: #1890FF;}
+.layui-nav-tree .layui-nav-bar{background-color:#1890FF}
+.layui-this-parent>a,
+.layui-nav-tree .layui-nav-item.layui-this-parent>a:hover {background-color:#fff!important;}
+
+.layui-nav-tree .layui-nav-child .layui-this>a cite,
+.layui-nav-tree .layui-nav-child-hover .layui-this>a cite {
+  color: #1890FF!important;
+  font-weight: bold;
+}
+
+.layui-tab-brief>.layui-tab-title .layui-this{color: #666666;}
+.beg-layout-container .beg-layout-header .beg-layout-logo .logo-img{
+  background: #565B69 url("../images/top/logo.png")center center no-repeat;background-size: 27px 27px;
+  border-radius: 4px;
+}
+.layui-tab-title li.layui-this:nth-child(1) a{
+  color: #1890FF;
+}
+/*endregion layui框架 end*/
+
+/*region 首页概况 start*/
+.calendar-left .calendar-stats li.active p:nth-child(1){color: #1890FF;}
+.main-stats .main-stats-right-time a h1{color: #1890FF;}
+.day-container .day td span.current {
+  color: #1890FF
+}
+.day-container .day td span.active {
+  color: #ffffff;
+}
+.day-container .day td span.active,
+.day-container .day td .todos{background-color: #1890FF}
+.calendar-left .calendar-stats li .myicon-time-wei{background:#25DB55 url("../images/common/time_wei.png")center center no-repeat;background-size: 22px 29px;}
+.calendar-left .calendar-stats li .myicon-time-1{background:#1890FF url("../images/common/time_1.png")center center no-repeat;background-size: 32px 32px;}
+.calendar-left .calendar-stats li .myicon-time-2{background:#FF9D3D url("../images/common/time_2.png")center center no-repeat;background-size: 36px 35px;}
+.calendar-left .calendar-stats li .myicon-time-3{background:#848484 url("../images/common/time_2.png")center center no-repeat;background-size: 36px 35px;}
+
+.calendar-date .calendar-top .calendar-pointer>a:hover {
+  background-color: #1890FF;
+}
+/*endregion 首页概况 end*/
+
+/*region 楼宇管理 start*/
+.building-left .apartment-list ul li.active {
+  color: #1890FF;
+  font-weight: bold;
+}
+.building-left .floor-list .add-floor{background-color: #1890FF}
+.building-left .floor-list ul li:hover {
+  background-color: rgba(255, 83, 61, .5);
+  color: #ffffff;
+}
+.building-left .floor-list ul li.active{background-color: #1890FF;color: #ffffff;
+  font-weight: bold;
+}
+/*endregion 楼宇管理 end*/
+
+
+/*region 合同模板 start*/
+/*.tpl-variable-word,*/
+.tpl-variable-word-div a:hover,
+.tpl-variable-word-div a:active,
+.tpl-variable-word-div a:visited,
+.tpl-variable-word-div a:focus {color: #1890FF;background-color: #F3F9FF;}
+.tpl-variable>p a{color: #1890FF;}
+/*endregion 合同模板 end*/
+
+.is-win-div {
+  background: url("../images/common/checkbox.png")center center /14px 14px no-repeat!important;
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "bills": [
+      {
+        "fee_items": [
+          {
+            "item_id": 0,
+            "fee": 10
+          }
+        ]
+      },
+      {
+        "fee_items": [
+          {
+            "item_id": -7,
+            "fee": 0
+          }
+        ]
+      },
+      {
+        "fee_items": [
+          {
+            "item_id": -7,
+            "fee": 2
+          }
+        ]
+      }
+    ],
+    "result": {
+      "fee_items": [
+        {
+          "item_id": -7,
+          "fee": 2
+        }
+      ]
+    }
+  }
+]

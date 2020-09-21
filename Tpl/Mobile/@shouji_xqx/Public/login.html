@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$title} - <tp:sitename /></title>
+<link href="__PUBLIC__/css/member.css?1701171" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<script src="__PUBLIC__/js/rem.js"></script>
+</head>
+<body>
+    <div class="login-header">
+        <a href="{:U('Index/index')}"><img src="__PUBLIC__/images/login-t.jpg" /></a>
+    </div>
+    <div class="login-text">
+        <form class="login-num" name="loginform" action="{:U(MODULE_NAME. '/Public/login')}" method="post" onSubmit="return checkForm(this);">
+            <ul>
+                <li>
+                    <h1>
+                        <img src="__PUBLIC__/images/login_07.png"/>
+                    </h1>
+                    <input type="text" placeholder="请输入用户名或邮箱" name="email" id="email">
+                </li>
+                <li>
+                    <h1>
+                        <img src="__PUBLIC__/images/login_06.png"/>
+                    </h1>
+                    <input type="password" placeholder="请输入密码" name="password" id="password">
+                </li>
+                <li class="login-btn">
+                	<input type="hidden" name="furl" value="{$furl}"/>
+                    <input type="image" src="__PUBLIC__/images/login_09.png" />
+                </li>
+            </ul>
+        </form>
+    </div>
+    <!--<div class="login-qq">
+        <a href="#">
+            <img src="__PUBLIC__/images/login_13.jpg" />
+        </a>
+    </div>-->
+    <div class="login-zc-btn">
+        <a href="{:U('Public/register')}">注册</a>
+    </div>
+</body>
+<script type="text/javascript">
+function checkForm(f){
+	//alert(f.email.value);
+	var email = f.email.value;
+	var password = f.password.value;
+	if(email == ''){
+		alert('请输入帐号！');
+		return false;
+	}
+	if(password == ''){
+		alert('请输入密码！');
+		return false;
+	}
+	f.submit();
+}
+</script>
+</html>

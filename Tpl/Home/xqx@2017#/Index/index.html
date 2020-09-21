@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta property="qc:admins" content="1720064050641161663757" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<title><tp:sitename /> - <tp:sitetitle/></title>
+<meta name="keywords" content="<tp:sitekeywords />" />
+<meta name="description" content="<tp:sitedescription />" />
+<link rel="stylesheet" href="__PUBLIC__/css/common.css" />
+<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.css">
+<link rel="stylesheet" href="__PUBLIC__/css/buttons.css">
+<link rel="stylesheet" href="__PUBLIC__/css/font-awesome.min.css">
+<link rel="stylesheet" href="__PUBLIC__/css/index.css" />
+<script type="text/JavaScript" src='__PUBLIC__/js/jquery.js'></script>
+<script type="text/JavaScript" src='__PUBLIC__/js/common.js'></script>
+<script type="text/javascript" src="__PUBLIC__/js/qq_focus.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/js/plyr/plyr.css" />
+<style type="text/css">
+.imgmagnify:hover {
+ position: relative;
+ z-index:888;
+ transform:rotate(360deg);
+ -webkit-transform:rotate(360deg);
+ -moz-transform:rotate(360deg);
+ -o-transform:rotate(360deg);
+ -ms-transform:rotate(360deg);
+}
+</style>
+</head>
+<body>
+<include file="Public:header" />
+<div id="snowzone"></div>
+<div class="indexFocusWrap">
+  <div class="indexFocus">
+    <div id="focus">
+        <ul style="left:-2550px; width: 5100px;">
+        	<tp:list typeid='0' flag='a,e' limit='5' infolen='90'>
+           <li>
+              <!--<a title="{$list.title}" class="imgg " href="{$list.url}" target="_blank"></a> -->
+              <a title="{$list.title}" class="img" href="{$list.url}" target="_blank">
+                 <img src="{$list.litpic}" width="" height="" alt="{$list.title}" />
+              </a> 
+              <div class="textinfo">
+                <a title="{$list.title}" href="{$list.url}" target="_blank"><h2>{$list.title}</h2></a>
+                <p>{$list.description}...</p>
+                <a title="{$list.title}" class="a" href="{$list.url}" target="_blank">查看详情 →</a>
+              </div>
+            </li>
+            </tp:list>
+        </ul>
+  	</div> 
+    <div class="tags">
+        <ul id="scroll_List" style="top: 0px; margin-top: 45px;">
+        	<volist name='comment' id='c'>
+        	<li class="li_2" style="opacity: 1;">
+                <a class="avatar" href="javascript:">
+                    <img onerror="javascript:this.src='__PUBLIC__/Images/Userd.jpg';" src="{$c.userid|get_face}" class="img">
+                </a>
+                <div class="name">
+                    <b>{$c.username}：</b>
+                    <a href="javascript:">{$c.content}</a>
+                </div>
+                <div class="time icon-time">&nbsp;{$c.posttime|date='Y-m-d',###}</div>
+            </li>
+            </volist>
+        </ul> 
+    </div>   
+  </div>
+</div>
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="indexMainBar" style="padding:0;width:1200px;">
+          	<div style="width:100%;line-height:100px;background: #09aa83;text-align:center;color:#fff;font-size:25px;"></div>
+		</div>
+  </div>
+</div>
+<!-- 2 -->
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="indexMainBar">
+            <div class="title">
+                <b><tp:type typeid='9'><a target="_blank" title="{$type.name}" href="{$type.url}">{$type.name}</a></tp:type></b>
+            </div>
+            <div class="content">
+                <ul class="indexnews">
+                	<tp:list typeid='9' limit='4' infolen='60'>
+                	<li>
+                        <a target="_blank" title="{$list.title}" class="t" href="{$list.url}">{$list.title}</a>
+                        <p>{$list.description}...</p>
+                        <a target="_blank" title="{$list.description}" class="more" href="{$list.url}">查看更多 →</a>
+                    </li>
+                    </tp:list>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 3 -->
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="moreM fl">
+            <div style="background: url(__PUBLIC__/Images/MM1.jpg) no-repeat;" class="moreMM fl">
+                <div class="back"></div>
+                <div class="content">
+                	<tp:type typeid='4'>
+                    <h3>{$type.name}</h3>
+                    <h4><a title="美文欣赏" href="{$type.url}">美文欣赏</a></h4>
+                    <p>本站已收录{:get_artcount(4,1)}条文章</p>
+                    <div class="list"><a title="{$type.name}" href="{$type.url}">{$type.name}</a></div>
+                    </tp:type>
+                </div>
+            </div>
+            <div class="moreMS fr">
+            	<div class="moreMST fl">
+                	<tp:list typeid='4' limit='0,1' infolen='35'>
+                    <p>{$list.description}...</p>
+                    <a title="{$list.title}" href="{$list.url}" target="_blank">查看详情 →</a>
+                    </tp:list>
+                </div>
+                <div class="moreMSBL fl">
+                    <tp:list typeid='4' limit='1,1' infolen='35'>
+                    <p>{$list.description}...</p>
+                    <a title="{$list.title}" href="{$list.url}" target="_blank">查看详情 →</a>
+                    </tp:list>
+                </div>
+                <div class="moreMSBR fl">
+                    <tp:list typeid='4' limit='2,1' infolen='35'>
+                    <p>{$list.description}...</p>
+                    <a title="{$list.title}" href="{$list.url}" target="_blank">查看详情 →</a>
+                    </tp:list>
+                </div>
+            </div>
+        </div>
+        <div class="moreM fr">
+            <div style="background: url(__PUBLIC__/Images/MM2.jpg) no-repeat;" class="moreMM moreMM-R fr r0">
+                <div class="back"></div>
+                <div class="content">
+                	<tp:type typeid='5'>
+                    <h3>{$type.name}</h3>
+                    <h4><a title="最新热门新闻" href="{$type.url}">最新热门新闻</a></h4>
+                    <p>本站已收录{:get_artcount(5,1)}条新闻</p>
+                    <div class="list"><a title="{$type.name}" href="{$type.url}">{$type.name}</a></div>
+                    </tp:type>
+                </div>
+            </div>
+            <div class="moreMS fl">
+            	<div class="moreMST moreMST-R fl">
+                    <tp:list typeid='5' limit='0,1' infolen='35'>
+                    <p>{$list.description}...</p>
+                    <a title="{$list.title}" href="{$list.url}" target="_blank">查看详情 →</a>
+                    </tp:list>
+                </div>
+                <div class="moreMSBL moreMSBL-R fl">
+                    <tp:list typeid='5' limit='1,1' infolen='35'>
+                    <p>{$list.description}...</p>
+                    <a title="{$list.title}" href="{$list.url}" target="_blank">查看详情 →</a>
+                    </tp:list>
+                </div>
+                <div class="moreMSBR moreMSBR-R fl">
+                    <tp:list typeid='5' limit='2,1' infolen='35'>
+                    <p>{$list.description}...</p>
+                    <a title="{$list.title}" href="{$list.url}" target="_blank">查看详情 →</a>
+                    </tp:list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 4 -->
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="ABOX fl">
+            <div class="ABOXT">
+                <b><tp:type typeid='29'><a target="_blank" title="{$type.name}" href="{$type.url}">{$type.name}</a></tp:type></b>
+            </div>
+            <div class="ABOXC">
+                <ul class="topA">
+                	<tp:list typeid='29' flag='a' limit='0,3'>
+                	<li>
+                        <a target="_blank" href="{$list.url}" class="t" title="{$list.title}"></a>
+                        <a target="_blank" href="{$list.url}" class="back" title="{$list.title}"></a>
+                        <a target="_blank" href="{$list.url}" class="img" title="{$list.title}">
+                            <img src="{$list.litpic}">
+                        </a>
+                    </li>
+                    </tp:list>
+                </ul>
+                <ul class="ul fl">
+                	<tp:list typeid='29' flag='a' limit='3,4'>
+                  	<li>
+                        <i>{$autoindex+1}</i>
+                        <a target="_blank" href="{$list.url}" title="{$list.title}">{$list.title}</a>
+                        <b class="icon-time"></b>
+                        <span>{$list.publishtime|date='Y-m-d',###}</span>
+                        <em class="icon-play-circle"></em>
+                        <span>{$list.click}</span>
+                	</li>
+                    </tp:list>
+                </ul>     
+            </div>
+        </div>
+        <div class="ABOX fr">
+            <div class="ABOXT">
+                <b><tp:type typeid='30'><a target="_blank" title="{$type.name}" href="{$type.url}">{$type.name}</a></tp:type></b>
+            </div>
+            <div class="ABOXC">
+                <ul class="topA">
+                	<tp:list typeid='30' flag='a' limit='0,3'>
+                	<li>
+                        <a target="_blank" href="{$list.url}" class="t" title="{$list.title}"></a>
+                        <a target="_blank" href="{$list.url}" class="back" title="{$list.title}"></a>
+                        <a target="_blank" href="{$list.url}" class="img" title="{$list.title}">
+                            <img src="{$list.litpic}">
+                        </a>
+                    </li>
+                    </tp:list>
+                </ul>
+                <ul class="ul fl">
+                    <tp:list typeid='30' flag='a' limit='3,4'>
+                  	<li>
+                        <i>{$autoindex+1}</i>
+                        <a target="_blank" href="{$list.url}" title="{$list.title}">{$list.title}</a>
+                        <b class="icon-time"></b>
+                        <span>{$list.publishtime|date='Y-m-d',###}</span>
+                        <em class="icon-play-circle"></em>
+                        <span>{$list.click}</span>
+                	</li>
+                    </tp:list>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 5 -->
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="Music">
+            <div class="MusicL">
+            	<tp:type typeid='7'>
+                <a target="_blank" href="{$type.url}" class="img" tilte="{$type.name}">
+                    <img src="__PUBLIC__/Images/yinyue.jpg" alt="{$type.name}" class="imgmagnify" _hover-ignore="1" >
+                </a>
+                <a target="_blank" href="{$type.url}" class="h3" tilte="{$type.name}">{$type.name}</a>
+                <p>
+                    <a target="_blank" href="{$type.url}" tilte="发现流行">发现流行</a><br>
+                    已收录{:get_artcount(7,10)}条音乐
+                </p>
+                </tp:type>
+            </div>
+            <div class="MusicM">
+            	<tp:list typeid='7' limit='0,1'>
+            	<p><a href="javascript:play('{$list.url}','{$list.title}')">{$list.title}</a></p>
+                <div class="embed">
+                   <div class="plyr">
+                       <audio controls>
+                           <source src="{$list.downlink}" type="audio/mp3">
+                       </audio>
+                   </div>
+                </div>
+                <div class="info">
+                    发布时间：{$list.publishtime|date='Y/m/d',###}&nbsp;&nbsp;播放次数：{$list.click}
+                </div>
+                </tp:list>
+                <ul>
+                	<tp:list typeid='7' limit='1,6'>
+                	<li>
+                        <i class="icon-headphones"></i>
+                        <a href="javascript:play('{$list.url}','{$list.title}')" title="{$list.title}">{$list.title}</a>
+                        <span>{$list.publishtime|date='m/d',###}</span>
+                    </li>
+                    </tp:list>
+                </ul>
+            </div>
+            <div class="MusicR">
+            	<tp:type typeid='27'>
+               	<a target="_blank" href="{$type.url}" class="img" tilte="中文推荐">
+                 <img class="imgmagnify" _hover-ignore="1" src="__PUBLIC__/Images/zw.jpg" alt="中文推荐">
+                </a>
+                <a target="_blank" href="{$type.url}" class="h3" tilte="中文推荐">中文推荐</a>
+                <p>
+                    <a target="_blank" href="{$type.url}" tilte="心花怒放">心花怒放</a><br>
+                    已收录{:get_artcount(27,10)}条音乐
+                </p>
+                </tp:type>
+            </div>
+            <div class="MusicR">
+            	<tp:type typeid='26'>
+                <a target="_blank" href="{$type.url}" class="img" tilte="欧美流行">
+                 <img class="imgmagnify" _hover-ignore="1" src="__PUBLIC__/Images/yw.jpg" alt="欧美流行">
+                </a>
+                <a target="_blank" href="{$type.url}" class="h3" tilte="欧美流行">欧美流行</a>
+                <p>
+                    <a target="_blank" href="{$type.url}" tilte="hello Music">hello Music</a><br>
+                    已收录{:get_artcount(26,10)}条音乐
+                </p>
+                </tp:type>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 6 -->
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="indexMainBar">
+            <div class="title">
+                <b><tp:type typeid='6'><a target="_blank" title="{$type.name}" href="{$type.url}">{$type.name}</a></tp:type></b>
+            </div>
+            <div class="content">
+            	<ul class="picList">
+                <tp:list typeid='6' limit='10'>
+                  <li>
+                    <a target="_blank" href="{$list.url}" title="{$list.title}" class="title">{$list.title}</a>
+                    <div class="black"></div>
+                    <a target="_blank" href="{$list.url}" title="{$list.title}" class="pic"><img src="{$list.litpic}"></a>
+                  </li>
+                 </tp:list>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 7 -->
+<div class="indexMainWrap">
+    <div class="indexMain">
+        <div class="count fl">
+            <div style="background: url(__PUBLIC__/Images/MM3.jpg) no-repeat;" class="left fl">
+                <div class="back"></div>
+                <div class="content">
+                    <h3>TOP</h3>
+                    <h4><a href="<tp:siteurl />" title="<tp:sitename />"><tp:sitename /></a></h4>
+                    <p><tp:block name='Introduction' /></p>
+                </div>
+            </div>
+            <div class="right">
+                <div class="toplist">
+                    <ul class="tmenu">
+                          <tp:catlist typeid='0'>
+                          <li id="tab{$autoindex+1}" onMouseOver="setTab('tab',{$autoindex+1},6)">
+                              <a href="{$catlist.url}" title="{$catlist.name}">{$catlist.name}</a>
+                          </li>
+                          </tp:catlist>
+                    </ul>
+                    
+                    <tp:catlist typeid='0'>
+                    <div id="con_tab_{$autoindex+1}" class="tbox">
+                        <ul>
+                        	<tp:list typeid='$catlist["id"]' limit='7'>
+                        	<li>
+                               <i>{$autoindex+1}</i>
+                               <if condition="$catlist['id'] eq 7">
+                               <a href="javascript:play('{$list.url}','{$list.title}')" title="{$list.title}">{$list.title}</a>
+                               <else />
+                               <a target="_blank" href="{$list.url}" title="{$list.title}">{$list.title}</a>
+                               </if>
+                               <b class="icon-time"></b>
+                               <span>{$list.publishtime|date='Y/m/d',###}</span>
+                               <em class="icon-eye-open"></em>
+                               <span>{$list.click}</span>
+                            </li>
+                            </tp:list>
+                          </ul>
+                    </div>
+                    </tp:catlist>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<include file="Public:footer" />
+
+<script type="text/javascript" src="__PUBLIC__/js/sc.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/plyr/plyr.js"></script>
+<script type="text/javascript">
+(function(d,u){
+	var a=new XMLHttpRequest(),b=d.body;
+	if("withCredentials" in a){
+		a.open("GET",u,true);
+	a.send();
+	a.onload=function(){
+		var c=d.createElement("div");c.setAttribute("hidden","");
+		c.innerHTML=a.responseText;
+		b.insertBefore(c,b.childNodes[0])
+	}
+   }})(document, "__PUBLIC__/js/plyr/sprite.svg");
+  setTab('tab',1,6);
+  plyr.setup();
+  $(document).snowfall('clear');
+  $(document).snowfall({
+	  image: "__PUBLIC__/js/BG/images/huaban.png",
+	  flakeCount:30,
+	  minSize: 5,
+	  maxSize: 22
+  });
+</script>
+<style>
+	#topcontrol a.top_stick{
+		display: block;
+		outline: medium none;
+		text-decoration: none;
+	}
+</style>
+<script src="__PUBLIC__/js/scrolltopcontrol.js"></script>
+<!--<script type="text/javascript" src="/Addons/Comment/Public/comments.js"></script>-->
+</body>
+</html>

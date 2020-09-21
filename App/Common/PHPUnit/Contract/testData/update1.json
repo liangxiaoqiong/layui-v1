@@ -1,0 +1,73 @@
+{
+  "room_id": "1347",
+  "customer_name": "黄俊",
+  "customer_mobile": "15805946549",
+  "leader_name": "游振丁",
+  "reminder_mobile": "",
+  "customer_address": "枋湖西路189号512",
+  "customer_email": "805210128@qq.com",
+  "customer_id_type": 0,
+  "customer_id_number": "350322199411047731",
+  "customer_id_pictures": [],
+  "contract_pictures": [],
+  "remark": "违约金壹万元整",
+  "room_area": "99",
+  "rent_type": 0,
+  "property_type": 0,
+  "segments_info": [
+    {
+      "start_time": "2018-08-20",
+      "end_time": "2019-02-19",
+      "rent_value": "0"
+    },
+    {
+      "start_time": "2019-02-20",
+      "end_time": "2020-02-19",
+      "rent_value": 50
+    }
+  ],
+  "property_info": [
+    {
+      "start_time": "2018-08-20",
+      "end_time": "2018-12-31",
+      "property_value": "3"
+    },
+    {
+      "start_time": "2019-01-01",
+      "end_time": "2019-12-31",
+      "property_value": "4"
+    },
+    {
+      "start_time": "2020-01-01",
+      "end_time": "2020-12-31",
+      "property_value": "5"
+    }
+  ],
+  "deposit_num": "1",
+  "deposit": "4950",
+  "rent_first_end_time": "2019-03-31",
+  "property_first_end_time": "2018-09-30",
+  "pay_type": 1,
+  "pay_period": "",
+  "collect_rental_type": 1,
+  "advanced_days": "",
+  "fixed_pay_date": "25",
+  "room_function": "商业",
+  "create_time": "2018-08-01",
+  "land_usage": "商业用地",
+  "charging_info": [
+    {
+      "item_id": "7",
+      "item_name": "卫生费",
+      "charge": 0,
+      "fee": "10"
+    },
+    {
+      "item_id": "10",
+      "item_name": "维护费",
+      "charge": "1",
+      "fee": "15"
+    }
+  ],
+  "tpl_id": "39"
+}

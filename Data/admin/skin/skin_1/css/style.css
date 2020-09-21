@@ -1,0 +1,113 @@
+/*region 通用 start*/
+.btn-default,
+.common-layer-btn-center a{background-color: #707cd2;}
+.btn53-default{border: solid 1px #707cd2;background-color: #707cd2;}
+.btn-action-edit{background: url("../images/common/action_edit.png")center center /100% 100% no-repeat;}
+.btn-action-del{background: url("../images/common/action_del.png")center center /100% 100% no-repeat}
+.btn-action-add{background: url("../images/common/action_add.png")center center /100% 100% no-repeat}
+.btn-action-edit1{background: url("../images/common/action_edit1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-del1{background: url("../images/common/action_del1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-view1{background: url("../images/common/action_view1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-notice1{background: url("../images/common/action_notice1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-close1{background: url("../images/common/action_close1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-open1{background: url("../images/common/action_open1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-set1{background: url("../images/common/action_set1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.btn-action-refresh1{background: url("../images/common/action_refresh1.png")center center /100% 100% no-repeat;width: 32px;height: 32px;border-radius: 4px}
+.myicon-switch-1{background: url('../images/common/switch_1.png')center center no-repeat;background-size: 64px 32px}
+
+.myicon-close-default{background: url("../images/common/close_default.png")center center /15px 15px no-repeat;}
+.myicon-input-date:focus{background: url("../images/common/date_default.png")calc(100% - 14px) center /14px 14px no-repeat;}
+.layui-input:focus,.layui-textarea:focus{border-color: #707cd2!important;}
+.line-left-default:before{background-color:#707cd2}
+    /*region 字体颜色 start*/
+.color-default,
+.tab-default li.active,
+.tab-default li font,
+.table-action a,
+.color-default_active:hover,
+.color-default_active:active,
+.color-default_active:visited,
+.color-default_active:focus{color: #707cd2;}
+    /*region 字体颜色 end*/
+
+    /*region layer 弹框 start*/
+body .layer-open .layui-layer-title{color: #707cd2;}
+body .layer-confirm .layui-layer-close,
+body .layer-open .layui-layer-close{background: url("../images/common/close_default.png")center center /15px 15px no-repeat;width: 15px;height: 15px;display: inline-block}
+body .layer-confirm .layui-layer-btn .layui-layer-btn0,
+body .layer-open .layui-layer-btn .layui-layer-btn0,
+.common-layer-btn a.btn-default{background-color: #707cd2;color: #ffffff;}
+    /*endregion layer 弹框 end*/
+
+    /*region tab+右侧滑出div start*/
+.nav-tab li{color: #707cd2;}
+.bill-contract-info .info-div a{color: #707cd2;}
+.nav-tab li.active:after{background-color: #707cd2;}
+    /*endregion tab+右侧滑出div end*/
+
+    /*region 搜索 start*/
+.search-content ul li.search-btn button{border: solid 1px #707cd2;color: #707cd2;}
+    /*endregion 搜索 end*/
+    /*展开、收起按钮*/
+.open-stop{background-color: #707cd2;}
+    /*region table start*/
+.table-bill tr th{background-color:#f0f2ff;color: #707cd2;}
+    /*endregion table end*/
+
+    /*region checkbox start*/
+.layui-form-checked, .layui-form-checked:hover,
+.checkbox-div input:checked ~ label.checkbox, .checkbox.checked{background: url("../images/common/checkbox.png")center center /16px 16px no-repeat!important;}
+    /*endregion checkbox end*/
+
+    /*region 上传文件 start*/
+.upload-annex ul li.add-annex{color: #707cd2;}
+.upload-div4 .upload-btn{background: url("../images/common/upload_icon.png")center 28px no-repeat;}
+    /*endregion 上传文件 end*/
+.line-left-1:before{background-color: #e91e63}
+.line-left-2:before{background-color: #673ab7}
+.line-left-3:before{background-color: #707cd2}
+.line-left-4:before{background-color: #53db69}
+
+/*endregion 通用 end*/
+
+/*region 登录页*/
+#login{background:url("../images/login/login_bg.jpg")center center /100% 100% no-repeat;}
+#login .login-bg{background-color: rgba(112, 124, 210, 0.8);}
+.login form .layui-form-item button{background-color: #707cd2;}
+/*endregion 登录页*/
+
+/*region layui框架(顶部+左侧) start*/
+.layui-tab-bar{background-color: #707cd2;color: #ffffff;}
+.layui-layout-admin .layui-header{border-color: #707cd2}
+.beg-layout-container .beg-layout-header{background-color: #707cd2}
+.beg-layout-container .beg-layout-header .beg-layout-logo{ border-right: 2px solid #5662bc;}
+.beg-layout-container .beg-layout-header .beg-layout-side-toggle:hover{background-color: rgb(139, 152, 243);}
+.layui-nav-tree .layui-nav-bar{background-color:#707cd2}
+.layui-this-parent>a{background-color:#707cd2!important}
+.layui-tab-brief>.layui-tab-title .layui-this{color: #707cd2}
+.layui-tab-title li.layui-this .layui-tab-close{background-color:#707cd2;}
+.layui-tab-title li .layui-tab-close:hover{background-color:#e91e63}
+.beg-layout-container .beg-layout-header .beg-layout-logo .logo-img{background: url("../images/top/logo.png")center center no-repeat;background-size: 38px auto;}
+/*endregion layui框架 end*/
+
+
+/*region 首页概况 start*/
+.main-stats-left-data table td p,
+.calendar-left .calendar-stats li.active p:nth-child(1){color: #707cd2;}
+.main-stats .main-stats-right-time a h1{color: #e91e63;}
+.day-container .day td span.active, .day-container .day td span:hover,
+.day-container .day td .todos{background-color: #e91e63}
+.calendar-left .calendar-stats li .myicon-time-wei{background: url("../images/common/time_wei.png")center center no-repeat;background-size: 58px 58px;}
+.calendar-left .calendar-stats li .myicon-time-1{background: url("../images/common/time_1.png")center center no-repeat;background-size: 58px 58px;}
+.calendar-left .calendar-stats li .myicon-time-2{background: url("../images/common/time_2.png")center center no-repeat;background-size: 58px 58px;}
+/*endregion 首页概况 end*/
+/*region 合同模板 start*/
+/*.tpl-variable-word,*/
+.tpl-variable-word-div a:hover,
+.tpl-variable-word-div a:active,
+.tpl-variable-word-div a:visited,
+.tpl-variable-word-div a:focus {background-color: #f0f2ff;color: #707cd2;}
+.tpl-variable>p a{color: #707cd2;}
+/*endregion 合同模板 end*/
+
+

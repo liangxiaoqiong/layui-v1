@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><tp:sitename /> - <tp:sitetitle/></title>
+<meta name="keywords" content="<tp:sitekeywords />" />
+<meta name="description" content="<tp:sitedescription />" />
+<link href="__PUBLIC__/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.min.js"></script>
+<!--[if lt IE 9]><script src="__PUBLIC__/js/modernizr.js"></script><![endif]-->
+</head>
+<body>
+<include file="Public:header" />
+<include file="Public:silderindex" />
+<div class="blank"></div>
+<div class="article">
+<div class="content">
+<div class="topblog"><h3><p>推荐吉他谱 Guitar spectrum</p></h3>
+<tp:artlist typeid='0' flag='a,e' limit='1'>
+<a href="<tp:siteurl />{$artlist.url}" title="{$artlist.title}" target="_blank"><img src="<tp:siteurl />{$artlist.litpic}" alt="{$artlist.title}" title="{$artlist.title}" width="315" height="205"></a>
+</tp:artlist>
+<ul>
+<tp:artlist typeid='0' flag='b' limit='3'>
+<li><a href="<tp:siteurl />{$artlist.url}" title="{$artlist.title}" target="_blank"><span class="btitle">{$artlist.title}</span></a><span class="bdescrp">{$artlist.description}...</span></li>
+</tp:artlist>
+</ul>
+</div>
+<div class="clear"></div>
+<div class="bloglist">
+<div class="tags">
+<volist name="tags" id="vo">
+	<li><a href="<tp:siteurl />{:U('tagname/'.$vo['tag_name'])}" title="{$vo.tag_name}"><span style="font-weight:bold">{$vo.tag_name}</span></a></li>
+</volist>
+</div>
+<!--article begin-->
+
+<tp:artlist typeid='0' limit='20' infolen='100'>
+<ul>
+<h2><a title="{$artlist.title}" href="<tp:siteurl />{$artlist.url}" target="_blank">{$artlist.title}</a></h2>
+<figure>
+<if condition="$artlist['litpic']">
+<img style="float:left;margin-right:10px;" src="{$artlist.litpic}" width="150" height="115" alt="{$artlist.title}" />
+<else />
+<img style="float:left;margin-right:10px;" src="__PUBLIC__/images/default.jpg" width="150" height="115" alt="{$artlist.title}" />
+</if>
+</figure>
+<span class="blog-content">{$artlist.description}...</span>
+<p class="dateview"><span>发布时间：{$artlist.publishtime|date='Y-m-d',###}</span>
+<span>分类：<a href="<tp:siteurl />{$artlist.curl}" target="_blank">{$artlist.catename}</a></span>
+<span>浏览次数({$artlist.click})</span>
+<span><a title="{$artlist.title}" href="<tp:siteurl />{$artlist.url}">查看详情</a></span>
+</p>
+</ul>
+</tp:artlist>
+
+<div class="clear"></div>
+<!--<div class="yellow">{$page}</div>-->
+<!--article end--><!--article begin--><!--article end-->
+</div>
+</div>
+<aside class="navsidebar"><h2><p>吉他和弦大全</p></h2>
+<ul class="jtflash"><embed height="200" type="application/x-shockwave-flash" width="276" src="__PUBLIC__/images/hx.swf" menu="true" play="true" loop="true" /></ul>
+<div class="clear"></div>
+<nav>
+<ul>
+<li class="sy"><tp:type typeid='1'><a href="{$type.url}" title="{$type.name}"><b>{$type.name}</b></a></tp:type></li>
+<li class="js"><tp:type typeid='7'><a href="{$type.url}" title="{$type.name}"><b>{$type.name}</b></a></tp:type></li>
+<li class="msh"><tp:type typeid='3'><a href="{$type.url}" title="{$type.name}"><b>{$type.name}</b></a></tp:type></li>
+<li class="ab"><tp:type typeid='4'><a href="{$type.url}" title="{$type.name}"><b>{$type.name}</b></a></tp:type></li>
+<li class="xc"><tp:type typeid='5'><a href="{$type.url}" title="{$type.name}"><b>{$type.name}</b></a></tp:type></li>
+<li class="ly"><tp:type typeid='6'><a href="{$type.url}" title="{$type.name}"><b>{$type.name}</b></a></tp:type></li>
+</ul>
+<div><img src="__PUBLIC__/images/bottom_bg.jpg" alt="<tp:sitename />" /></div>
+</nav>
+<!--<div class="slide"><h2><p>关注公众号</p></h2><img src="__PUBLIC__/images/qrcode.jpg" alt="<tp:sitename />"></div>-->
+
+<h2><p>热门综合</p></h2>
+<ul class="news">
+<tp:artlist typeid='0' limit='10' orderby='click DESC'>
+<li><a href="<tp:siteurl />{$artlist.url}" target="_blank" title="{$artlist.title}">{$artlist.title}</a></li>
+</tp:artlist>
+</ul>
+
+<h2><p>推荐吉他谱</p></h2>
+<ul class="news">
+<tp:artlist typeid='0' limit='10' flag='c'>
+<li><a href="<tp:siteurl />{$artlist.url}" target="_blank" title="{$artlist.title}">{$artlist.title}</a></li>
+</tp:artlist>
+</ul>
+
+<h2><p>联系方式</p></h2>
+<ul class="news">
+<a href="tencent://message/?Menu=yes&uin={:C('QQ_NUM')}&Site=linker&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" rel="nofollow"><img src="__PUBLIC__/images/qq.png" alt="<tp:sitename />qq" /></a>
+<a href="mailto:{:C('CFG_EMAIL_FROM')}" rel="nofollow"><img src="__PUBLIC__/images/email.jpg" width="85" height="75" alt="<tp:sitename />官方邮箱" /></a>
+</ul>
+
+<h2><p>友情链接</p></h2>
+<ul class="links">
+<tp:flink limit='20'>
+    <li><a class="tags" target="_blank" title="{$flink.name}" href="{$flink.url}">{$flink.name}</a></li>
+</tp:flink>
+</ul>
+<ul class="news">
+<tp:union id='10' />
+</ul>
+</aside>
+</div>
+<include file="Public:footer" />
+</body>
+</html>

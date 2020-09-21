@@ -1,0 +1,135 @@
+[
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2018-10-15",
+        "rent_value": "50"
+      }
+    ],
+    "options": {
+      "room_area": 99,
+      "rent_type": 0,
+      "pay_type": 0,
+      "pay_period": ""
+    },
+    "result": [
+      {
+        "start_time": 1534694400,
+        "end_time": 1539532800,
+        "rent_value": "50",
+        "rent_type": 0,
+        "room_area": 99,
+        "pay_type": 0,
+        "pay_period": 1,
+        "month_rental": 4950,
+        "total_rental": 9160,
+        "total_time": "1个月26天"
+      }
+    ]
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2018-10-15",
+        "rent_value": "50"
+      }
+    ],
+    "options": {
+      "room_area": 99,
+      "rent_type": 0,
+      "pay_type": 1,
+      "pay_period": ""
+    },
+    "result": [
+      {
+        "start_time": 1534694400,
+        "end_time": 1539532800,
+        "rent_value": "50",
+        "rent_type": 0,
+        "room_area": 99,
+        "pay_type": 1,
+        "pay_period": 3,
+        "month_rental": 4950,
+        "total_rental": 9160,
+        "total_time": "1个月26天"
+      }
+    ]
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2018-10-15",
+        "rent_value": "50"
+      }
+    ],
+    "options": {
+      "room_area": 99,
+      "rent_type": 0,
+      "pay_type": 4,
+      "pay_period": "12"
+    },
+    "result": [
+      {
+        "start_time": 1534694400,
+        "end_time": 1539532800,
+        "rent_value": "50",
+        "rent_type": 0,
+        "room_area": 99,
+        "pay_type": 4,
+        "pay_period": 12,
+        "month_rental": 4950,
+        "total_rental": 9160,
+        "total_time": "1个月26天"
+      }
+    ]
+  },
+  {
+    "segments": [
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2018-10-15",
+        "rent_value": "50"
+      },
+      {
+        "start_time": "2018-08-20",
+        "end_time": "2018-10-15",
+        "rent_value": "50"
+      }
+    ],
+    "options": {
+      "room_area": 99,
+      "rent_type": 0,
+      "pay_type": 4,
+      "pay_period": "12"
+    },
+    "result": [
+      {
+        "start_time": 1534694400,
+        "end_time": 1539532800,
+        "rent_value": "50",
+        "rent_type": 0,
+        "room_area": 99,
+        "pay_type": 4,
+        "pay_period": 12,
+        "month_rental": 4950,
+        "total_rental": 9160,
+        "total_time": "1个月26天"
+      },
+      {
+        "start_time": 1534694400,
+        "end_time": 1539532800,
+        "rent_value": "50",
+        "rent_type": 0,
+        "room_area": 99,
+        "pay_type": 4,
+        "pay_period": 12,
+        "month_rental": 4950,
+        "total_rental": 9160,
+        "total_time": "1个月26天"
+      }
+    ]
+  }
+]

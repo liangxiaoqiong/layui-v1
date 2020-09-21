@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title} - <tp:sitename /></title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<link href="__PUBLIC__/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.min.js"></script>
+<!--[if lt IE 9]><script src="Home/Tpl/Public/bieanju/js/modernizr.js"></script><![endif]-->
+</head>
+<body>
+<include file="Public:header" />
+<include file="Public:silder" />
+<style>
+.news li{
+    float: left;
+	width: 280px;
+    height: 25px;
+    line-height: 25px;
+}
+.art_content img{
+	width: 95%;
+	height: auto;
+	display:block;
+	 margin:0 auto;
+}
+.bloglist{
+	margin: 10px auto;
+	width: 95%;
+}
+blockquote{
+    margin: 10px 0;
+    border: 1px solide rgba(0, 0, 0, 0.26);
+    padding: 10px 23px;
+    background: #D9EDF7;
+}
+</style>
+<div class="article">
+<div class="contents">
+<h1 class="t_nav"><span>您当前的位置：<tp:position delimiter='&nbsp;&gt;&nbsp;' /></span></h1>
+<div class="clear"></div>
+<div class="index_about">
+<div class="panel-heading">
+<h2 class="c_title">{$content.title}</h2>
+<div class="bloglist">
+<!--广告位-->
+</div>
+</div>
+<div class="art_content">
+<div style="text-align:center;">
+<embed type="application/x-shockwave-flash" width="850" height="600" src="__PUBLIC__/images/hx.swf" menu="true" play="true" loop="true" />
+</div>
+{$cate.content}
+<p>
+
+</p>
+
+<blockquote>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<div class="blank"></div>
+</blockquote>
+</div>
+<div class="blank"></div>
+<div class="aboutread" style=" width: 95%; margin: 0 auto;">
+<h2><p>推荐吉他谱</p></h2>
+<ul class="news">
+<tp:list typeid='0' limit='24' flag='c'>
+<li class="list-group-item"><a href="<tp:siteurl />{$list.url}" title="{$list.title}">{$list.title}</a></li>
+</tp:list>
+</ul>
+</div><div class="hr">
+</div>
+<div class="clear"></div>
+
+</div>
+</div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$ptitle}{$title} - <tp:sitename /></title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<link href="__PUBLIC__/css/ku.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<!--<script type="text/javascript" src="__PUBLIC__/js/mingxing.js"></script>-->
+</head>
+<body class="ku_list">
+<include file="Public:header" />
+<div class="w1200 w_1">
+  <div class="list_box">
+    <notempty name="proplist">
+        <php>$k=1;</php>
+        <volist name="proplist" id="vo">
+        <php>
+        $purl = '?';
+        $comurl='?';
+        $pnum = count($proplist)+1;
+        for($j=1;$j<$pnum;$j++){
+            $vid = 0;
+            if($j!=$k){
+                $vid = I('q'.$j, 0, 'intval');
+            }
+            $comid = I('q'.$j, 0, 'intval');
+            if($j==1){
+                $purl .= 'q'.$j.'='.$vid;
+                $comurl .= 'q'.$j.'='.$comid;
+            }else{
+                $purl .= '&q'.$j.'='.$vid;
+                $comurl .= '&q'.$j.'='.$comid;
+            }
+        }
+        </php>
+        <div class="tg_classify_wrap clearfix">
+            <dl>
+    		<dt>{$vo.name}：</dt>
+            <dd>
+            <div class="txt">
+            <a <if condition="I('q'.$k, 0, 'intval') eq 0">class="current"</if> href="/{$cate['ename']}{$purl}">全部</a>
+            <volist name=":get_propvalue($vo['id'])" id="v">
+            <php>
+            $vurl = '?';
+            for($n=1;$n<$pnum;$n++){
+                if($n==$k){
+                    $vid1 = $v['id'];
+                }else{
+                    //$vid1 = isset($_GET['q'.$n])?$_GET['q'.$n]:0;
+                    $vid1 = I('q'.$n, 0, 'intval');
+                }
+                if($n==1){
+                    $vurl .= 'q'.$n.'='.$vid1;
+                }else{
+                    $vurl .= '&q'.$n.'='.$vid1;
+                }
+            }
+            </php>
+            <a <if condition="$v['id'] eq I('q'.$k, 0, 'intval')">class="current"</if> href="/{$cate['ename']}{$vurl}">{$v.vname}</a>
+            </volist>
+            </div>
+            </dd>
+           </dl>
+        </div>
+        <php>$k++;</php>
+        </volist>
+      </notempty>
+    
+    <div style="clear:both"></div>
+  </div>
+  <div style="clear:both"></div>
+</div>
+<div class="w1200 w_2"> 
+<div class="ulbox">
+<ul>
+
+<foreach name="vlist" item="spelist" key="autoindex">
+<li><a href="<tp:siteurl />{$spelist.url}" title="{$spelist.title}" target="_blank"><img src="<tp:siteurl />{$spelist.litpic}" alt="{$spelist.title}"></a><em class="bg"></em><h3 class="txt"><a href="<tp:siteurl />{$spelist.url}" title="{$spelist.title}" target="_blank">{$spelist.title}</a></h3></li>
+</foreach>
+
+</ul>
+<div style="clear:both"></div>
+</div>
+</div>
+
+<div id="page">{$page}</div>
+<include file="Public:footer" />
+</body>
+</html>

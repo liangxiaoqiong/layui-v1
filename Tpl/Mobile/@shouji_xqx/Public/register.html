@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$title} - <tp:sitename /></title>
+<link href="__PUBLIC__/css/member.css?1701171" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<script src="__PUBLIC__/js/rem.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jq1.7.js" ></script>
+<script type="text/javascript">
+function changeVcode(obj){
+	new_jq("#VCode").attr("src",'<tp:vcodeurl />'+ '#'+Math.random());
+	return false;
+}
+</script>
+</head>
+<body>
+    <div class="login-header">
+        <a href="{:U('Index/index')}"><img src="__PUBLIC__/images/login-t.jpg" /></a>
+    </div>
+    <div class="login-text">
+        <form class="login-num" name="loginform" action="{:U(MODULE_NAME. '/Public/register')}" method="post" onSubmit="return checkForm(this);">
+            <ul>
+                <li>
+                    <h1><img src="__PUBLIC__/images/login_08.png"/></h1>
+                    <input type = "text" name="email" id="email" placeholder="请输入邮箱" />
+                    <input id="yanzhengfag" value="0" style="display:none">
+                </li>
+                <li>
+                    <h1><img src="__PUBLIC__/images/login_07.png"/></h1>
+                    <input type = "text" name="username" id="username" placeholder="请输入昵称" />
+                    <input id='userfag' value="0" style="display:none">
+                </li>
+                <li>
+                    <h1><img src="__PUBLIC__/images/login_06.png"/></h1>
+                    <input type="password" name="password" id="password" placeholder="请输入密码" />
+                </li>
+                <li>
+                    <h1><img src="__PUBLIC__/images/login_06.png"/></h1>
+                    <input type="password" name="rpassword" id="rpassword" placeholder="确认密码" />
+                </li>
+                <if condition="C('CFG_VERIFY_REGISTER') eq 1">
+                <li class="login-verification">
+                    <h1><img src="__PUBLIC__/images/login_yzm.png"/></h1>
+                    <input id="vcode" type="text" class="register_con_0925" name="vcode" placeholder="验证码" />
+                    <input id="codefag" value="0" style="display:none">
+                    <!--<a href="javascript:;" id="phone_yz_btn_1216">获取短信验证码</a>-->
+                    <img src="<tp:vcodeurl />" id="VCode" onClick="javascript:changeVcode(this);" style="width:120px; height:50px; cursor:pointer;" />
+                </li>
+                </if>
+                
+                <div class="register_con error"></div>
+                <li class="login-btn">
+                    <input name="platfag" value="1" style="display:none"/>
+                    <input type="image" src="__PUBLIC__/images/sign.jpg" class="btn-hidden" id="regist_btn">
+                </li>
+            </ul>
+        </form>
+    </div>
+    <!--<div class="login-xieyi">
+        <p>点击【注册】按钮表示我已同意
+            <span><a href="#">《弹琴吧用户协议》</a></span>
+        </p>
+    </div>-->
+</body>
+
+<script type="text/javascript">
+ var new_jq = jQuery.noConflict();
+    function trim(a){
+        return a.replace(/(^\s*)|(\s*)|(\s)/g,"")
+    }
+    var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9])/;
+    function checkForm(form){
+		if(filter.test(trim(document.getElementById("email").value))){
+        }else{
+            new_jq(".error").html("邮箱输入有误！");
+            return false;
+        }
+        if(trim(document.getElementById("username").value).length<=0){
+            new_jq(".error").html("昵称不能为空！");
+            return false;
+        }
+        if(trim(document.getElementById("password").value).length<=0||trim(document.getElementById("password").value).length<6){
+            new_jq(".error").html("密码不能小于6位!");
+            return false;
+        }
+		if(trim(document.getElementById("password").value) != trim(document.getElementById("rpassword").value)){
+            new_jq(".error").html("两次密码输入不一致!");
+            return false;
+        }
+		
+		<if condition="C('CFG_VERIFY_REGISTER') eq 1">
+		if(trim(document.getElementById("vcode").value).length<=0){
+            new_jq(".error").html("请填写验证码！");
+            return false;
+        }
+		</if>
+        
+        form.submit();
+        new_jq(".error").html("");
+        //form.submit();
+        return false;
+    }  
+        new_jq("input").focus(function(){
+            new_jq(".error").html("");
+    });
+        new_jq(".clear_btn").click(function(){
+            new_jq(this).prev("input").val("");
+            new_jq(this).prev("input").focus();
+    })
+
+</script>
+
+<!--<script src="__PUBLIC__/js/mobilevalidate.js?lv_4"></script>-->
+</html>
+
+

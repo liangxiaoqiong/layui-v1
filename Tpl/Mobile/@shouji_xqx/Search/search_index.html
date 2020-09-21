@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{$title} - <tp:sitename /></title>
+<meta name="keywords" content="<tp:sitekeywords />" />
+<meta name="description" content="<tp:sitedescription />" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<include file="Public:header_com" />
+</head>
+<body>
+	<div class="search-top">
+		<div class="center">
+			<a href="{:U('Index/index')}">回首页</a>
+            <tp:catlist typeid='0' flag='0'>
+			<a href="{:U('Search/search_index?cid='.$catlist['id'])}" <if condition="$cid eq $catlist['id']">class="active"</if> >{$catlist.name}</a>&nbsp;
+            </tp:catlist>
+		</div>
+	</div>
+	<div class="search-box">
+        <form name="search" action="{:U('Search/search_list')}" method="get">
+            <input type="hidden" name="cid" value="{$cid}" />
+            <input type="text" class="piano-search" name="keyword" placeholder="请输入关键词" />
+            <input type="submit" class="btn-search" value="搜索" />
+        </form>
+	</div>
+
+	<div class="search-like">
+		<h1>猜你喜欢
+			<span><a href="" id="more">换一换</a></span>
+		</h1>
+		<ul>
+            <tp:list typeid='0' limit='9' orderby='rand()' >
+            <li>
+				<div class="img">
+					<a href="{$list.url}"><img src="{$list.litpic}" /></a>
+					<p>{$list.title}</p>
+				</div>				
+			</li>
+			</tp:list>
+		</ul>
+	</div>
+    <include file="Public:footer" />
+</body>
+</html>

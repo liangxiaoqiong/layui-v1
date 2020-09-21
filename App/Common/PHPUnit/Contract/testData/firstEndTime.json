@@ -1,0 +1,52 @@
+[
+  {
+    "result": true,
+    "data": {
+      "end_time": "",
+      "segments": [
+        {
+          "end_time": "2018-12-31"
+        }
+      ]
+    }
+  },
+  {
+    "result": false,
+    "data": {
+      "end_time": "2019-01-01",
+      "segments": [
+        {
+          "end_time": "2018-12-31"
+        }
+      ]
+    }
+  },
+  {
+    "result": false,
+    "data": {
+      "end_time": "2019-01-01",
+      "segments": [
+        {
+          "end_time": "2020-12-31"
+        },
+        {
+          "end_time": "2018-01-01"
+        }
+      ]
+    }
+  },
+  {
+    "result": true,
+    "data": {
+      "end_time": "2019-01-01",
+      "segments": [
+        {
+          "end_time": "2018-12-31"
+        },
+        {
+          "end_time": "2019-01-01"
+        }
+      ]
+    }
+  }
+]

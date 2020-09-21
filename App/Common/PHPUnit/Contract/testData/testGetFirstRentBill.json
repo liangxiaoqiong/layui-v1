@@ -1,0 +1,86 @@
+[
+  {
+    "bills": [
+      {
+        "fee_items": [
+          {
+            "item_id": -1,
+            "fee": 10
+          }
+        ]
+      },
+      {
+        "fee_items": [
+          {
+            "item_id": -7,
+            "fee": 0
+          }
+        ]
+      },
+      {
+        "fee_items": [
+          {
+            "item_id": -7,
+            "fee": 2
+          }
+        ]
+      }
+    ],
+    "result": {
+      "fee_items": [
+        {
+          "item_id": -1,
+          "fee": 10
+        }
+      ]
+    }
+  },
+  {
+    "bills": [
+      {
+        "fee_items": [
+          {
+            "item_id": -2,
+            "fee": 10
+          },
+          {
+            "item_id": -1,
+            "fee": 0
+          },
+          {
+            "item_id": 1,
+            "fee": 3
+          }
+        ]
+      },
+      {
+        "fee_items": [
+          {
+            "item_id": -1,
+            "fee": 50
+          },
+          {
+            "item_id": -7,
+            "fee": 3
+          }
+        ]
+      }
+    ],
+    "result": {
+      "fee_items": [
+        {
+          "item_id": -2,
+          "fee": 10
+        },
+        {
+          "item_id": -1,
+          "fee": 50
+        },
+        {
+          "item_id": 1,
+          "fee": 3
+        }
+      ]
+    }
+  }
+]

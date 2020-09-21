@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>{$title} - <tp:sitename /></title>
+<meta name="keywords" content="{$tagname}" />
+<meta name="description" content="包含标签'{$tagname}'的内容." />
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<link href="/favicon.ico" type="image/x-icon" rel=icon>
+<link rel="stylesheet" href="__PUBLIC__/css/common.css" />
+<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.css">
+<link rel="stylesheet" href="__PUBLIC__/css/buttons.css">
+<link rel="stylesheet" href="__PUBLIC__/css/font-awesome.min.css">
+<link rel="stylesheet" href="__PUBLIC__/css/font-awesome.min.css">
+<script type="text/JavaScript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/JavaScript" src="__PUBLIC__/js/common.js"></script>
+</head>
+<body>
+<include file="Public:header" />
+<div class="mainWrap" id="mT100">
+    <div class="main">
+        <div class="mainBar mT15">
+            <div class="box">
+                <div class="title">包含标签&nbsp;<b>{$tagname}</b>&nbsp;相关结果<b>{:count($vlist)}</b>条</div>
+                <div class="content">
+                    <ul class="htmllist">
+                    	<foreach name="vlist" item="list" key="autoindex">
+                        <php>
+                        $vtitle = str_replace($tagname,'<b style="color:red">'.$tagname.'</b>',$list['title']);
+                        $descr = str_replace($tagname,'<b style="color:red">'.$tagname.'</b>',$list['description']);
+                        </php>
+                    	<li>
+                            <a href="{$list.url}" title="{$list.title}" class="img" target="_blank"><img onerror="javascript:this.src='__PUBLIC__/Images/default.jpg';" src="{$list.litpic|default='__PUBLIC__/Images/default.jpg'}" /></a>
+                            <a href="{$list.url}" title="{$list.title}" class="htmltitle" target="_blank">{$vtitle}</a>
+                            <div class="desc">
+                                <div class="icon-th-list fl mR5 icons "></div>
+                                <a href="{$list.curl}" class="mR10">{$list.catename}</a>
+                                <div class=" icon-eye-open  fl mR5 icons"></div>
+                                <span>{$list.click}</span>
+                            </div>
+                            <p>{$descr}...</p>
+                        </li>
+                        </foreach>
+                    </ul>
+                    <div class="pagesize">{$page}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sideBar mT15">
+            <div class="box">
+                <div class="title"><strong>热门标签</strong></div>
+                <div class="content">
+                    <div class="taglist">
+                    	<volist name=":get_tags(0,18)" id='tag'>
+                        <a href="{:U('tagname/'.$tag['tag_name'])}" title="{$tag.tag_name}">{$tag.tag_name}</a>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title"><strong>热门文章</strong></div>
+                <div class="content">
+                    <ul class="newsList">
+                        <tp:list typeid='0' limit='6' orderby='click DESC'>
+                        <li>
+                            <a href="{$list.url}" title="{$list.title}">{$list.title}</a>
+                            <span>({$list.click})</span>
+                        </li>
+                        </tp:list>
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title"><strong>最新评论</strong></div>
+                <div class="content">
+                    <script src="__PUBLIC__/js/sc.js" type="text/javascript"></script>
+                    <ul id="scroll_List">
+                        <volist name=":get_comlist(0,10)" id='c'>
+                        <li class="li_1">
+                            <a href="/user/10" class="avatar"><img onerror="javascript:this.src='__PUBLIC__/Images/Userd.jpg';" src="{$c.userid|get_face}" class="img"/></a>
+                            <div class="name"><b>{$c.username}：</b><a href="javascript:;">{$c.content}...</a></div>
+                            <div class="time icon-time">&nbsp;{$c.posttime|date='Y-m-d',###}</div>
+                        </li>
+                        </volist>
+                    </ul> 
+                </div>
+            </div>
+            <div class="box">
+                <div class="title"><strong>最新文章</strong></div>
+                <div class="content">
+                    <ul class="newsList">
+                        <tp:list limit='6'>
+                        <li><a href="{$list.url}" title="{$list.title}">{$list.title}</a></li>
+                        </tp:list>
+                    </ul>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer" />
+
+</body>
+</html>

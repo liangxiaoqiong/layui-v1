@@ -1,0 +1,226 @@
+[
+  {
+    "sundryFees": [
+      {
+        "item_id": 0,
+        "item_name": "租金"
+      },
+      {
+        "item_id": 1,
+        "item_name": "杂费1",
+        "month_avg_fee": 3
+      },
+      {
+        "item_id": 2,
+        "item_name": "杂费2",
+        "month_avg_fee": 4
+      }
+    ],
+    "groupSegments": [
+      {
+        "remark": "三个月免租期",
+        "start_time": "2018-08-20",
+        "end_time": "2018-11-19",
+        "month_rental": 0
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-11-20",
+        "end_time": "2018-12-25",
+        "month_rental": 50
+      }
+    ],
+    "segmentType": "rent",
+    "result": {
+      "total": 89.03,
+      "fee_items": [
+        {
+          "item_id": 0,
+          "item_name": "租金",
+          "fee_type": 0,
+          "fee": 59.68
+        },
+        {
+          "item_id": 1,
+          "item_name": "杂费1",
+          "fee_type": 0,
+          "fee": 12.58
+        },
+        {
+          "item_id": 2,
+          "item_name": "杂费2",
+          "fee_type": 0,
+          "fee": 16.77
+        }
+      ]
+    }
+  },
+  {
+    "sundryFees": [
+      {
+        "item_id": -1,
+        "item_name": "押金",
+        "total_fee": 100
+      },
+      {
+        "item_id": 0,
+        "item_name": "租金"
+      },
+      {
+        "item_id": 1,
+        "item_name": "杂费1",
+        "month_avg_fee": 3
+      },
+      {
+        "item_id": 2,
+        "item_name": "杂费2",
+        "month_avg_fee": 4
+      }
+    ],
+    "groupSegments": [
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2018-12-26",
+        "end_time": "2019-03-25",
+        "month_rental": 50
+      }
+    ],
+    "segmentType": "rent",
+    "result": {
+      "total": 271,
+      "fee_items": [
+        {
+          "item_id": -1,
+          "item_name": "押金",
+          "fee_type": 0,
+          "fee": 100
+        },
+        {
+          "item_id": 0,
+          "item_name": "租金",
+          "fee_type": 0,
+          "fee": 150
+        },
+        {
+          "item_id": 1,
+          "item_name": "杂费1",
+          "fee_type": 0,
+          "fee": 9
+        },
+        {
+          "item_id": 2,
+          "item_name": "杂费2",
+          "fee_type": 0,
+          "fee": 12
+        }
+      ]
+    }
+  },
+  {
+    "sundryFees": [
+      {
+        "item_id": -1,
+        "item_name": "原押金",
+        "fee_type": 1,
+        "total_fee": 50
+      },
+      {
+        "item_id": -1,
+        "item_name": "押金",
+        "total_fee": 100
+      },
+      {
+        "item_id": 0,
+        "item_name": "租金"
+      },
+      {
+        "item_id": 1,
+        "item_name": "杂费1",
+        "month_avg_fee": 3
+      },
+      {
+        "item_id": 2,
+        "item_name": "杂费2",
+        "month_avg_fee": 4
+      }
+    ],
+    "groupSegments": [
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-03-26",
+        "end_time": "2019-05-19",
+        "month_rental": 50
+      },
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-05-20",
+        "end_time": "2019-06-25",
+        "month_rental": 60
+      }
+    ],
+    "segmentType": "rent",
+    "result": {
+      "total": 231.84,
+      "fee_items": [
+        {
+          "item_id": -1,
+          "item_name": "原押金",
+          "fee_type": 1,
+          "fee": 50
+        },
+        {
+          "item_id": -1,
+          "item_name": "押金",
+          "fee_type": 0,
+          "fee": 100
+        },
+        {
+          "item_id": 0,
+          "item_name": "租金",
+          "fee_type": 0,
+          "fee": 160.98
+        },
+        {
+          "item_id": 1,
+          "item_name": "杂费1",
+          "fee_type": 0,
+          "fee": 8.94
+        },
+        {
+          "item_id": 2,
+          "item_name": "杂费2",
+          "fee_type": 0,
+          "fee": 11.92
+        }
+      ]
+    }
+  },
+  {
+    "sundryFees": [
+      {
+        "item_id": -7,
+        "item_name": "物业管理费"
+      }
+    ],
+    "groupSegments": [
+      {
+        "remark": "半年涨一次租金",
+        "start_time": "2019-09-26",
+        "end_time": "2019-11-19",
+        "month_property": 3
+      }
+    ],
+    "segmentType": "property",
+    "result": {
+      "total": 5.48,
+      "fee_items": [
+        {
+          "item_id": -7,
+          "item_name": "物业管理费",
+          "fee_type": 0,
+          "fee": 5.48
+        }
+      ]
+    }
+  }
+]

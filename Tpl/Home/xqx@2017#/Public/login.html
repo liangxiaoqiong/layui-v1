@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>{$title}-<tp:sitename /></title>
+<meta name="keywords" content="<tp:sitekeywords />" />
+<meta name="description" content="<tp:sitedescription />" />
+<link href="__PUBLIC__/css/Login/css/style.css" rel="stylesheet">
+<script type="text/JavaScript" src="__PUBLIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/layer/layer.js"></script>
+<style type="text/css">
+  body{
+  	margin: 0;
+  	padding: 0px;
+  	font-family: "微软雅黑";
+  }
+  a{
+  	text-decoration:none;
+  }
+  .verifyimg{
+  	width:100px;
+  	float:right;
+  	margin:0 auto;
+  	cursor:pointer;
+  	height:37px;
+  }
+  .login-bottom {
+      margin: 5px auto;
+  }
+  input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+      opacity: 1;
+  }
+</style>
+</head>
+<body>
+<!--header start here-->
+	<div class="login">
+		 <div class="login-main">
+		   <form action="{:U('Ajax/checkLogin')}" method="post">
+		 		<div class="login-top">
+		 			<img src="__PUBLIC__/css/Login/images/head-img.png" alt="会员登录"/>
+		 			<h1><span class="anc-color">会员登录</span> </h1>
+		 			<h2>合作登陆</h2>
+		 			<ul>
+		 				<li><a class="fa" href="javascript:;"></a></li>
+		 				<li><a class="tw" href="javascript:;"> </a></li>
+		 				<li><a class="g" href="javascript:;"> </a></li>
+		 			</ul>
+		 			<h3> or</h3>
+		 			<input type="text" autocomplete="off" placeholder="账号" required="" name="email" />
+		 			<input type="password" autocomplete="off" placeholder="密码" required="" name="password" />
+	 			      <div style="width:80%;margin:0 auto;margin-top:16px;">
+	 					 <input style="width:110px;float:left; margin:0 auto;" type="text" name="vcode" placeholder="验证码" required="">
+	 					 <img class="verifyimg reloadverify" alt="点击切换" src="<tp:vcodeurl />">
+	 					 <div class="clear"> </div>
+	 				  </div>
+		 			<div class="login-bottom">
+		 			  <div class="login-check">
+			 			<label class="checkbox" for="rememberme">
+				 			<input id="rememberme" type="checkbox" name="rememberme" />
+				 			<i></i>
+				 			<span class="anc-color">记住我</span>
+			 		    </label>
+			 		  </div>
+			 		  <div class="login-para">
+			 			<p><a href="javascript:">忘记密码了吗？</a></p>
+			 		 </div>
+			 			<div class="clear"> </div>
+		 			</div>
+		 			<input type="submit" value="去装逼" />
+		 			<h4>没有一个帐户吗? <a href="javascript:Login('{:U('Public/register')}','注册');"> 现在注册! </a></h4>
+		 		</div>
+		 		</form>
+		 	</div>
+  </div>
+  <script type="text/javascript">
+   function Login(url,title){
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.open({
+      type: 2,
+      area: ['360px', '520px'],
+      skin: 'layerLogin-class',
+      content: [url,'no'],
+      shade: [0.5, '#000'],
+      moveType: 1,
+      shadeClose:true,//点击外层是否关闭
+      shift:4,
+    });
+    parent.layer.close(index); 
+   }
+  </script>
+  <script type="text/javascript">
+  	$(document).ajaxStart(function(){
+			$("input:submit").addClass("log-in").attr("disabled", true);
+		}).ajaxStop(function(){
+			$("input:submit").removeClass("log-in").attr("disabled", false);
+		});
+  	$("form").submit(function(){
+  		var self = $(this);
+  		$.post(self.attr("action"), self.serialize(), success, "json");
+  		return false;
+
+  		function success(data){
+  			if(data.status){
+				var purl = parent.window.location.href;
+  				parent.window.location.href = purl;
+  			} else {
+  				parent.layer.msg(data.info);
+  				//刷新验证码
+  				$(".reloadverify").click();
+  			}
+  		}
+  	});
+		$(function(){
+			var verifyimg = $(".verifyimg").attr("src");
+          $(".reloadverify").click(function(){
+              if( verifyimg.indexOf('?')>0){
+                  $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+              }else{
+                  $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+              }
+          });
+		});
+    // 用于第三方登录跳转
+    function LoginBottom(url){
+     parent.window.location.href = url;
+    }
+
+    if (navigator.userAgent.toLowerCase().indexOf("chrome") >= 0)
+    {
+        var _interval = window.setInterval(function ()
+        {
+            var autofills = $('input:-webkit-autofill');
+            if (autofills.length > 0)
+            {
+                window.clearInterval(_interval); // stop polling
+                autofills.each(function()
+                {
+                    var clone = $(this).clone(true, true);
+                    $(this).after(clone).remove();
+                });
+            }
+        }, 20);
+    }
+
+	</script>
+</body>
+</html>

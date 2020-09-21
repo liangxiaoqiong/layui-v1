@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title} - <tp:sitename /></title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<include file="Public:header_com" />
+<style type="text/css">
+.adaptive-style .list_title a.cur{color:#519A94;}
+.adaptive-style .list_title {width: auto; float:left;font-weight:bold;}
+.adaptive-style .list_title a {
+   float:none;
+   font-size: 14px;
+   color: #1f1f1f;
+   margin-left: 0px;
+   margin-right: 0px;
+   transition: all 200ms ease;
+}
+.active-adaptive-style{color: #15AE89 !important;}
+.EditConttent{padding-bottom: 30px;}
+.EditConttent p{
+line-height: 30px;
+margin-bottom:0px;
+font-size: 13px;
+letter-spacing: 0px;
+}
+.container {
+	display: inline-block;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #eee;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.06) inset;
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset; 
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+	position: relative;
+	zoom: 1;
+	width:100%;
+}
+.container:before {
+	-webkit-transform: skew(-15deg) rotate(-6deg);
+	-moz-transform: skew(-15deg) rotate(-6deg);
+	transform: skew(-15deg) rotate(-6deg);
+	left: 15px;
+}
+.container:after {
+	-webkit-transform: skew(15deg) rotate(6deg);
+	-moz-transform: skew(15deg) rotate(6deg);
+	transform: skew(15deg) rotate(6deg);
+	right: 15px;
+}
+.container:before, .container:after {
+	width: 70%;
+	height: 55%;
+	content: ' ';
+	
+	-webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	
+	position: absolute;
+	bottom: 10px;
+	z-index: -1;	
+}
+.adaptive-style {
+	margin-bottom: 10px;
+}
+.EditConttent img{
+	width: 100%;
+}
+.EditConttent p{
+	width: 100%;
+}
+.content {
+	clear: both;
+	margin:20px 10px;
+}
+.one-half{
+	width: 33.33%;
+	float: left;
+	text-align: left;
+	margin: 0;
+}
+.twitter-color ,.google-color{
+	background-color: #09AA83;
+	color: #FFFFFF;
+	width: 45px;
+	border-radius: 50%;
+	font-size: 2em;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+}
+.google-color{
+  float: right;
+}
+</style>
+</head> 
+<body> 
+<div id="preloader">
+    <div id="status">
+        <p class="center-text"><tp:sitename /><em>文艺青年的心灵驿站！</em></p>
+    </div>
+</div>
+<div class="all-elements">
+	<include file="Public:header" />
+  
+    <div class="all-elements">
+        <div id="content" class="snap-content">
+                <div class="content">
+                    <div class="adaptive-style">
+                        <span class="list_title"><tp:position delimiter='&nbsp;/&nbsp;' ismobile='1' />&nbsp;/&nbsp;<a class="cur" href="{$content.url}">{$content.title}</a></span>
+                    </div>
+                    <div class="decoration"></div>
+                    <p>导读：{$content.description}...</p>
+                    <div class="one-half-responsive">    
+                    <div class="container">
+                        <h3 style="text-align:center;">{$content.title}</h3>
+                        <div class="decoration"></div>
+                        <div class="EditConttent">
+                        <div class="ibox-content" id="playBox">
+                            <div class="plyr" id="playVideo">
+                              <if condition="$content['downlink']">
+                                <video poster="{$content.litpic}" controls crossorigin width="100%" height="280">
+                                    <source src="{$content.downlink}" type="video/mp4">
+                                </video>
+                              <else />
+                                {$content.video}
+                              </if>
+                            </div>
+                          </div>
+                        {$content.content}
+                        </div>
+                        
+                        <if condition="$front">
+                        <div class="one-half">
+                            <a href="{$front.url}" title="{$front.title}" class="twitter-color no-bottom"><i class="fa fa-hand-o-left"></i></a>
+                        </div>
+                        </if>
+                        <div class="one-half">
+                            <a href="javascript:" style="margin:auto;background:#FEB021;" class="twitter-color no-bottom">
+                                <i class="fa fa-thumbs-o-up"></i>
+                            </a>
+                        </div>
+                        <if condition="$next">
+                        <div class="one-half">
+                            <a href="{$next.url}" title="{$next.title}" class="google-color no-bottom"><i class="fa fa-hand-o-right"></i></a>
+                        </div>
+                        </if>
+                    </div>
+                   </div>
+                   <div class="decoration hide-if-responsive"></div>
+               </div>
+          <!-- Page Footer-->
+            <include file="Public:footer" />    
+        </div>
+    </div>
+</div>
+</body>
+</html>
