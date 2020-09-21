@@ -3,7 +3,7 @@
 $mode = defined('MODE') ? MODE : 'common';
 return array(
     'MODULE_ALLOW_LIST' => array('Home', 'Mobile'), //模块列表
-    'MODULE_DENY_LIST' => array('Common', 'Manage'),
+    'MODULE_DENY_LIST' => array('Common', 'AdminLF'),
     'DEFAULT_MODULE' => 'Home', //默认分组
 
     'DB_PARAMS' => array(\PDO::ATTR_CASE => \PDO::CASE_NATURAL),
@@ -12,7 +12,7 @@ return array(
     'APP_SUB_DOMAIN_DEPLOY' => 1,
     //子域名配置,格式：'子域名'=> array('分组名/[模块名]','var1=a&var2=b');
     'APP_SUB_DOMAIN_RULES' => array(
-        //'admin' => array('Manage/'),
+        //'admin' => array('AdminLF/'),
         'm' => array('Mobile/'),//对应域名为m.xxx.com
     ),
 

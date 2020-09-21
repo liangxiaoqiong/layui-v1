@@ -2,7 +2,7 @@
 /**
  * 后台基本框架页面
  * Class IndexController
- * @package Manage\Controller
+ * @package AdminLF\Controller
  * User: hjun
  * Date: 2018-03-29 22:55:53
  * Update: 2018-03-29 22:55:53
@@ -11,7 +11,7 @@
  * Copyright  ©2018 www.wxzbc.com  All rights reserved
  */
 
-namespace Manage\Controller;
+namespace AdminLF\Controller;
 
 use Common\Lib\Category;
 use Common\Model\ContractModel;
@@ -31,7 +31,7 @@ class IndexController extends CommonController
     }
     public function getMenu($pid = 0)
     {
-        $menu_list = getDefaultData('json/menu/manage');//左侧二级菜单
+        $menu_list = getDefaultData('json/menu/admin_lf');//左侧二级菜单
         $menu_json = json_encode($menu_list);
         exit($menu_json);
     }

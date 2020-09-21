@@ -6,7 +6,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
 
 require 'GLOBAL/global.php';
 
-define('BIND_MODULE', 'Manage');
+define('BIND_MODULE', 'AdminLF');
 defined('APP_PATH') or define('APP_PATH', "./App/");
 //require 'vendor/autoload.php';
 require THINK_PATH . 'ThinkPHP.php';

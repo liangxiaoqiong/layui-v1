@@ -2,7 +2,7 @@
 /**
  * 管理员信息基类
  * Class CommonController
- * @package Manage\Controller
+ * @package AdminLF\Controller
  * User: hjun
  * Date: 2018-03-27 20:22:33
  * Update: 2018-03-27 20:22:33
@@ -10,7 +10,7 @@
  * company 启达联创(厦门)信息科技有限公司
  * Copyright  ©2018 www.wxzbc.com  All rights reserved
  */
-namespace Manage\Controller;
+namespace AdminLF\Controller;
 
 use Think\Controller;
 

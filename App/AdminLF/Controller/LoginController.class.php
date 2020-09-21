@@ -2,7 +2,7 @@
 /**
  * 后台登录登出
  * Class LoginController
- * @package Manage\Controller
+ * @package AdminLF\Controller
  * User: hjun
  * Date: 2018-07-11 17:08:05
  * Update: 2018-07-11 17:08:05
@@ -11,7 +11,7 @@
  * Copyright  ©2018 www.wxzbc.com  All rights reserved
  */
 
-namespace Manage\Controller;
+namespace AdminLF\Controller;
 
 use Think\Controller;
 

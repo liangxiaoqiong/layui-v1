@@ -5,7 +5,7 @@ namespace Common\Model;
 /**
  * 会员
  * Class MemberModel
- * @package Manage\Model
+ * @package AdminLF\Model
  * User: hjun
  * Date: 2018-03-29 23:10:58
  * Update: 2018-03-29 23:10:58
