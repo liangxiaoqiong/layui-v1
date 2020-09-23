@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="__ADMIN__/icon/diy-icon/style.css?v={$V}">
   <link rel="stylesheet" href="__ADMIN__/plugins/layui/css/layui.css?v={$V}" media="all"/>
   <link rel="stylesheet" href="__DATA__/static/jq_plugins/jq-ui/jquery-ui.min.css?v={$V}" media="all"/>
+  <link rel="stylesheet" href="__ELEMENTUI_CSS__" media="all"/>
   <link rel="stylesheet" href="__ADMIN__/css/main.css?v={$V}" media="all"/>
   <link rel="stylesheet" href="__ADMIN__/css/admin.css?v={$V}" media="all"/>
   <php>
@@ -37,6 +38,7 @@
   <script type="text/javascript" src="__PUBLIC__/js/jquery.form.min.js?v={$V}"></script>
   <script type="text/javascript" src="__DATA__/static/jq_plugins/layer/layer.js?v={$V}"></script>
   <script type="text/javascript" src="__VUE__"></script>
+  <script type="text/javascript" src="__ELEMENTUI_JS__"></script>
   <script type="text/javascript" src="__DATA__/static/jq_plugins/jq-ui/jquery-ui.min.js?v={$V}"></script>
   <script language="JavaScript">
     <!--
@@ -79,32 +81,15 @@ define('CODE_NOT_FOUND', 404); // 不存在
     }
     // VUE组件存储对象
     var COMPONENT = {}
-    // 园区配置
-    var GARDEN_CONFIG = {
-      service_ctrl: "{:C('GARDEN_CONFIG.service_ctrl')}",
-      maintain_ctrl: "{:C('GARDEN_CONFIG.maintain_ctrl')}",
-      service_name: "{:C('GARDEN_CONFIG.service_name')}",
-      maintain_name: "{:C('GARDEN_CONFIG.maintain_name')}",
-      time_ctrl_1: "{:C('GARDEN_CONFIG.time_ctrl_1')}",
-      time_ctrl_2: "{:C('GARDEN_CONFIG.time_ctrl_2')}",
-      time_ctrl_3: "{:C('GARDEN_CONFIG.time_ctrl_3')}",
-      time_name_1: "{:C('GARDEN_CONFIG.time_name_1')}",
-      time_name_2: "{:C('GARDEN_CONFIG.time_name_2')}",
-      time_name_3: "{:C('GARDEN_CONFIG.time_name_3')}",
-    }
   </script>
   <script type="text/javascript" src="__PUBLIC__/js/common.js?v={$V}"></script>
   <script type="text/javascript" src="__DATA__/static/js/public.js?v={$V}"></script>
-  <script type="text/javascript" src="__ROOT__/Public/static/think.js?v={$V}"></script>
   <script src="__MOMENT__"></script>
   <script src="__APP_UTIL__"></script>
   <!-- 头部js文件|自定义 -->
   <block name="header_js"></block>
 </head>
 <body>
-<include file="Public/components/upload_file"/><!--上传文件组件-->
-<include file="Public/components/base_input"/><!--基础输入框组件-->
-<include file="Public/components/date_picker"/><!--日期选择器组件-->
 
 <div class="body-main" style="height: 100%">
   <div class="layui-form" style="height: 100%;">
