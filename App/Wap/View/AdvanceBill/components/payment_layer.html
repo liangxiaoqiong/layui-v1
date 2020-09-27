@@ -1,0 +1,88 @@
+<!--收费员 查询账单列表：线上账单=> 确认缴费弹框-->
+<style>
+  .payment-layer .dl-list {
+    padding-top: 0;
+  }
+  .payment-layer .dl-list p {
+    padding: 1rem 0;
+    border-bottom: 1px solid #F0F0F0;
+  }
+</style>
+<!-- template -->
+<script type="x-template" id="payment_layer">
+  <!--region 模版-->
+  <div>
+
+    <div class="payment-layer" v-if="isShowLayer">
+      <div class="layer-shade" @click="hideLayer"></div>
+      <div class="layer-confirm-wap layer-body-fixed">
+        <div class="layui-layer-title">确定缴费</div>
+        <div class="layui-layer-content">
+          <div class="dl-list">
+            <p>
+              <span>账单金额(元)：</span>
+              <span>2000.00</span>
+            </p>
+            <p>
+              <span>预缴活动送：</span>
+              <span @click="showChoiceLayer">选择缴费礼包<i class="diyicon-right-black" style="margin-left: .3rem"></i></span>
+            </p>
+          </div>
+        </div>
+        <div class="layer-btn">
+          <a @click="payment">确定缴费</a>
+          <a @click="hideLayer">取消缴费</a>
+        </div>
+      </div>
+    </div>
+
+    <choice-single-layer ref="choiceSingleLayer"></choice-single-layer>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENTS.PAYMENT_LAYER = {
+    template: '#payment_layer',
+    components: {
+      'choice-single-layer': COMPONENTS.CHOICE_SINGLE_LAYER
+    },
+    props: {},
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+        isShowLayer: false,
+        info: {}
+      }
+    },
+    methods: {
+      init: function (item) {
+        this.info = item
+        this.showLayer()
+      },
+      showLayer: function () {
+        this.isShowLayer = true
+      },
+      hideLayer: function () {
+        this.isShowLayer = false
+      },
+      showChoiceLayer: function () {
+        var self = this
+        var options = {
+          item: self.info,
+          layerList: ['线上代金券', '线下礼包'],
+          paramVal: 'send_lb_val', //选中的值变量item[paramVal]
+          paramKey: 'send_lb_val_key' //选中的键变量item[paramKey]
+        }
+        self.$refs.choiceSingleLayer.init(options)
+      },
+      payment: function () {
+        this.hideLayer()
+      }
+    },
+    directives: {}
+  }
+</script>

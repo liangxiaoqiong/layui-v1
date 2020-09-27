@@ -1,0 +1,39 @@
+<!-- template 表格下分页-->
+<script type="x-template" id="pagination_component">
+  <div v-if="!isNaN(total)">
+    <div class="table-page" v-if="+total > 0">
+      <el-pagination
+          background
+          :page-size="+query.limit"
+          layout="total, sizes, prev, pager, next, jumper"
+          :page-sizes="[10, 20, 30, 40, 50, 100]"
+          :total="+total"
+          :current-page="+query.page"
+          @current-change="pageChange" @size-change="limitChange">
+      </el-pagination>
+    </div>
+  </div>
+</script>
+<script>
+  COMPONENT.PAGINATION_COMPONENT = {
+    template: '#pagination_component',
+    components: {},
+    props: {
+      query: Object,
+      total: [Number, String],
+    },
+    data: function () {
+      return {}
+    },
+    methods: {
+      pageChange: function (page) {
+        this.query.page = page
+        this.$emit('temp-page-event')
+      },
+      limitChange: function (limit) {
+        this.query.limit = limit
+        this.$emit('temp-page-event')
+      }
+    }
+  }
+</script>

@@ -1,0 +1,85 @@
+<!--项目管理/项目管理/新增编辑项目-->
+<!-- template -->
+<script type="x-template" id="project_info_layer">
+  <!--region 模版-->
+  <div id="project-info-layer" style="display: none">
+    <div class="form-row">
+      <div class="row-cell">
+        <p class="row-t">所属商城</p>
+        <el-select class="row-div" v-model="info.sssc">
+          <el-option value="" label="全部商城"></el-option>
+          <el-option value="1" label="商城1"></el-option>
+        </el-select>
+      </div>
+      <div class="row-cell">
+        <p class="row-t">项目名称</p>
+        <input type="text" class="layui-input row-div">
+      </div>
+    </div>
+    <div class="form-row row-three">
+      <p class="row-t">项目地址</p>
+      <area-component ref="areaComponent" :info="info"></area-component>
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">详细地址</p>
+      <input type="text" class="layui-input row-div">
+    </div>
+    <div class="form-row">
+      <div class="row-cell">
+        <p class="row-t">负责人</p>
+        <input type="text" class="layui-input row-div">
+      </div>
+      <div class="row-cell">
+        <p class="row-t">手机号</p>
+        <input type="text" class="layui-input row-div">
+      </div>
+    </div>
+    <div class="form-row">
+      <p class="row-t">备注</p>
+      <textarea class="layui-textarea row-div" style="height: 66px"></textarea>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.PROJECT_INFO_LAYER = {
+    template: '#project_info_layer',
+    components: {
+      'area-component': COMPONENT.AREA_COMPONENT
+    },
+    props: {},
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+        info: {
+          sssc: '',
+          province_id: 0,
+          city_id: 0,
+          area_id: 0
+        }
+      }
+    },
+    methods: {
+      init: function () {
+        this.$refs.areaComponent.changeArea('area');
+        this.showLayer()
+      },
+      showLayer: function () {
+        var self = this
+        publicObj.layerConfirm({
+          self: self,
+          title: '新增/编辑项目',
+          area: ['640px', ''],
+          content: $('#project-info-layer')
+        }, function (index) {
+          layer.close(index)
+        })
+      }
+    },
+    directives: {}
+  }
+</script>

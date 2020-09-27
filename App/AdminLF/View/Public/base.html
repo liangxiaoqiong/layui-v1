@@ -17,12 +17,6 @@
   <link rel="stylesheet" href="__ELEMENTUI_CSS__" media="all"/>
   <link rel="stylesheet" href="__ADMIN__/css/main.css?v={$V}" media="all"/>
   <link rel="stylesheet" href="__ADMIN__/css/admin.css?v={$V}" media="all"/>
-  <php>
-    $skin = get_cfg_value('CFG_MANAGE_THEMESTYLE');
-    $skin = empty($skin) ? 'skin_1' : $skin;
-  </php>
-  <link rel="stylesheet" href="__ADMIN__/skin/{$skin}/css/style.css?v={$V}"
-        media="all"/>
   <!-- 头部css文件|自定义  -->
   <block name="header_css"></block>
 
@@ -35,7 +29,6 @@
   <![endif]-->
   <script type="text/javascript" src="__DATA__/static/jq_plugins/laydate/laydate.js?v={$V}"></script>
   <script type="text/javascript" src="__ADMIN__/plugins/layui/layui.js?v={$V}"></script>
-  <script type="text/javascript" src="__PUBLIC__/js/jquery.form.min.js?v={$V}"></script>
   <script type="text/javascript" src="__DATA__/static/jq_plugins/layer/layer.js?v={$V}"></script>
   <script type="text/javascript" src="__VUE__"></script>
   <script type="text/javascript" src="__ELEMENTUI_JS__"></script>
@@ -82,14 +75,16 @@ define('CODE_NOT_FOUND', 404); // 不存在
     // VUE组件存储对象
     var COMPONENT = {}
   </script>
-  <script type="text/javascript" src="__PUBLIC__/js/common.js?v={$V}"></script>
   <script type="text/javascript" src="__DATA__/static/js/public.js?v={$V}"></script>
+  <script type="text/javascript" src="__DATA__/static/js/think.js?v={$V}"></script>
   <script src="__MOMENT__"></script>
   <script src="__APP_UTIL__"></script>
   <!-- 头部js文件|自定义 -->
   <block name="header_js"></block>
 </head>
 <body>
+<include file="Public/components/upload_file"/><!--上传文件组件-->
+<include file="Public/components/date_picker/datetime_range_picker"/>
 
 <div class="body-main" style="height: 100%">
   <div class="layui-form" style="height: 100%;">
@@ -97,17 +92,14 @@ define('CODE_NOT_FOUND', 404); // 不存在
     <script>
       layui.config({
         version: '{$V}',
-      }).use(['form', 'upload', 'layer', 'element'], function () {
-        var form = layui.form()
-          , jq = layui.jquery
+      }).use(['upload', 'layer', 'element'], function () {
+        var jq = layui.jquery
           , element = layui.element();
       });//全局样式
     </script>
   </div>
   <!--<div class="foot">点点全球租房_logov4.11 © 2014-2017     客服:400-670-2515 | 400-816-1525</div>-->
 </div>
-<!--公用弹框-->
-<div id="layerModel" onclick="publicObj.slideRight('hide');"></div>
 
 <!--region 底部JS-->
 <block name="footer_js"></block>

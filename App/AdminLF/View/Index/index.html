@@ -15,11 +15,6 @@
   <link rel="stylesheet" href="__ADMIN__/css/layout.css?v={$V}" media="all"/>
   <link rel="stylesheet" href="__ADMIN__/css/global.css?v={$V}" media="all"/>
   <link rel="stylesheet" href="__ADMIN__/css/admin.css?v={$V}" media="all"/>
-  <php>
-    $skin = get_cfg_value('CFG_MANAGE_THEMESTYLE');
-    $skin = empty($skin) ? 'skin_1' : $skin;
-  </php>
-  <link rel="stylesheet" href="__ADMIN__/skin/{$skin}/css/style.css?v={$V}" media="all"/>
 
 </head>
 <style>
@@ -42,19 +37,19 @@
               <dl class="layui-nav-child">
                 <dd>
                   <a href="javascript:;" data-tab="true" data-url="{:U('Personal/pwd')}">
-                    <i class="yqicon-password" aria-hidden="true"></i>
+                    <i class="diyicon-password" aria-hidden="true"></i>
                     <cite>修改密码</cite>
                   </a>
                 </dd>
                 <dd>
                   <a href="{:U('Login/logout')}">
-                    <i class="yqicon-sign-out" aria-hidden="true"></i>
+                    <i class="diyicon-sign-out" aria-hidden="true"></i>
                     <cite>退出登录</cite>
                   </a>
                 </dd>
                 <dd>
                   <a class="update_cache" href="javascript:void(0)">
-                    <i class="yqicon-clear-cache"></i>
+                    <i class="diyicon-clear-cache"></i>
                     <cite>清除缓存</cite>
                   </a>
                 </dd>
@@ -81,7 +76,7 @@
         </foreach>
       </ul>
     </div>
-    <span class="title-refresh" onclick="reloadIframe()"></span>
+    <span class="title-refresh" onclick="reloadIframe()"><i class="diyicon-clear-cache"></i></span>
   </div>
   <!--侧边导航栏-->
   <div class="layui-side beg-layout-side" id="side" lay-filter="side"></div>

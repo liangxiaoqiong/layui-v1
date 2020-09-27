@@ -1,0 +1,59 @@
+<!--列表页底部-->
+<style>
+  .list-default {
+    height: 100%;
+  }
+</style>
+<!-- template -->
+<script type="x-template" id="list_default_component">
+  <!--region 模版-->
+  <div :class="{'list-default': isNoList}">
+    <div class="in-end" v-if="+total> 0 && !listLoad.hasMore"><span>已经到底啦~</span></div>
+    <div class="in-end" v-if="listLoad.hasMore"><span>加载中~</span></div>
+    <div class="no-list" v-if="isNoList">
+      <img :src="'/Data/wap/images/default_img/'+noListDefault.img">
+      <div class="no-list-text">{{ noListDefault.text }}</div>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENTS.LIST_DEFAULT_COMPONENT = {
+    template: '#list_default_component',
+    props: {
+      noListDefault: {
+        type: Object,
+        default: function () {
+          return {
+
+          }
+        }
+      },
+      total: [String, Number],
+      listLoad: {
+        type: Object,
+        default: function () {
+          return {
+            isBusy: false,
+            hasMore: true,
+            isLoadMore: false,//是否有下一页
+          }
+        }
+      }
+    },
+    computed: {
+      isNoList: function () {
+        return +this.total <= 0 && !this.listLoad.isBusy
+      }
+    },
+    mounted: function () {
+    },
+    data: function () {
+      return {}
+    },
+    methods: {},
+    directives: {}
+  }
+</script>

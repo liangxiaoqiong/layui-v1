@@ -1,88 +1,88 @@
-.yqicon-view {
+.diyicon-import {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe90a;');
+}
+.diyicon-view {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe90b;');
 }
-.yqicon-t-change-pwd {
+.diyicon-t-change-pwd {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe90c;');
 }
-.yqicon-down-1 {
+.diyicon-down-1 {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe909;');
 }
-.yqicon-save {
+.diyicon-save {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe907;');
 }
-.yqicon-checked-2 {
+.diyicon-checked-2 {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe908;');
 }
-.yqicon-search {
+.diyicon-search {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe905;');
 }
-.yqicon-export {
+.diyicon-export {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe904;');
 }
-.yqicon-building {
-  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe906;');
-}
-.yqicon-sort-asc {
+.diyicon-sort-asc {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe902;');
 }
-.yqicon-sort-desc {
+.diyicon-sort-desc {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe903;');
 }
-.yqicon-menu-icon-xtgk {
+.diyicon-menu-icon-xtgk {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe901;');
 }
-.yqicon-checked {
+.diyicon-checked {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe900;');
 }
-.yqicon-clear-cache {
+.diyicon-clear-cache {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe96b;');
 }
-.yqicon-menu-icon-bbgl {
+.diyicon-menu-icon-bbgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe96c;');
 }
-.yqicon-menu-icon-czfgl {
+.diyicon-menu-icon-czfgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe96d;');
 }
-.yqicon-menu-icon-fwgl {
+.diyicon-menu-icon-fwgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe96e;');
 }
-.yqicon-menu-icon-hygl {
+.diyicon-menu-icon-hygl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe96f;');
 }
-.yqicon-menu-icon-khgl {
+.diyicon-menu-icon-khgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe970;');
 }
-.yqicon-menu-icon-tzjl {
+.diyicon-menu-icon-tzjl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe971;');
 }
-.yqicon-menu-icon-xtsz {
+.diyicon-menu-icon-xtsz {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe972;');
 }
-.yqicon-menu-icon-yggl {
+.diyicon-menu-icon-yggl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe973;');
 }
-.yqicon-menu-icon-zdgl {
+.diyicon-menu-icon-zdgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe974;');
 }
-.yqicon-menu-icon-zngl {
+.diyicon-menu-icon-zngl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe975;');
 }
-.yqicon-menu-icon-zwgl {
+.diyicon-menu-icon-zwgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe976;');
 }
-.yqicon-menu-icon-zxgl {
+.diyicon-menu-icon-zxgl {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe977;');
 }
-.yqicon-password {
+.diyicon-password {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe978;');
 }
-.yqicon-phone {
+.diyicon-phone {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe979;');
 }
-.yqicon-sign-out {
+.diyicon-sign-out {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe97a;');
 }
-.yqicon-right {
+.diyicon-right {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe927;');
 }
 

@@ -1,0 +1,62 @@
+<extend name="Public:base" />
+<block name="content">
+    <div class="admin-main">
+        <div class="bg-white">
+          <h1 class="white-title"><b>修改密码</b></h1>
+            <form method="post" class="layui-form form-container dl-div-2" id="form_do" data-url="{:U('pwd')}">
+
+              <dl class="basic-dl">
+                <dt>旧密码：</dt>
+                <dd>
+                  <input type="password" name="oldpassword" value="" required lay-verify="required" class="layui-input dd-input" placeholder="旧密码" />
+                </dd>
+              </dl>
+              <dl class="basic-dl">
+                <dt>新密码：</dt>
+                <dd>
+                  <input type="password" name="password" value="" required lay-verify="required" class="layui-input dd-input" placeholder="新密码" />
+                </dd>
+              </dl>
+              <dl class="basic-dl">
+                <dt>确认密码：</dt>
+                <dd>
+                  <input type="password" name="rpassword" value="" required lay-verify="required" class="layui-input dd-input" placeholder="确认密码" />
+                </dd>
+              </dl>
+
+              <div class="flex-left" style="padding: 20px 0 0 150px;">
+                  <button class="btn-primary-diy" lay-submit="" lay-filter="formadd">确认修改 </button>
+               </div>
+           </form>
+        </div>
+    </div>
+    <script>
+	layui.use(['form','upload','layer','element'],function(){
+	  var form = layui.form()
+	  ,jq = layui.jquery
+	  ,element = layui.element();
+
+	  var url=jq('form').data('url');
+	  form.on('submit(formadd)', function(data){
+	    loading = layer.load(2, {
+	      shade: [0.2,'#000']
+	    });
+	    //var param = data.field;
+	    jq.post(url,jq('#form_do').serialize(),function(data){
+
+	      if(data.status == 1){
+	        layer.close(loading);
+	        layer.msg(data.info, {icon: 1, time: 1000}, function(){
+	          location.href = data.url;
+	        });
+	      }else{
+	        layer.close(loading);
+	        layer.msg(data.info, {icon: 2, anim: 6, time: 1000});
+	      }
+	    });
+	    return false;
+	  });
+
+	});
+	</script>
+</block>

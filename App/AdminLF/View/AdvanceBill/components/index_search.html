@@ -1,0 +1,215 @@
+<!--账单管理/预缴账单管理(AdvanceBill/index)顶部的查询条件-->
+<script type="x-template" id="advance_bill_search">
+  <div class="search-content" style="padding-left: 0">
+    <div class="search-container flex-between">
+      <ul class="search-left" style="flex: 1">
+        <li>
+          <span>项目名称</span>
+          <div class="l-content">
+            <el-select v-model="query.xmmc">
+              <el-option value="" label="全部"></el-option>
+              <el-option value="1" label="项目1"></el-option>
+            </el-select>
+          </div>
+        </li>
+        <li>
+          <span>缴费状态</span>
+          <div class="l-content">
+            <el-select v-model="query.jfzt">
+              <el-option value="0" label="全部"></el-option>
+              <el-option value="1" label="待缴费"></el-option>
+              <el-option value="2" label="已缴费"></el-option>
+            </el-select>
+          </div>
+        </li>
+        <li>
+          <span>领取状态</span>
+          <div class="l-content">
+            <el-select v-model="query.lqzt">
+              <el-option value="0" label="全部"></el-option>
+              <el-option value="1" label="待领取"></el-option>
+              <el-option value="2" label="已领取"></el-option>
+            </el-select>
+          </div>
+        </li>
+        <li class="flex-left search-btn-div">
+          <button class="btn-primary-diy" @click="search">搜索</button>
+        </li>
+      </ul>
+      <div class="search-right">
+        <button class="btn-grey" @click.stop="isShowSearchLayer = !isShowSearchLayer">
+          <i class="diyicon-search"></i>更多搜索
+        </button>
+        <button type="button" class="btn-grey" @click="importBill">
+          <i class="diyicon-import"></i>导入账单
+        </button>
+        <a class="btn-grey" @mouseenter.stop="isShowSearchLayer = false">
+          <i class="diyicon-export"></i>导出列表
+        </a>
+      </div>
+    </div>
+
+    <!--region 搜索列表弹框-->
+    <div class="search-layer" v-if="isShowSearchLayer">
+      <div class="title">搜索列表</div>
+      <div class="search-form">
+        <div class="search-item">
+          <p>项目名称</p>
+          <div>
+            <el-select v-model="query.xmmc">
+              <el-option value="" label="全部"></el-option>
+              <el-option value="1" label="项目1"></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="search-item">
+          <p>缴费状态</p>
+          <div>
+            <el-select v-model="query.jfzt">
+              <el-option value="0" label="全部"></el-option>
+              <el-option value="1" label="待缴费"></el-option>
+              <el-option value="2" label="已缴费"></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="search-item">
+          <p>领取状态</p>
+          <div>
+            <el-select v-model="query.lqzt">
+              <el-option value="0" label="全部"></el-option>
+              <el-option value="1" label="待领取"></el-option>
+              <el-option value="2" label="已领取"></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="search-item">
+          <p>账单编号</p>
+          <div>
+            <input type="text" class="layui-input" >
+          </div>
+        </div>
+        <div class="search-item">
+          <p>房间号</p>
+          <div>
+            <input type="text" class="layui-input" >
+          </div>
+        </div>
+        <div class="search-item">
+          <p>手机号</p>
+          <div>
+            <input type="text" class="layui-input" >
+          </div>
+        </div>
+        <div class="search-item">
+          <p>账单额(元)</p>
+          <div class="input-two-period">
+            <div class="input-div">
+              <input type="text" class="layui-input" >
+              <i class="unit">元</i>
+            </div>
+            <div class="input-div">
+              <input type="text" class="layui-input" >
+              <i class="unit">元</i>
+            </div>
+          </div>
+        </div>
+        <div class="search-item">
+          <p>缴费类型</p>
+          <div>
+            <el-select v-model="query.jflx">
+              <el-option value="0" label="全部"></el-option>
+              <el-option value="1" label="线上"></el-option>
+              <el-option value="2" label="线下"></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="search-item">
+          <p>领取类型</p>
+          <div>
+            <el-select v-model="query.lqlx">
+              <el-option value="0" label="全部"></el-option>
+              <el-option value="1" label="线上代金券"></el-option>
+              <el-option value="2" label="线下礼包"></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="search-item">
+          <p>会员账号</p>
+          <div>
+            <input type="text" class="layui-input" >
+          </div>
+        </div>
+        <div class="search-item">
+          <p>会员昵称</p>
+          <div>
+            <input type="text" class="layui-input" >
+          </div>
+        </div>
+        <div class="search-item">
+          <p>创建时间</p>
+          <datetime-range-picker :info="query" :param="['creat_start_time', 'creat_end_time']"></datetime-range-picker>
+        </div>
+        <div class="search-item">
+          <p>缴费时间</p>
+          <datetime-range-picker :info="query" :param="['jf_start_time', 'jf_end_time']"></datetime-range-picker>
+        </div>
+        <div class="search-item">
+          <p>核销时间</p>
+          <datetime-range-picker :info="query" :param="['hx_start_time', 'hx_end_time']"></datetime-range-picker>
+        </div>
+
+      </div>
+      <div class="search-layer-btn">
+        <button type="button" class="btn-grey" @click="resetQuery">清空</button>
+        <button type="button" class="btn-primary-diy"
+                @click="search">搜索</button>
+      </div>
+    </div>
+    <!--endregion-->
+  </div>
+</script>
+<script>
+  COMPONENT.ADVANCE_BILL_SEARCH = {
+    template: '#advance_bill_search',
+    components: {
+      'datetime-range-picker': COMPONENT.DATETIME_RANGE_PICKER
+    },
+    props: {
+      query: Object,
+    },
+    data: function () {
+      return {
+        isShowSearchLayer: false
+      }
+    },
+    methods: {
+      search: function () {
+        var self = this
+        self.$nextTick(function () {
+          self.query.page = 1
+          self.$emit('search')
+          self.isShowSearchLayer = false
+        })
+      },
+      /**重置，清空搜索框*/
+      resetQuery:function () {
+        var self = this;
+        self.query.xmmc = ''
+        self.query.jfzt = '0'
+        self.query.lqzt = '0'
+        self.query.jflx = '0'
+        self.query.lqlx = '0'
+        self.query.creat_start_time = ''
+        self.query.creat_end_time = ''
+        self.query.jf_start_time = ''
+        self.query.jf_end_time = ''
+        self.query.hx_start_time = ''
+        self.query.hx_end_time = ''
+      },
+      //导入账单
+      importBill: function () {
+        this.$emit('import-bill')
+      }
+    }
+  }
+</script>

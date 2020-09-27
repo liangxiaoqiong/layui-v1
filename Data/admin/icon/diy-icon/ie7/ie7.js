@@ -10,38 +10,38 @@
 (function() {
 	function addIcon(el, entity) {
 		var html = el.innerHTML;
-		el.innerHTML = '<span style="font-family: \'yqicon\'">' + entity + '</span>' + html;
+		el.innerHTML = '<span style="font-family: \'styleicon\'">' + entity + '</span>' + html;
 	}
 	var icons = {
-		'yqicon-view': '&#xe90b;',
-		'yqicon-t-change-pwd': '&#xe90c;',
-		'yqicon-down-1': '&#xe909;',
-		'yqicon-save': '&#xe907;',
-		'yqicon-checked-2': '&#xe908;',
-		'yqicon-search': '&#xe905;',
-		'yqicon-export': '&#xe904;',
-		'yqicon-building': '&#xe906;',
-		'yqicon-sort-asc': '&#xe902;',
-		'yqicon-sort-desc': '&#xe903;',
-		'yqicon-menu-icon-xtgk': '&#xe901;',
-		'yqicon-checked': '&#xe900;',
-		'yqicon-clear-cache': '&#xe96b;',
-		'yqicon-menu-icon-bbgl': '&#xe96c;',
-		'yqicon-menu-icon-czfgl': '&#xe96d;',
-		'yqicon-menu-icon-fwgl': '&#xe96e;',
-		'yqicon-menu-icon-hygl': '&#xe96f;',
-		'yqicon-menu-icon-khgl': '&#xe970;',
-		'yqicon-menu-icon-tzjl': '&#xe971;',
-		'yqicon-menu-icon-xtsz': '&#xe972;',
-		'yqicon-menu-icon-yggl': '&#xe973;',
-		'yqicon-menu-icon-zdgl': '&#xe974;',
-		'yqicon-menu-icon-zngl': '&#xe975;',
-		'yqicon-menu-icon-zwgl': '&#xe976;',
-		'yqicon-menu-icon-zxgl': '&#xe977;',
-		'yqicon-password': '&#xe978;',
-		'yqicon-phone': '&#xe979;',
-		'yqicon-sign-out': '&#xe97a;',
-		'yqicon-right': '&#xe927;',
+		'diyicon-import': '&#xe90a;',
+		'diyicon-view': '&#xe90b;',
+		'diyicon-t-change-pwd': '&#xe90c;',
+		'diyicon-down-1': '&#xe909;',
+		'diyicon-save': '&#xe907;',
+		'diyicon-checked-2': '&#xe908;',
+		'diyicon-search': '&#xe905;',
+		'diyicon-export': '&#xe904;',
+		'diyicon-sort-asc': '&#xe902;',
+		'diyicon-sort-desc': '&#xe903;',
+		'diyicon-menu-icon-xtgk': '&#xe901;',
+		'diyicon-checked': '&#xe900;',
+		'diyicon-clear-cache': '&#xe96b;',
+		'diyicon-menu-icon-bbgl': '&#xe96c;',
+		'diyicon-menu-icon-czfgl': '&#xe96d;',
+		'diyicon-menu-icon-fwgl': '&#xe96e;',
+		'diyicon-menu-icon-hygl': '&#xe96f;',
+		'diyicon-menu-icon-khgl': '&#xe970;',
+		'diyicon-menu-icon-tzjl': '&#xe971;',
+		'diyicon-menu-icon-xtsz': '&#xe972;',
+		'diyicon-menu-icon-yggl': '&#xe973;',
+		'diyicon-menu-icon-zdgl': '&#xe974;',
+		'diyicon-menu-icon-zngl': '&#xe975;',
+		'diyicon-menu-icon-zwgl': '&#xe976;',
+		'diyicon-menu-icon-zxgl': '&#xe977;',
+		'diyicon-password': '&#xe978;',
+		'diyicon-phone': '&#xe979;',
+		'diyicon-sign-out': '&#xe97a;',
+		'diyicon-right': '&#xe927;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),
@@ -52,7 +52,7 @@
 			break;
 		}
 		c = el.className;
-		c = c.match(/yqicon-[^\s'"]+/);
+		c = c.match(/diyicon-[^\s'"]+/);
 		if (c && icons[c[0]]) {
 			addIcon(el, icons[c[0]]);
 		}

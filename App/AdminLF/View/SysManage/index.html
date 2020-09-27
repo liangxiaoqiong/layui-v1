@@ -1,0 +1,106 @@
+<!--系统管理/管理日志-->
+<extend name="Public:base"/>
+<block name="content">
+  <div class="admin-main" id="app" v-cloak>
+    <div class="search-content">
+      <div class="search-container">
+        <ul class="search-left">
+          <li>
+            <span>操作者</span>
+            <div class="l-content">
+              <input type="text" class="layui-input" placeholder="输入操作者账号"/>
+            </div>
+          </li>
+          <li class="flex-left search-btn-div">
+            <button class="btn-primary-diy" @click="getTableData({page: 1})">搜索</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <diy-table
+        :query="query"
+        :table-filed="tableFiled"
+        :table-data="tableData"
+        is_show_checkbox="1"
+        is_show_menu="1"
+        @get-table-data="getTableData">
+      <!--region td-val-->
+      <template v-slot:td-val="slotData">
+        <template>
+          {{ slotData.item[slotData.th.th_val[0]] }}
+        </template>
+      </template>
+      <!--endregion-->
+
+      <!--region 左下角批量操作键-->
+      <template v-slot:table-batch-action>
+        <button class="btn-grey" @click="batchDel">删除</button>
+      </template>
+      <!--endregion-->
+    </diy-table>
+
+  </div>
+  <!--region diy-table引入-->
+  <include file="Public/components/diy_table/table_setting"/>
+  <include file="Public/components/pagination"/>
+  <include file="Public/components/diy_table/table_content" />
+  <!--endregion-->
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      components: {
+        'diy-table': COMPONENT.DIY_TABLE_COMPONENT,
+      },
+      data: function () {
+        return {
+          tableFiled: [
+            {filed_val: 'bh', th_val: ['bh'], th_name: "编号"},
+            {filed_val: 'czz', th_val: ['czz'], th_name: "操作者"},
+            {filed_val: 'czsj', th_val: ['czsj'], th_name: "操作时间"},
+            {filed_val: 'ipdz', th_val: ['ipdz'], th_name: "IP地址"},
+            {filed_val: 'czjl', th_val: ['czjl'], th_name: "操作记录", t_width: 400},
+          ],//表头
+          query: {
+            page: 1,
+            limit: 20,
+            checkedIds: [],
+          },
+          tableData: {
+            total: '0',
+            list: [],
+          },
+        }
+      },
+      mounted: function () {
+        this.getTableData()
+      },
+      methods: {
+        getTableData: function (current) {
+          var self = this
+          if (typeof current !== 'undefined') {
+            if (typeof current.page !== 'undefined') {
+              self.query.page = current.page
+            }
+          }
+          AppUtil.ajaxRequest({
+            url: '/Data/json/admin/SysManage/index.json',
+            dataType: 'json',
+            type: 'get',
+            showLoad: false
+          }).then(function (result) {
+            self.tableData = result.data
+          })
+        },
+        //批量删除
+        batchDel: function () {
+          var self = this
+          if (publicObj.isCheckItem(self.query.checkedIds)) {
+            publicObj.confirmDel(function (index) {
+              layer.close(index)
+            }, {title: '确定删除选中的数据？'})
+          }
+        },
+      },
+    })
+  </script>
+</block>

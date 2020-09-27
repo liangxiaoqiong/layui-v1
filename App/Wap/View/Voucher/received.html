@@ -1,0 +1,93 @@
+<!--代金券领取成功页面-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>联客荟-生活家</title>
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/common.css?v={$V}">
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/Voucher/received.css?v={$V}">
+</head>
+<body>
+<div class="success_fail_page" id="app" v-cloak="">
+  <div class="page-title">
+    <div class="page-icon">
+      <img src="/Data/static/images/success_white3.png"/>
+    </div>
+    <div class="title-text">恭喜您，已领取一张代金券</div>
+  </div>
+  <div
+       :class="[('diy-list-box'), (isShowDetail ? 'is-open-detail' : '')]">
+    <div>
+      <div class="box-up">
+        <div class="box-info">
+          <div class="coupon-base">
+            <div class="coupon-price">
+              <template v-if="+coupon.coupons_type === 1">
+                <font class="color-diy">￥</font>
+                <b class="color-diy">{{ coupon.coupons_money }}</b>
+              </template>
+              <template v-if="+coupon.coupons_type === 2">
+                <b class="color-diy">{{ coupon.coupons_value.value }}</b>
+                <font class="color-diy">{{ coupon.coupons_value.unit }}</font>
+              </template>
+            </div>
+            <div class="coupon-limit color-diy">{{ coupon.coupons_value.limit }}</div>
+          </div>
+          <div class="present-text">
+            <div class="present-name line-two">{{ coupon.coupons_name }}</div>
+            <div class="time-range">{{ coupon.limit_time_range }}</div>
+          </div>
+        </div>
+        <div class="box-more-btn" @click="isShowDetail = !isShowDetail">
+          详细信息
+          <i class="diyicon-right-black grey"></i>
+        </div>
+      </div>
+      <div class="box-more">
+        <p v-html="coupon.instructions"></p>
+        <p>{{ coupon.use_range }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="tip">已领取代金券可在商城个人中心查看！</div>
+  <div class="btn-div">
+    <a class="diybtn-plain-diy">去使用</a>
+  </div>
+</div>
+<include file="Public:base"/>
+<script>
+  (function (window) {
+    var app = window.AppUtil,
+      rootPath = window.ThinkPHP.APP;
+    var vm = new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          isShowDetail: false,
+          coupon: {
+            coupons_type: 1,
+            coupons_value: {
+              value: 2,
+              unit: '折',
+              limit: '满500元可用'
+            },
+            coupons_money: '20',
+            coupons_name: '20元飞燕国内机票券',
+            limit_time_range: '2019.03.09-2019.06.08',
+            instructions: 'instructionsinstructionsinstructions',
+            use_range: '使用范围'
+          }
+        }
+      },
+      mounted: function () {
+      },
+      methods: {
+      }
+    })
+    window.vm = vm;
+  })(window);
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!--单选弹框 select||radio-->
+<style>
+  .choice-single-layer .layer-body-fixed {
+    z-index: 1002;
+    width: 15rem;
+    box-sizing: border-box;
+    top: calc(50% - 50px);
+    bottom: initial;
+    left: calc(50% - 7.5rem);
+    background-color: #FFFFff;
+    border-radius: .25rem;
+  }
+  .choice-single-layer .layer-shade {
+    z-index: 110;
+  }
+  .choice-single-layer .layer-main {
+    max-height: 340px;
+    overflow-y: auto;
+    padding: .6rem 0;
+    color: #000000;
+  }
+
+  .choice-single-layer ul li {
+    font-size: .7rem;
+    padding: .6rem 1.2rem;
+    position: relative;
+  }
+</style>
+<script type="x-template" id="choice_single_layer">
+  <div class="choice-single-layer" v-if="isShowLayer">
+    <div class="layer-shade" @click="hideLayer"></div>
+    <div class="layer-body-fixed">
+      <ul class="layer-main">
+        <li v-for="(list,index) in info.layerList"
+            :class="{'color-diy': isActive(index)}"
+            @click="changeSelect(list, index)">
+          {{list}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</script>
+<script>
+  COMPONENTS.CHOICE_SINGLE_LAYER = {
+    template: '#choice_single_layer',
+    props: {},
+    data: function () {
+      return {
+        info: {
+          item: {}, //当前操作的数据
+          layerList: [],//弹框选项列表
+          paramVal: 'value', //选中的值变量item[paramVal]
+          paramKey: 'value_key' //选中的键变量item[paramKey]
+        },
+        isShowLayer: false,
+      }
+    },
+    computed: {
+      isActive: function () {
+        return function (index) {
+          return this.info.item[this.info.paramKey] !== '' && +index === +this.info.item[this.info.paramKey]
+        }
+      }
+    },
+    methods: {
+      init: function (options) {
+        var self = this
+        self.info = options
+        self.showLayer()
+      },
+      showLayer: function () {
+        this.isShowLayer = true
+      },
+      hideLayer: function () {
+        this.isShowLayer = false
+      },
+      changeSelect:function (value,key) {
+        var self = this;
+        self.info.item[self.info.paramVal] = value
+        self.info.item[self.info.paramKey] = key
+        self.hideLayer()
+      },
+    }
+  }
+</script>

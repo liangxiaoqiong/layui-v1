@@ -1,0 +1,50 @@
+<!--项目管理/项目管理/核销员管理/新增编收费员-->
+<!-- template -->
+<script type="x-template" id="tollman_info_layer">
+  <!--region 模版-->
+  <div id="tollman-info-layer" style="display: none">
+    <div class="form-row mb-10">
+      <p class="row-t">手机号码</p>
+      <input type="text" class="layui-input row-div">
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">姓名</p>
+      <input type="text" class="layui-input row-div">
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">备注</p>
+      <textarea class="layui-textarea row-div" style="height: 66px"></textarea>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.TOLLMAN_INFO_LAYER = {
+    template: '#tollman_info_layer',
+    props: {},
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {}
+    },
+    methods: {
+      init: function () {
+        this.showLayer()
+      },
+      showLayer: function () {
+        var self = this
+        publicObj.layerConfirm({
+          self: self,
+          title: '新增/编辑收费员',
+          content: $('#tollman-info-layer')
+        }, function (index) {
+          layer.close(index)
+        })
+      }
+    },
+    directives: {}
+  }
+</script>

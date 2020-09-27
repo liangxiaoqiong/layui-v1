@@ -1,0 +1,65 @@
+<!--系统管理/管理员列表/新增编辑管理员-->
+<!-- template -->
+<script type="x-template" id="admin_info_layer">
+  <!--region 模版-->
+  <div id="admin-info-layer" style="display: none">
+    <div class="form-row mb-10">
+      <p class="row-t">用户名<b class="color-red">*</b></p>
+      <input type="text" class="layui-input row-div">
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">Email地址<b class="color-red">*</b></p>
+      <input type="text" class="layui-input row-div">
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">账号权限</p>
+      <el-select class="row-div" v-model="info.zhqx">
+        <el-option value="" label="请选择"></el-option>
+        <el-option value="1" label="账号权限1"></el-option>
+      </el-select>
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">密码<b class="color-red">*</b></p>
+      <input type="password" class="layui-input row-div">
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">确认密码<b class="color-red">*</b></p>
+      <input type="password" class="layui-input row-div">
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.ADMIN_INFO_LAYER = {
+    template: '#admin_info_layer',
+    props: {},
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+        info: {
+          zhqx: ''
+        }
+      }
+    },
+    methods: {
+      init: function () {
+        this.showLayer()
+      },
+      showLayer: function () {
+        var self = this
+        publicObj.layerConfirm({
+          self: self,
+          title: '新增/编辑管理员',
+          content: $('#admin-info-layer')
+        }, function (index) {
+          layer.close(index)
+        })
+      }
+    },
+    directives: {}
+  }
+</script>

@@ -31,6 +31,8 @@ return array(
         '__DATA__' => __ROOT__ . '/Data',
         '__ADMIN__' => __ROOT__ . '/Data/admin',
         '__VUE__' => VUE,
+        '__ELEMENTUI_CSS__' => __ROOT__ . '/Data/static/jq_plugins/element-ui/2.13.2/theme-chalk/index.css',
+        '__ELEMENTUI_JS__' => __ROOT__ . '/Data/static/jq_plugins/element-ui/2.13.2/index.js',
         '__APP_UTIL__' => APP_UTIL,
         '__CITY_JS__' => CITY_JS,
         '__MOMENT__' => __ROOT__ . '/Data/static/jq_plugins/moment/moment.js?v=' . EXTRA_VERSION

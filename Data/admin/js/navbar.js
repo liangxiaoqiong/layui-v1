@@ -273,7 +273,7 @@ layui.define(['element', 'common'], function(exports) {
 						ulHtml += '<i class="fa ' + data[i].icon + '" aria-hidden="true" data-icon="' + data[i].icon + '"></i>';
 					} else {
 						//ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
-						ulHtml += '<i class="yqicon-' + data[i].icon + '"></i>';
+						ulHtml += '<i class="diyicon-' + data[i].icon + '"></i>';
 						ulHtml += '<i class="' + data[i].icon + '"></i>';
 					}
 				}else{
@@ -292,7 +292,7 @@ layui.define(['element', 'common'], function(exports) {
 							ulHtml += '<i class="fa ' + data[i].child[j].icon + '" data-icon="' + data[i].child[j].icon + '" aria-hidden="true"></i>';
 						} else {
 							//ulHtml += '<i class="layui-icon" data-icon="' + data[i].child[j].icon + '">' + data[i].child[j].icon + '</i>';
-							ulHtml += '<i class="yqicon-' + data[i].child[j].icon + '"></i>';
+							ulHtml += '<i class="diyicon-' + data[i].child[j].icon + '"></i>';
 							ulHtml += '<i class="' + data[i].child[j].icon + '"></i>';
 						}
 					}else{
@@ -316,7 +316,7 @@ layui.define(['element', 'common'], function(exports) {
 							ulHtml += '<i class="fa ' + data[i].child[j].icon + '" data-icon="' + data[i].child[j].icon + '" aria-hidden="true"></i>';
 						} else {
 							//ulHtml += '<i class="layui-icon" data-icon="' + data[i].child[j].icon + '">' + data[i].child[j].icon + '</i>';
-							ulHtml += '<i class="yqicon-' + data[i].child[j].icon + '"></i>';
+							ulHtml += '<i class="diyicon-' + data[i].child[j].icon + '"></i>';
 							ulHtml += '<i class="' + data[i].child[j].icon + '"></i>';
 						}
 					}else{
@@ -336,7 +336,7 @@ layui.define(['element', 'common'], function(exports) {
 						ulHtml += '<i class="fa ' + data[i].icon + '" aria-hidden="true" data-icon="' + data[i].icon + '"></i>';
 					} else {
 						//ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
-						ulHtml += '<i class="yqicon-' +  data[i].icon + '"></i>';
+						ulHtml += '<i class="diyicon-' +  data[i].icon + '"></i>';
 						ulHtml += '<i class="' +  data[i].icon + '"></i>';
 					}
 				}else{

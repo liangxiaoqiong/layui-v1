@@ -1,0 +1,75 @@
+<!--系统管理/管理员列表/新增编辑管理员-->
+<!-- template -->
+<script type="x-template" id="auth_info_layer">
+  <!--region 模版-->
+  <div id="auth-info-layer" style="display: none">
+    <div class="form-row mb-10">
+      <p class="row-t">组名<b class="color-red">*</b><font class="color-tip">(唯一的)</font></p>
+      <input type="text" class="layui-input row-div">
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">项目备注</p>
+      <textarea class="layui-textarea row-div" style="height: 66px"></textarea>
+    </div>
+    <div class="form-row mb-10">
+      <p class="row-t">操作权限</p>
+      <el-checkbox-group class="checkbox-group" v-model="info.czqx">
+        <el-checkbox v-for="(auth, index) in authList" :key="index" :label="auth.value">{{ auth.name }}</el-checkbox>
+      </el-checkbox-group>
+    </div>
+    <div class="form-row mb-10 mt-10">
+      <span>设置</span>
+      <el-radio-group v-model="info.status" style="padding-left: 20px;">
+        <el-radio label="1">启用</el-radio>
+        <el-radio label="0">关闭</el-radio>
+      </el-radio-group>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.AUTH_INFO_LAYER = {
+    template: '#auth_info_layer',
+    props: {},
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+        authList: [
+          {value: 1, name: '管理首页'},
+          {value: 2, name: '系统管理'},
+          {value: 3, name: '会员管理'},
+          {value: 4, name: '团队管理'},
+          {value: 5, name: '套餐管理'},
+          {value: 6, name: '商城数据'},
+          {value: 7, name: '资金管理'},
+          {value: 8, name: '公众号管理'},
+        ],
+        info: {
+          czqx: [],
+          status: '1'
+        }
+      }
+    },
+    methods: {
+      init: function () {
+        this.showLayer()
+      },
+      showLayer: function () {
+        var self = this
+        publicObj.layerConfirm({
+          self: self,
+          title: '新增/编辑权限组',
+          area: ['640px', ''],
+          content: $('#auth-info-layer')
+        }, function (index) {
+          layer.close(index)
+        })
+      }
+    },
+    directives: {}
+  }
+</script>

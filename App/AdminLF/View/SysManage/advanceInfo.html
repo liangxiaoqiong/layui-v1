@@ -1,0 +1,163 @@
+<!--系统管理/预缴返设置-->
+<extend name="Public:base" />
+<block name="header_css">
+  <style>
+    .time-div {
+      width: 280px!important;
+      vertical-align: middle;
+    }
+  </style>
+</block>
+<block name="content">
+  <div class="admin-main" id="app" v-cloak="" style="padding-bottom: 55px">
+    <div class="dl-div-2">
+      <dl class="basic-dl">
+        <dt>所属商城：</dt>
+        <dd>
+          <el-select class="dd-input" v-model="info.sssc">
+            <el-option value="" label="全部商城"></el-option>
+            <el-option value="1" label="商城1"></el-option>
+          </el-select>
+        </dd>
+      </dl>
+
+      <!--region 预缴返券配置-->
+      <dl class="basic-dl">
+        <dt>预缴返券配置：</dt>
+      </dl>
+      <dl class="basic-dl">
+        <dt>代金券：</dt>
+        <dd>
+          <input type="text" class="layui-input dd-input" placeholder="优惠券ID">
+        </dd>
+      </dl>
+      <dl class="basic-dl">
+        <dt>缴费时间：</dt>
+        <dd>
+          <ul>
+            <li v-for="(item, index) in info.jfsj" class="mb-10">
+              <div>
+                <datetime-range-picker class="time-div" :info="item" :param="['start_time', 'end_time']"></datetime-range-picker>
+                <div class="input-div display-align" style="width: 150px;margin: 0 5px 0 7px;">
+                  <input type="text" class="layui-input" placeholder="请输入缴费返券比例">
+                  <em class="unit">%</em>
+                </div>
+                <a class="el-icon-error" @click="delPaymentTime(index)"></a>
+              </div>
+            </li>
+          </ul>
+          <button class="btn-grey" @click="addPaymentTime">添加时间</button>
+        </dd>
+      </dl>
+      <!--endregion-->
+
+      <!--region 预缴礼包配置-->
+      <dl class="basic-dl">
+        <dt>预缴礼包配置：</dt>
+      </dl>
+      <!--region 循环礼包-->
+      <dl class="basic-dl" v-for="(item, index) in info.jflb">
+        <dt>礼包1：</dt>
+        <dd>
+          <datetime-range-picker class="time-div mb-10" :info="item" :param="['start_time', 'end_time']"></datetime-range-picker>
+          <ul>
+            <li v-for="(item2, index) in item.tc" class="mb-10">
+              <div class="input-two-period" style="width: 150px">
+                <div class="input-div">
+                  <input type="text" class="layui-input" placeholder="输入金额" >
+                </div>
+                <div class="input-div">
+                  <input type="text" class="layui-input" placeholder="输入金额" >
+                </div>
+              </div>
+              <input type="text" class="layui-input dd-input display-align" style="margin-left: 7px" placeholder="请输入赠送礼包名称" >
+              <a class="el-icon-error" @click="delGiftPackage(item, index)"></a>
+            </li>
+          </ul>
+          <button class="btn-grey" @click="addGiftPackage(item)">添加套餐</button>
+          <button class="btn-grey" @click="delGift(index)">删除礼包</button>
+        </dd>
+      </dl>
+      <!--endregion-->
+      <dl class="basic-dl">
+        <dt></dt>
+        <dd>
+          <button class="btn-grey" @click="addGift">添加礼包</button>
+        </dd>
+      </dl>
+      <!--endregion-->
+    </div>
+    <div style="padding-left: 150px; padding-top: 10px;">
+      <button class="btn-primary-diy">确认提交</button>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      components: {
+        'datetime-range-picker': COMPONENT.DATETIME_RANGE_PICKER
+      },
+      data: function () {
+        return {
+          info: {
+            sssc: '',
+            jfsj: [
+              /*{
+                start_time: '',
+                end_time: '',
+              }*/
+            ],
+            jflb: [
+             /* {
+                start_time: '',
+                end_time: '',
+                tc: [
+                  /!*{}*!/
+                ]//套餐
+              }*/
+            ]//预缴礼包
+          }
+        }
+      },
+      methods: {
+        /**region 缴费时间*/
+        //添加缴费时间
+        addPaymentTime: function () {
+          this.info.jfsj.push({
+            start_time: '',
+            end_time: ''
+          })
+        },
+        //删除缴费时间
+        delPaymentTime: function (index) {
+          this.info.jfsj.splice(index, 1)
+        },
+        /**endregion*/
+
+        /**region 预缴礼包配置*/
+        //添加礼包
+        addGift: function () {
+          this.info.jflb.push({
+            start_time: '',
+            end_time: '',
+            tc: []
+          })
+        },
+        //删除礼包
+        delGift: function (index) {
+          this.info.jflb.splice(index, 1)
+        },
+        //添加礼包里的套餐
+        addGiftPackage: function (item) {
+          item.tc.splice(item.tc.length - 1, 0, {})
+        },
+        //删除礼包里的套餐
+        delGiftPackage: function (item, index) {
+          item.tc.splice(index, 1)
+        }
+        /**endregion*/
+      }
+    })
+  </script>
+</block>
+

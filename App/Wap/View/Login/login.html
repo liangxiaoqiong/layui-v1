@@ -1,0 +1,156 @@
+<!--收费员登录、核销员登录-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/common.css?v={$V}">
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/Login/login.css?v={$V}">
+</head>
+<body class="bg-img3">
+<div class="block-card-list font-13" id="app" v-cloak="">
+<!-- 1、输入手机号-->
+<div class="block-card card-step1" v-if="+step === 1">
+  <div>
+    <div class="card-t">{{ loginTypeName }}手机号码</div>
+    <input type="text" placeholder="请输入手机号码" v-model="query.phone">
+  </div>
+  <div class="submit-btn-box">
+    <a class="diybtn-primary-diy" @click="intoStep2">下一步</a>
+  </div>
+</div>
+<!--2、发送短信验证码-->
+<div class="block-card card-step1" v-if="+step === 2">
+    <div>
+      <div class="card-t">输入短信验证码</div>
+      <div class="count-down">
+        <input type="text" placeholder="请输入短信验证码" v-model="query.code">
+        <button class="flex-row" :disabled="count_down.sendDisabled" @click="sendCode">
+          <template v-if="+count_down.sendDisabled">发送({{count_down.rTime}}s)</template>
+          <template v-else>获取验证码</template>
+        </button>
+      </div>
+    </div>
+    <div class="submit-btn-box btn-num2">
+      <a class="diybtn-primary-diy" @click="intoStep1">上一步</a>
+      <a class="diybtn-primary-diy" @click="submitLogin">确定登入</a>
+    </div>
+  </div>
+</div>
+<script>
+  var gid = '{$gid}';
+  var back_url = '{$back_url}';
+  back_url = escape2Html(back_url);
+  function escape2Html(str) {
+    var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+  }
+</script>
+<include file="Public:base"/>
+<script>
+  (function (window) {
+    var app = window.AppUtil,
+      rootPath = window.ThinkPHP.APP;
+    var vm = new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          info: {
+            phone: ''//关联的手机号码
+          },
+          query: {
+            user_type: 1,//登录用户类型：1-收费员登录，2-核销员登录
+            phone: '',//关联的手机号码
+            code: ''//短信验证码
+          },
+          step: 1,//未关联时 绑定手机号步骤1,2
+          count_down: {
+            rTime: 120, // 发送验证码倒计时
+            sendDisabled: false, // 发送验证码按钮状态
+          }//倒计时
+        }
+      },
+      computed: {
+        loginTypeName: function () {
+          var name = '收费员'
+          if (+this.query.user_type === 2) {
+            name = '核销员'
+          }
+          return name
+        }
+      },
+
+      mounted: function () {
+        document.title = this.loginTypeName + '登录'
+        this.getInfo();
+      },
+      methods: {
+        getInfo: function () {
+          var self = this;
+          AppUtil.ajaxRequest({
+            url: '/Data/json/wap/Login/memberBindTel.json',
+            data: {"gid":gid},
+          }).then(function (result) {
+            self.info.phone = result.data.phone;
+          })
+        },
+        /*点击进入下一步*/
+        intoStep2: function () {
+          var self = this;
+          if (publicObj.isPhone(self.query.phone)) {
+            self.step = 2;
+            self.sendCode();
+          }
+        },
+        /*返回上一步*/
+        intoStep1: function () {
+          this.step = 1;
+        },
+        /*发送短信验证码*/
+        sendCode: function () {
+          var self = this;
+          AppUtil.ajaxRequest({
+            url: '/Data/json/wap/Login/ajaxSendMessageCode.json',
+            data: {
+              "gid": gid,
+              "bindTel": self.query.phone
+            },
+          }).then(function (result) {
+            // 倒计时
+            self.count_down.sendDisabled = true;
+            var interval = window.setInterval(function () {
+              self.count_down.rTime--;
+              if (self.count_down.rTime < 0) {
+                self.count_down.rTime = 120;
+                self.count_down.sendDisabled = false;
+                window.clearInterval(interval);//停止计时器
+              }
+            }, 1000);
+          })
+        },
+        /*点击‘确定登入’*/
+        submitLogin: function () {
+          var self = this;
+          if (self.query.code === '') {
+            publicObj.layerMsg('请输入验证码')
+            return false
+          }
+          AppUtil.ajaxRequest({
+            url: '/Data/json/common/success.json',
+            data: {"gid":gid,"bindTel":self.query.phone,"code":self.query.code},
+          }).then(function (result) {
+            publicObj.layerMsg('登录成功！', {icon: 1});
+            setTimeout(function () {
+              back_url = rootPath + '/AdvanceBill/search' + '&gid=' + REQ['gid']
+              window.location.href = back_url;
+            }, 1000)
+          })
+        }
+      }
+    })
+    window.vm = vm;
+  })(window);
+</script>
+</body>

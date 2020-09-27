@@ -1,0 +1,100 @@
+/*region 登录 Login/index.html*/
+#login{box-sizing: border-box; height: 100%;
+  background:url("../../images/Login/login_bg.png")center center /100% 100% no-repeat;
+}
+#login .login-bg{height: 100%;box-sizing: border-box;display: flex;align-items: center;justify-content: center;
+  background-color: transparent;
+  flex-direction: column;
+}
+.login{border-radius:4px;width:400px;margin:0 auto;background-color: #ffffff;}
+.login-bg h2{text-align:center;
+  margin-bottom: 35px;
+  font-family: "华文宋体 Black";
+  font-size: 30px;
+  color: #1890FF;
+  font-weight: bold;
+}
+.login h3 {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 106px;
+   font-family: "华文宋体 Black";
+   font-size: 26px;
+   color: #333333;
+   font-weight: bold;
+ }
+.login form{padding: 0 30px 30px 30px;box-sizing: border-box;border-radius: 4px;background-color: transparent;box-shadow:none;}
+.login form .layui-form-item{margin-bottom: 20px;
+  display: flex;
+}
+.login form .layui-input{
+  height: 42px!important;line-height: 42px!important;
+  font-size: 14px;padding: 0 20px;
+  background-color: #FAFAFA;
+  border-color: #E9E9E9;
+  border-radius: 25px;
+}
+.login form .layui-form-item.item-verify .layui-input {
+  width: calc(100% - 114px);
+}
+.login form .layui-form-item.item-verify img {
+  width: 100px;
+  margin-left: 14px;
+  height: 42px;border-radius: 25px;
+}
+.login form .layui-form-item button{width: 100%;height: 42px;font-size: 14px;color: #ffffff;border: none;font-weight: normal;
+  border-radius: 25px;}
+.login .login-tab {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 0 30px;
+}
+.login .login-tab a {
+  width: 50%;
+  text-align: center;
+  height: 80px;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #E9E9E9;
+  color: #999999;
+  font-size: 16px;
+}
+.login .login-tab a.active {
+  border-color: #1890FF;
+  color: #1890FF;
+}
+
+.login-bg .phone-code-item {
+  border: 1px solid #e1e1e1;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+}
+.login-bg .phone-code-item input.layui-input {
+  border: none;
+  width: calc(100% - 100px);
+}
+.login-bg .phone-code-item input.layui-input:focus {
+  border: 1px solid #1890FF!important;
+}
+.login-bg .phone-code-item a {
+  flex: 1;
+  padding: 0 15px;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  background-color: #FAFAFA;
+  font-size: 14px;
+  border-radius: 4px;
+}
+/*endregion*/

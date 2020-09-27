@@ -174,7 +174,8 @@
 	height:auto;
 	bottom:0px;
 }
-.beg-layout-container .beg-layout-body .layout-nav-card cite{
+.beg-layout-container .beg-layout-body .layout-nav-card cite,
+.beg-layout-container .beg-layout-body .layout-nav-card font {
 	font-style: normal;
     padding-left: 5px;
 }

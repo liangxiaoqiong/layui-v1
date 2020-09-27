@@ -125,7 +125,7 @@ layui.define(['element', 'common'], function (exports) {
                     title += '<i class="layui-icon">' + data.icon + '</i>';
                 }
             }
-            title += '<cite>' + data.title + '</cite>';
+            title += '<cite>' + data.title + '</cite><font>' + data.title + '</font>';
             if (_config.closed) {
                 title += '<i class="layui-icon layui-unselect layui-tab-close" data-id="' + globalTabIdIndex + '">&#x1006;</i>';
             }

@@ -1,0 +1,167 @@
+<!--账单管理/预缴账单管理-->
+<extend name="Public:base"/>
+<block name="content">
+  <div class="admin-main" id="app" v-cloak>
+    <table-search :query="query" @search="getTableData" @import-bill="importBill"></table-search>
+    <diy-table
+        :query="query"
+        :table-total-filed="tableTotalFiled"
+        :table-filed="tableFiled"
+        :table-data="tableData"
+        is_show_total="1"
+        is_show_checkbox="1"
+        is_show_menu="1"
+        @change-sort="changeSort"
+        @get-table-data="getTableData">
+      <!--region td-val-->
+      <template v-slot:td-val="slotData">
+        <template v-if="slotData.th.th_val[0] === 'zde'">
+          <span class="color-red">{{ slotData.item[slotData.th.th_val[0]] }}</span>
+        </template>
+        <template v-else-if="slotData.th.th_val[0] === 'lqnr'">
+          <span class="color-red">{{ slotData.item[slotData.th.th_val[0]] }}</span>
+          <span>礼包名称</span>
+        </template>
+        <template v-else>
+          {{ slotData.item[slotData.th.th_val[0]] }}
+        </template>
+      </template>
+      <!--endregion-->
+
+      <!--region 左下角批量操作键-->
+      <template v-slot:table-batch-action>
+        <button class="btn-grey" @click="batchDel">批量删除</button>
+        <button class="btn-grey" @click="batchSend">发送代金券未使用通知</button>
+      </template>
+      <!--endregion-->
+    </diy-table>
+
+    <!--弹框-->
+    <batch-import ref="batchImportLayer" import-type="bill" :import-table-filed="importTableFiled"></batch-import>
+  </div>
+  <!--region diy-table引入-->
+  <include file="Public/components/diy_table/table_setting"/>
+  <include file="Public/components/pagination"/>
+  <include file="Public/components/diy_table/table_content" />
+  <!--endregion-->
+  <include file="AdvanceBill/components/index_search" />
+  <include file="Public/components/batch_import/batch_import_layer" />
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      components: {
+        'diy-table': COMPONENT.DIY_TABLE_COMPONENT,
+        'table-search': COMPONENT.ADVANCE_BILL_SEARCH,
+        'batch-import': COMPONENT.BATCH_IMPORT_LAYER,
+      },
+      data: function () {
+        return {
+          tableTotalFiled: [
+            {property: 'zde', meta_param: 'zde_total'},
+            {property: 'lqnr', meta_param: 'lqnr_total'}
+          ],
+          tableFiled: [
+            {filed_val: 'zdbh', th_val: ['zdbh'], th_name: "账单编号",t_width: 140},
+            {filed_val: 'xmmc', th_val: ['xmmc'], th_name: "项目名称", t_width: 130},
+            {filed_val: 'fjh', th_val: ['fjh'], th_name: "房间号", t_width: 120},
+            {filed_val: 'sjhm', th_val: ['sjhm'], th_name: "手机号码", t_width: 130},
+            {filed_val: 'gx', th_val: ['gx'], th_name: "关系", t_width: 130},
+            {filed_val: 'zde', th_val: ['zde'], th_name: "账单额(元)", t_width: 100, sort: {is_sort: 1, sort_type: 'desc'}},
+            {filed_val: 'jfzt', th_val: ['jfzt'], th_name: "缴费状态", t_width: 80},
+            {filed_val: 'jflx', th_val: ['jflx'], th_name: "缴费类型", t_width: 80},
+            {filed_val: 'jfsj', th_val: ['jfsj'], th_name: "缴费时间",t_width: 150},
+            {filed_val: 'lqlx', th_val: ['lqlx'], th_name: "领取类型", t_width: 80},
+            {filed_val: 'lqnr', th_val: ['lqnr'], th_name: "领取内容", t_width: 100},
+            {filed_val: 'lqzh', th_val: ['lqzh'], th_name: "领取账号", t_width: 130},
+            {filed_val: 'sfy', th_val: ['sfy'], th_name: "收费员", t_width: 100},
+            {filed_val: 'hxy', th_val: ['hxy'], th_name: "核销员", t_width: 100},
+            {filed_val: 'hxsj', th_val: ['hxsj'], th_name: "核销时间",t_width: 150},
+            {filed_val: 'bz', th_val: ['bz'], th_name: "备注",t_width: 150},
+            {filed_val: 'cjsj', th_val: ['cjsj'], th_name: "创建时间",t_width: 150, sort: {is_sort: 1, sort_type: 'desc'}},
+          ],//表头
+          query: {
+            page: 1,
+            limit: 20,
+            checkedIds: [],
+            xmmc: '',//项目名称
+            jfzt: '0',//缴费状态：0-全部，1-待缴费，2-已缴费
+            lqzt: '0',//领取状态：0-全部，1-待领取，2-已领取
+            jflx: '0',//缴费类型：0-全部，1-线上，2-线下
+            lqlx: '0',//领取类型：0-全部，1-线上代金券，2-线下礼包
+            creat_start_time: '',//创建时间
+            creat_end_time: '',//
+            jf_start_time: '',//缴费时间
+            jf_end_time: '',//
+            hx_start_time: '',//核销时间
+            hx_end_time: '',//
+          },
+          tableData: {
+            total: '0',
+            list: [],
+            meta: {}
+          },
+          importTableFiled: [
+            {filed_val: 'xh', th_val: ['id'], th_name: "序号",t_width: 50},
+            {filed_val: 'xmmc', th_val: ['xmmc'], th_name: "项目名称",t_width: 130},
+            {filed_val: 'fjh', th_val: ['fjh'], th_name: "房间号", t_width: 160},
+            {filed_val: 'xm', th_val: ['xm'], th_name: "姓名", t_width: 180},
+            {filed_val: 'sjh', th_val: ['sjh'], th_name: "手机号", t_width: 110},
+            {filed_val: 'gx', th_val: ['gx'], th_name: "关系", t_width: 120},
+            {filed_val: 'zdje', th_val: ['zdje'], th_name: "账单金额", t_width: 150}
+          ],//批量导入表格表头
+        }
+      },
+      mounted: function () {
+        this.getTableData()
+      },
+      methods: {
+        //切换排序
+        changeSort: function (th) {
+          var self = this
+          console.log(th)
+          self.query.page = 1
+          self.getTableData()
+          th.sort.sort_type = th.sort.sort_type === 'desc' ? 'asc' : 'desc'
+        },
+        getTableData: function (current) {
+          var self = this
+          if (typeof current !== 'undefined') {
+            if (typeof current.page !== 'undefined') {
+              self.query.page = current.page
+            }
+          }
+          AppUtil.ajaxRequest({
+            url: '/Data/json/admin/AdvanceBill/index.json',
+            dataType: 'json',
+            type: 'get',
+            showLoad: false
+          }).then(function (result) {
+            self.tableData = result.data
+          })
+        },
+        //批量删除
+        batchDel: function () {
+          var self = this
+          if (publicObj.isCheckItem(self.query.checkedIds)) {
+            publicObj.confirmDel(function (index) {
+              layer.close(index)
+            }, {title: '确认删除？'})
+          }
+        },
+        //发送代金券未使用通知
+        batchSend: function () {
+          var self = this
+          if (publicObj.isCheckItem(self.query.checkedIds)) {
+            publicObj.confirmDel(function () {
+
+            },{title: '确认发送代金券未使用通知吗？'})
+          }
+        },
+        //导入账单
+        importBill: function () {
+          this.$refs.batchImportLayer.init()
+        }
+      },
+    })
+  </script>
+</block>

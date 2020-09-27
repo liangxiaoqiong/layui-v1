@@ -1,0 +1,102 @@
+<!--批量导入弹框-->
+<!-- template -->
+<script type="x-template" id="batch_import_layer">
+  <!--region 模版-->
+  <div id="batch-import-layer" style="display: none;height: 100%;">
+    <div class="common-layer-body pl-30">
+      <div class="tab-box" style="padding-top: 20px">
+        <ul>
+          <li :class="{'active': +step === 1}" @click="changeTab(1)">第一步: 选择文件</li>
+          <li :class="{'active': +step === 2}" @click="changeTab(2)">第二步: 数据确认</li>
+        </ul>
+      </div>
+      <div>
+        <import-step1 :info="info" :import-type="importType" v-show="+step === 1"></import-step1>
+        <import-step2 ref="step2" :info="info" :import-type="importType" :table-filed="importTableFiled" v-show="+step === 2"></import-step2>
+      </div>
+    </div>
+    <div class="common-layer-btn">
+      <a class="btn-primary-diy" @click="confirmImport" v-if="+step === 2">确定</a>
+      <a class="btn-grey" @click="hideLayer">取消</a>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<include file="Public/components/batch_import/import_step1" />
+<include file="Public/components/batch_import/import_step2" />
+<script>
+  COMPONENT.BATCH_IMPORT_LAYER = {
+    template: '#batch_import_layer',
+    components: {
+      'import-step1': COMPONENT.IMPORT_STEP1_COMPONENT,
+      'import-step2': COMPONENT.IMPORT_STEP2_COMPONENT,
+    },
+    props: {
+      importTableFiled: {
+        type: Array,
+        default: function () {
+          return []
+        }
+      },
+      importType: {
+        type: String,
+        default: 'project'
+      },//批量导入类型。project-项目，bill-账单
+    },
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+        step: 1,//1-第一步，2-第二步
+        info: {
+          file_url: ''
+        },
+      }
+    },
+    methods: {
+      init: function () {
+        this.showLayer()
+      },
+      showLayer: function () {
+        var self = this
+        publicObj.layerDialog({
+          type: 1,
+          title: '批量导入项目',
+          area: ['950px', '95%'],
+          content: $('#batch-import-layer')
+        })
+      },
+      hideLayer: function () {
+        layer.closeAll()
+      },
+      changeTab: function (tid) {
+        if (+tid === 2) {
+          if (this.info.file_url === '') {
+            publicObj.layerMsg('请先上传文件')
+            return false
+          }
+        }
+        this.step = tid
+        if (+this.step === 2) {
+          this.$refs.step2.init()
+        }
+      },
+      //确定导出
+      confirmImport: function () {
+        var self = this
+        var html = '<div>导入成功<span class="color-diy">40</span>条！导入失败<span class="color-red">50</span>条！</div>';
+        publicObj.confirmDel(function (index) {
+          self.hideLayer()
+        }, {
+          title: html,
+          btn: ['确定']
+        })
+      }
+
+    },
+    directives: {}
+  }
+</script>

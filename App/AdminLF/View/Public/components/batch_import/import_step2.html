@@ -1,0 +1,93 @@
+<!--批量导入/第一步: 选择文件-->
+<!-- template -->
+<script type="x-template" id="import_step2_component">
+  <!--region 模版-->
+  <div>
+    <div class="bg-grey flex-left mt-10" style="height: 40px;padding: 0 14px;">
+      本次从Excel读取<span class="color-red">2</span>条数据，
+      经验证其中待新增<span class="color-red">1</span>条，
+      待修改<span class="color-red">2</span>条<span class="color-red">（红色行错误）</span>
+    </div>
+
+    <diy-table
+        style="width: calc(100% + 20px);margin: 0 -10px;"
+        :query="query"
+        :table-filed="tableFiled"
+        :table-data="tableData"
+        is_show_checkbox="0"
+        is_show_menu="0"
+        page-other-h="340"
+        :table-row-class="tableRowClassData"
+        @get-table-data="getTableData">
+      <!--region td-val-->
+      <template v-slot:td-val="slotData">
+        <template>
+          {{ slotData.item[slotData.th.th_val[0]] }}
+        </template>
+      </template>
+      <!--endregion-->
+    </diy-table>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.IMPORT_STEP2_COMPONENT = {
+    template: '#import_step2_component',
+    components: {
+      'diy-table': COMPONENT.DIY_TABLE_COMPONENT,
+    },
+    props: {
+      importType: {
+        type: String,
+        default: 'project'
+      },//批量导入类型。project-项目，bill-账单
+      tableFiled: {
+        type: Array,
+        default: function () {
+          return []
+        }
+      }//表头
+    },
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+        query: {
+          page: 1,
+          limit: 20,
+        },
+        tableData: {
+          total: '0',
+          list: []
+        },
+        tableRowClassData: []//失败的行数
+      }
+    },
+    methods: {
+      init: function () {
+        this.getTableData()
+      },
+      getTableData: function () {
+        var self = this
+        AppUtil.ajaxRequest({
+          url: '/Data/json/admin/Project/index.json',
+          dataType: 'json',
+          type: 'get',
+          showLoad: false
+        }).then(function (result) {
+          self.tableRowClassData = [
+            {
+              rowIndex: 1,
+              rowName: 'danger-row'
+            }
+          ]
+          self.tableData = result.data
+        })
+      },
+    },
+    directives: {}
+  }
+</script>

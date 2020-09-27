@@ -5,9 +5,9 @@
  */
 
 
-var tTD;//用来存储当前更改宽度的Table Cell,避免快速移动鼠标的问题
 var publicObj = new Object({
   bodyScroll: '',
+
   /*点击复制文字*/
   copyContent: function (text, id, doMsg) {
     if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
@@ -47,6 +47,7 @@ var publicObj = new Object({
       layer.msg('已复制内容到剪贴板');
     }
   },
+
   /**
    * 质朴长存法 =>不足位步0 by lifesinger
    * @param value
@@ -59,6 +60,7 @@ var publicObj = new Object({
     }
     return num;
   },
+
   /**
    * 正则，只允许正整数
    * @param value
@@ -81,6 +83,7 @@ var publicObj = new Object({
     }
     return obj.value;
   },
+
   /**
    * 浮点小数(最多精确到2位)
    * @param value
@@ -99,144 +102,7 @@ var publicObj = new Object({
     }
     return obj.value;
   },
-  customLayer: function (type, contentLayer) {
-    if (type === 'show') {
-      $('#layerModel,' + contentLayer + '').show();
-    } else {
-      $('#layerModel,' + contentLayer + '').hide();
-    }
-  },
-  /**
-   * 右侧滑出/关闭弹框
-   * */
-  slideRight: function (type, elName) {
-    if (elName === undefined) {
-      elName = '.slide-right';
-    }
-    if (type === 'show') {
-      $(elName).show("drop", {direction: 'right'}, 400);
-      $("#layerModel").parents('html,body').css({'overflow': 'hidden', 'width': 'calc(100% - 5px)'});
-      $("#layerModel").show();
-    } else {
-      $(elName).hide("drop", {direction: 'right'}, 400);
-      $("#layerModel").parents('html,body').css({'overflow': 'auto', 'width': '100%'});
-      $("#layerModel").hide();
-    }
-  },
-  /**
-   * 显示layer 弹框
-   参数解释：
-   type==1,div层 ；==2：iframe
-   title  标题
-   url    请求的url,div el
-   id    需要操作的数据id
-   area{w:弹出层宽度（缺省调默认值760px）,h:弹出层高度（缺省调默认值80%）}
-   cancelPoll 关闭轮序
-   * */
-  layerShow: function (type, title, content, area, cancelPoll) {
-    var areaH, areaW;
-    var cancelEvent;
-    if (title == null || title == '') {
-      title = false;
-    }
-    if (typeof (area) === 'undefined') {
-      areaW = '700px';
-      areaH = '90%';//($(window).height() - 50)+'px';
-    } else {
-      areaW = area.w_;
-      areaH = area.h_;
-    }
-    if (typeof (cancelPoll) === 'undefined') {
-      cancelEvent = 0;
-    } else {
-      cancelEvent = cancelPoll;
-    }
-    if (+type === 2) {
-      console.log(content);
-      if (content == null || content == '') {
-        content = "404.html";
-      }
-    } else {
-      content = $(content);
-    }
-    return layer.open({
-      type: type,
-      area: [areaW, areaH],
-      fix: false, //不固定
-      // maxmin: true,
-      //shade:0.4,
-      title: title,
-      closeBtn: title == null || title == '' ? false : true,
-      skin: 'layer-open',
-      // shadeClose: true,
-      content: content,
-      cancel: function () {
-        if (+cancelPoll === 1) {
-          window.localStorage.setItem("cancel_poll", "1")
-        }
-      }
-    });
-  },
 
-  /**
-   * 关闭弹出框口 ifream
-   * */
-  layerFrameClose: function () {
-    var index = parent.layer.getFrameIndex(window.name);
-    parent.layer.close(index);
-  },
-  /**
-   * 重置layer.msg样式
-   * content:msg内容
-   * msgType:msg类型{0：失败，1：成功}
-   * iconName：
-   * */
-  layerMsg: function (content, msgType, iconName) {
-    if (+msgType === 1) {
-      if (typeof (iconName) === 'undefined' || typeof (iconName) === '') {
-        iconName = 'myicon-success-white';
-      }
-      var html = '<div class="layer-msg-success"><i class="' + iconName + '"></i><div class="display-align">' + content + '</div></div>';
-    } else {
-      if (typeof (iconName) === 'undefined' || typeof (iconName) === '') {
-        iconName = 'myicon-fail-white';
-      }
-      var html = '<div class="layer-msg-fail"><i class="' + iconName + '"></i><div class="display-align">' + content + '</div></div>';
-    }
-    layer.msg(html);
-    $('[class^="layer-msg-"]').parents('.layui-layer').css({'background': 'none'});
-  },
-
-  confirmDel: function (callback, config) {
-    var content = config.content ? config.content : ''
-    var skin2 = config.content ? '' : ' layer-confirm-del'
-    layer.confirm(content, {
-      title: config && config.title ? config.title : '确认要删除该项吗？',
-      skin: 'layer-confirm' + skin2,
-      btn: config && config.btn ? config.btn : ['确定', '取消'],
-    }, function (index) {
-      callback(index)
-    })
-  },
-
-  /**region wap端 layer弹框*/
-  confirmWap: function (callback, config) {
-    var content = config.content ? config.content : ''
-    var layerType = config.layerType ? config.layerType : 'confirm'
-    var skin2 = config.skin ? config.skin : ''
-    skin2 += layerType === 'alert' ? ' btn-1' : ''
-    layer[layerType](content, {
-      type: 1,
-      title: config && config.title ? config.title : '',
-      skin: 'layer-wap-confirm ' + skin2,
-      btn: config && config.btn ? config.btn : ['确定', '取消'],
-      area: ['80%', ''],
-      offset: ['', '10%']
-    }, function (index) {
-      callback(index)
-    })
-  },
-  /**endregion*/
   /**
    * 点击图片查看大图
    * 需要指向图片的父容器
@@ -254,6 +120,7 @@ var publicObj = new Object({
     });
     /*$('.layui-layer').css({'background-color':'transparent','box-shadow':'none'});*/
   },
+
   /**
    * 格式化时间
    * @param {} date
@@ -303,6 +170,7 @@ var publicObj = new Object({
       return cfg[m];
     });
   },
+
   /**
    * 判断是否是手机
    * @param value
@@ -310,8 +178,13 @@ var publicObj = new Object({
    */
   isPhone: function (value) {
     var reg = /^1[2|3|4|5|6|7|8|9][0-9]\d{4,8}$/;
-    return reg.test(value);
+    if (!reg.test(value)) {
+      publicObj.layerMsg('请输入正确的手机号');
+      return false;
+    }
+    return true;
   },
+
   /**
    * //毫秒转时间戳2017-08-20 12:12:12*/
   dateTime_Str: function (time_, timeType) {
@@ -328,7 +201,8 @@ var publicObj = new Object({
     }
     return dataTime;
   },
-  // 验证
+
+  // 提交验证数据是否为空
   /*
     var verifyRule = [
       { key: 'name', verify_type: 'required', error_text: '请输入**'},
@@ -366,69 +240,202 @@ var publicObj = new Object({
     }
     return result
   },
-  /**自定义可滑动table*/
-  diyTableScroll: function () {
-    $(".diy-table-box>.diy-table-body").scroll(function () {
-      $(".diy-table-header").scrollLeft($(".diy-table-box>.diy-table-body").scrollLeft());
-      $(".diy-table-fixed .diy-table-body").scrollTop($(".diy-table-box>.diy-table-body").scrollTop());
+
+  //是否选择内容，主要用于选中批量操作
+  isCheckItem: function (item) {
+    if (item.length <= 0) {
+      publicObj.layerMsg('请先选择要操作的内容！')
+      return false
+    }
+    return true
+  },
+  /**region ====== PC后台layer弹框 ======*/
+  /**
+   * 右侧滑出/关闭弹框
+   * */
+  slideRight: function (type, elName) {
+    if (elName === undefined) {
+      elName = '.slide-right';
+    }
+    if (type === 'show') {
+      $(elName).show("drop", {direction: 'right'}, 400);
+      $("#layerModel").parents('html,body').css({'overflow': 'hidden', 'width': 'calc(100% - 5px)'});
+      $("#layerModel").show();
+    } else {
+      $(elName).hide("drop", {direction: 'right'}, 400);
+      $("#layerModel").parents('html,body').css({'overflow': 'auto', 'width': '100%'});
+      $("#layerModel").hide();
+    }
+  },
+
+  /**
+   * 显示layer 弹框
+   参数解释config：
+   type==1,div层 ；==2：iframe
+   title  标题
+   url    请求的url,div el
+   * */
+  layerDialog: function (config, callback) {
+    config.area = config.area || ['700px', '90%']
+    if (config.title == null || config.title == '') {
+      config.title = false;
+    }
+    if (+config.type === 2) {
+      if (config.content == null || config.content == '') {
+        config.content = "404.html";
+      }
+    }
+    layer.open({
+      type: config.type,
+      area: config.area,
+      fix: false, //不固定
+      // maxmin: true,
+      //shade:0.4,
+      title: config.title,
+      closeBtn: config.title == null || config.title == '' ? false : true,
+      skin: 'layer-open',
+      shadeClose: config.shadeClose || true,
+      content: config.content,
+      success: function (layero) {
+        // layer弹层遮罩挡住窗体解决
+        var mask = $(".layui-layer-shade");
+        mask.appendTo(layero.parent());
+        publicObj.isLayerOpenCallback = true
+      },
+      yes: function (index) {
+      },
+      cancel: function () {
+        publicObj.isLayerOpenCallback = false
+      },
+      end: function () {
+        //弹框销毁后的回调
+        if (publicObj.isLayerOpenCallback && typeof callback !== 'undefined') {
+          callback()
+          publicObj.isLayerOpenCallback = false
+        }
+      }
     });
   },
-  /**表格table 可改变列宽*/
-  diyTableTh: function (el, tableFiled) {
-    var table = document.getElementById(el);
-    for (j = 0; j < table.rows[0].cells.length; j++) {
-      table.rows[0].cells[j].onmousedown = function () {
-//记录单元格
-        tTD = this;
-        if (event.offsetX > tTD.offsetWidth - 10) {
-          tTD.mouseDown = true;
-          tTD.oldX = event.x;
-          tTD.oldWidth = tTD.offsetWidth;
+
+  /**
+   * 关闭弹出框口 ifream
+   * */
+  layerFrameClose: function () {
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+  },
+
+  //layer.confirm弹框
+  layerConfirm: function (config, callbackYes, callbackCancel, callbackEnd) {
+    layer.confirm(config.content, {
+      type: 1,
+      title: config.title,
+      skin: 'layer-confirm',
+      shadeClose: config.shadeClose || true,
+      area: config.area || 'auto',
+      offset: config.offset || 'auto',
+      success: function (layero) {
+        //兼容弹框div在滚动条下面，弹框显示内容偏下（代码正常）
+        config.self.$nextTick(function () {
+          $("#layerModel").parents('html, body').css({'overflow': 'auto'})
+        })
+        // layer弹层遮罩挡住窗体解决
+        var mask = $(".layui-layer-shade");
+        mask.appendTo(layero.parent());
+      },
+      end: function (index) {
+        config.self.$nextTick(function () {
+          $("#layerModel").parents('html, body').css({'overflow': 'hidden'})
+        })
+        if (typeof callbackEnd !== 'undefined') {
+          callbackEnd(index)//取消后的回调
         }
-        $('.diy-table .diy-table-cell').addClass('unselect');
-      };
-      table.rows[0].cells[j].onmouseup = function () {
-//结束宽度调整
-        if (tTD == undefined) tTD = this;
-        tTD.mouseDown = false;
-        tTD.style.cursor = 'default';
-        $('.diy-table .diy-table-cell').removeClass('unselect');
-      };
-      table.rows[0].cells[j].onmousemove = function () {
-//更改鼠标样式
-        if (event.offsetX > this.offsetWidth - 10)
-          this.style.cursor = 'col-resize';
-        else
-          this.style.cursor = 'default';
-//取出暂存的Table Cell
-        if (tTD == undefined) tTD = this;
-//调整宽度
-        if (tTD.mouseDown != null && tTD.mouseDown == true) {
-          tTD.style.cursor = 'default';
-          if (tTD.oldWidth + (event.x - tTD.oldX) > 0) {
-            var index = $(tTD).data('index')
-            if (typeof tableFiled !== 'undefined') {
-              if (tableFiled[index].is_fixed_left === 'undefined'
-                || +tableFiled[index].is_fixed_left === 1
-                || tableFiled[index].is_fixed_right === 'undefined'
-                || +tableFiled[index].is_fixed_right === 1)
-                return false
-              tableFiled[index].t_width = tTD.oldWidth + (event.x - tTD.oldX)
-            } else {
-              $('.diy-table-cell-' + index).css('width', tTD.oldWidth + (event.x - tTD.oldX))
-            }
-          }
-          tTD.style.cursor = 'col-resize';
+      },
+      yes: function (index) {
+        callbackYes(index)//确定后的回调
+      },
+      cancel: function (index) {
+        if (typeof callbackCancel !== 'undefined') {
+          callbackCancel(index)//取消后的回调
         }
-      };
+      }
+    })
+  },
+
+  //删除弹框
+  confirmDel: function (callback, config) {
+    var content = config.content ? config.content : ''
+    var skin2 = config.content ? '' : ' layer-confirm-del'
+    layer.confirm(content, {
+      title: config && config.title ? config.title : '确认要删除该项吗？',
+      skin: 'layer-confirm' + skin2,
+      btn: config && config.btn ? config.btn : ['确定', '取消'],
+    }, function (index) {
+      callback(index)
+    })
+  },
+
+  /**
+   * 重置layer.msg样式
+   * content:msg内容
+   * icon:msg类型{0：失败，1：成功}
+   * iconName：
+   * */
+  layerMsg: function (content, config, callback) {
+    var className = ''
+    var iconName = ''
+    config = config || {icon: 2}
+    if (+config.icon === 1) {
+      iconName = 'myicon-success-white'
+      className = 'layer-msg-success'
+    } else {
+      iconName = 'myicon-fail-white'
+      className = 'layer-msg-fail'
     }
-    document.onmouseup = function () {
-//结束宽度调整
-      if (tTD == undefined) tTD = this;
-      tTD.mouseDown = false;
-      // tTD.style.userSelect = '';
-      $('.diy-table .diy-table-cell').removeClass('unselect');
-    }
+    var html = '<div class="'+className+'"><i class="' + iconName + '"></i><div class="display-align">' + content + '</div></div>';
+    layer.msg(html,{}, function () {
+      if (typeof callback !== 'undefined') {
+        callback()
+      }
+    });
+    $('[class^="layer-msg-"]').parents('.layui-layer').css({'background': 'none'});
+  },
+
+  /*region 顶部iframe tab*/
+  //更改顶部iframe文字
+  modifyTabTitle: function (text, layId) {
+    parent.$('#layui-tab-list').find('li[lay-id="'+layId+'"]').find('font').text(text)
+  },
+  //点击左侧菜单更改iframe路径刷新
+  clickMenuRefresh: function (title, oldUrl, newUrl) {
+    window.parent.$('[title="'+title+'"]').click(function (event) {
+      var _iframe = window.parent.$('.beg-layout-body').find('iframe[src="'+oldUrl+'"]')
+      _iframe.attr('src', newUrl)
+      publicObj.modifyTabTitle(title, newUrl)
+    });
+  },
+  /*endregion*/
+  /**endregion*/
+
+  /**region ====== Wap ===== */
+  //wap端 layer弹框
+  confirmWap: function (callback, config) {
+    var content = config.content ? config.content : ''
+    config.layerType = config.layerType || 'confirm'
+    var skin2 = config.skin ? config.skin : ''
+    skin2 += config.layerType === 'alert' ? ' btn-1' : ''
+    var btnDefault = config.layerType === 'alert' ? ['确定'] : ['确定', '取消']
+    layer[config.layerType](content, {
+      type: 1,
+      title: config && config.title ? config.title : '',
+      closeBtn: false,
+      skin: 'layer-confirm-wap ' + skin2,
+      btn: config && config.btn ? config.btn : btnDefault,
+      area: ['80%', ''],
+      offset: ['', '10%']
+    }, function (index) {
+      callback(index)
+    })
   },
 
   //弹框显示，底部body无法滑动
@@ -462,4 +469,5 @@ var publicObj = new Object({
       $(el).animate({scrollTop: 0}, 1000);
     }
   },
+  /**endregion*/
 })

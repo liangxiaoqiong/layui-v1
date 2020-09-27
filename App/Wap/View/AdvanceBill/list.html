@@ -1,0 +1,180 @@
+<!--收费员 查询账单列表：线上账单-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>预缴处理</title>
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/common.css?v={$V}">
+</head>
+<body class="bg-img5">
+<div class="font-13" id="app" v-cloak="">
+  <div class="block-card card-fixed">
+    <div class="color-grey2" style="padding: 1rem 0 .75rem 0">关联手机号1885922222的房间账单:</div>
+    <div class="tab-box">
+      <ul>
+        <li :class="{'active': +query.status === 0}" @click="changeTab(0)">未缴账单</li>
+        <li :class="{'active': +query.status === 1}" @click="changeTab(1)">已缴账单</li>
+      </ul>
+    </div>
+  </div>
+  <!--region 循环账单列表-->
+  <div class="block-card-list list-scroll" id="chatpart-flow">
+    <div v-if="+listData.total > 0">
+      <div class="block-card" v-for="(bill, index) in listData.list">
+        <div class="dl-list">
+          <p>
+            <span>账单编号</span>
+            <span>00002122</span>
+          </p>
+          <p>
+            <span>项目名称</span>
+            <span>车位物业管理费</span>
+          </p>
+          <p>
+            <span>房间号</span>
+            <span>1栋505室</span>
+          </p>
+          <p>
+            <span>账单金额(元)</span>
+            <span>2000.00</span>
+          </p>
+          <p>
+            <span>缴费状态</span>
+            <span>待缴费||已缴费</span>
+          </p>
+          <p>
+            <span>领取状态</span>
+            <span>未领取||已领取</span>
+          </p>
+          <div class="dl-list-btn"><!--btn-num1-->
+            <a class="diybtn-plain-diy" @click="toPayment(bill)" v-if="index !== 1">确认缴费</a>
+            <a class="diybtn-plain-diy" @click="toReceive(bill)" v-if="index === 1">确认领取</a>
+            <a class="diybtn-plain-diy" @click="toBillInfo(bill)">账单详情</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <list-default
+        :total="listData.total"
+        :list-load="listLoad"
+        :no-list-default="{img: 'common.png', text: '暂时没有账单哦'}"></list-default>
+  </div>
+  <!--endregion-->
+
+  <payment-layer ref="paymentLayer"></payment-layer>
+</div>
+<include file="Public:base"/>
+<include file="Public/components/list_default"/>
+<include file="Public/components/choice_single_layer"/>
+<include file="AdvanceBill/components/payment_layer"/>
+<script>
+  (function (window) {
+    var app = window.AppUtil,
+      rootPath = window.ThinkPHP.APP;
+    var vm = new Vue({
+      el: '#app',
+      components: {
+        'list-default': COMPONENTS.LIST_DEFAULT_COMPONENT,
+        'payment-layer': COMPONENTS.PAYMENT_LAYER
+      },
+      data: function () {
+        return {
+          query: {
+            page: 1,
+            limit: 20,
+            status: 0, //0-未缴账单,1-已缴账单
+            phone: '',
+          },
+          listLoad: {
+            isBusy: false,
+            hasMore: true,
+            isLoadMore: false,//是否有下一页
+          },
+          listData: {
+            total: 0,
+            list: []
+          }
+        }
+      },
+      mounted: function () {
+        this.getListData()
+        this.moreListData()
+      },
+      methods: {
+        changeTab: function (tid) {
+          this.query.status = tid
+          this.query.page = 1
+          this.listData.total = 0
+          this.listData.list = []
+          this.getListData()
+        },
+        getListData: function () {
+          var self = this;
+          self.listLoad.isBusy = true;
+          AppUtil.ajaxRequest({
+            url: '/Data/json/wap/list.json',
+            data: self.query,
+          }).then(function (result) {
+            if (+result.data.list.length <= +self.query.limit) {
+              self.listLoad.hasMore = false;
+            } else {
+              self.listLoad.hasMore = true;
+            }
+            if (self.listLoad.isLoadMore === false) {
+              self.listData = result.data;
+            } else {
+              self.listData.list = self.listData.list.concat(result.data.list);
+            }
+            self.query.page++;
+            self.listLoad.isBusy = false;
+          }).catch(function () {
+            self.listLoad.isBusy = false;
+          });
+
+        },
+        moreListData: function () {
+          var self = this;
+          var range = 50;
+          var el = $('#chatpart-flow');
+          $(document).ready(function () {
+            el.unbind("scroll").bind("scroll", function (e) {
+              var sum = this.scrollHeight - range;
+              if (sum <= $(this).scrollTop() + $(this).height()) {
+                if (self.listLoad.hasMore && !self.listLoad.isBusy) {
+                  self.listLoad.isLoadMore = true;
+                  self.listLoad.isBusy = true;
+                  self.getListData();
+                }
+              }
+            });
+          });
+        },
+        //点击【确认缴费】
+        toPayment: function (item) {
+          item = {
+            send_lb_val: '',//选择的礼包
+            send_lb_valKey: '',//选择的礼包
+          }
+          this.$refs.paymentLayer.init(item)
+        },
+        //点击【账单详情】
+        toBillInfo: function (item) {
+          var url = rootPath + '/AdvanceBill/info' + '&gid=' + REQ['gid']
+          window.location.href = url
+        },
+        //点击【确认领取】
+        toReceive: function (item) {
+          var html = '<div><p style="color: #9A9A9A;">礼包内容：</p><div>礼包名称礼包名称礼包名称礼包名称礼包名称礼 包名称礼包名称礼包名称</div></div>'
+          publicObj.confirmWap(function (index) {
+            publicObj.layerMsg('核销成功', {icon: 1})
+            layer.close(index)
+          }, {title: '确认领取礼包', btn: [ '确定核销', '取消核销',], content: html})
+        }
+      }
+    })
+    window.vm = vm;
+  })(window);
+</script>
+</body>

@@ -1,0 +1,75 @@
+<!--收费员查询账单、核销员查询账单-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>查询账单</title>
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/common.css?v={$V}">
+</head>
+<body class="bg-img3">
+<div class="block-card-list font-13" id="app" v-cloak="">
+  <div class="block-card card-step1">
+    <div>
+      <div class="card-t">客户房间关联手机号</div>
+      <input type="text" placeholder="请输入手机号码" v-model="query.phone">
+    </div>
+    <div class="submit-btn-box">
+      <a class="diybtn-primary-diy" @click="search">查询</a>
+    </div>
+  </div>
+  <div class="logout-btn diybtn-grey" @click="logout">退出</div>
+</div>
+<include file="Public:base"/>
+<script>
+  (function (window) {
+    var app = window.AppUtil,
+      rootPath = window.ThinkPHP.APP;
+    var vm = new Vue({
+      el: '#app',
+      data: function () {
+        return {
+          query: {
+            user_type: 1,//登录用户类型：1-收费员登录，2-核销员登录
+            phone: '',
+          },
+        }
+      },
+      computed: {
+        loginTypeName: function () {
+          var name = '收费员'
+          if (+this.query.user_type === 2) {
+            name = '核销员'
+          }
+          return name
+        }
+      },
+      methods: {
+        /*点击‘查询’*/
+        search: function () {
+          /*if (false) {
+            publicObj.confirmWap(function (index) {
+              layer.close(index)
+            }, {title: '该手机号还不是收费员账号', layerType: 'alert'})
+            return false
+          }*/
+          if (publicObj.isPhone(this.query.phone)) {
+            var url = rootPath + '/AdvanceBill/list' + '&gid=' + REQ['gid']
+            window.location.href = url
+          }
+        },
+        //退出
+        logout: function () {
+          publicObj.confirmWap(function (index) {
+            var url = rootPath + '/Login/login' + '&gid=' + REQ['gid']
+            window.location.href = url
+            layer.close(index)
+          }, {title: '确认退出？'})
+        }
+      }
+    })
+    window.vm = vm;
+  })(window);
+</script>
+</body>

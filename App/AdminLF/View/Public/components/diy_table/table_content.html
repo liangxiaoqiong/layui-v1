@@ -1,0 +1,346 @@
+<!--diy表格，可滑动，可拖动设置表格宽度，可悬浮-->
+<!-- template -->
+<style>
+  .el-table-diy {
+    padding: 10px;
+  }
+  .el-table-diy .el-table td,
+  .el-table-diy .el-table th {
+    padding: 9px 0;
+    border-color: #E0E0E0;
+  }
+  .el-table-diy .el-table .cell {
+    font-size: 12px;
+    font-weight: normal;
+    color: #908686;
+  }
+  .el-table-diy .el-table th {
+    background-color: #FAFAFA;
+    height: 50px;
+  }
+  .el-table-diy .el-table th>.cell {
+    white-space: nowrap;
+  }
+  .el-table-diy .el-table .el-table-column--selection {
+    text-align: center;
+  }
+
+  .el-table-diy .el-table__footer-wrapper .cell {
+    color: #FF0000;
+  }
+  .el-table__fixed-footer-wrapper tbody td {
+    padding: 12px 0!important;
+  }
+  .table-bottom {
+    padding: 0 10px;
+  }
+  .table-batch-action {
+    display: inline-block;
+  }
+</style>
+<script type="x-template" id="diy_table_component">
+  <!--region 模版-->
+  <div>
+    <div class="el-table-diy">
+      <div class="position-r">
+        <el-table
+            :data="tableData.list"
+            border
+            :height="tableHeight"
+            :show-summary="+is_show_total === 1"
+            :summary-method="getSummaries"
+            :row-class-name="tableRowClassName"
+            empty-text="数据为空哦">
+
+          <!--多选，设置显示隐藏弹框按钮-->
+          <template v-if="+is_show_checkbox === 1 || +is_show_menu === 1">
+            <el-table-column
+                :width="+is_show_checkbox === 1 && +is_show_menu === 1 ? '76' : '50'"
+                :align="+is_show_checkbox === 1 && +is_show_menu === 1 ? 'left' : 'center'"
+                fixed="left"
+                class-name="row-menu">
+
+                <template slot="header" slot-scope="scope">
+                  <template v-if="+is_show_checkbox === 1">
+                    <label class="diy-checkbox display-align">
+                      <input type="checkbox" lay-ignore  @click="checkAllChange"
+                           :checked="isCheckAll" />
+                    </label>
+                  </template>
+                  <template v-if="+is_show_menu === 1">
+                    <i class="diyicon-table-setting" @click="tableSettingLayer"></i>
+                  </template>
+                </template>
+
+                <template slot-scope="scope">
+                  <template v-if="+is_show_checkbox === 1">
+                    <label class="diy-checkbox display-align">
+                      <input type="checkbox" lay-ignore :value="scope.row[checkedParam]" v-model="query.checkedIds" />
+                    </label>
+                  </template>
+
+                  <template v-if="+is_show_menu === 1">
+                    <div class="display-align">{{ (query.page - 1) * query.limit + (scope.$index + 1) }}</div>
+                  </template>
+                </template>
+
+            </el-table-column>
+          </template>
+
+          <template v-for="th in tableFiled">
+            <el-table-column
+                v-if="isShowRow(th)"
+                :prop="th.th_val[0]"
+                :label="th.th_name"
+                show-overflow-tooltip
+                :align="th.th_val[0] === 'action' ? 'right' : 'left'"
+                :fixed="isFixed(th)"
+                :width="tableRowWidth(th)">
+              <template slot="header" slot-scope="scope">
+                <div @click="changeSort(th)" :style="isSortable(th) ? 'cursor: pointer;' : ''">
+                  {{ th.th_name }}
+                  <i :class="'diyicon-sort-'+th.sort.sort_type" v-if="isSortable(th)"></i>
+                </div>
+              </template>
+              <template slot-scope="scope">
+                <slot name="td-val" :th="th" :item="scope.row" :index="scope.$index"></slot>
+              </template>
+            </el-table-column>
+
+          </template>
+        </el-table>
+
+        <table-setting ref="settingLayer" :query="query" :table-filed="tableFiled"></table-setting>
+      </div>
+    </div>
+    <div class="table-bottom flex-between">
+      <!--左下角批量操作键-->
+      <div class="table-bottom-left">
+        <template v-if="+is_show_checkbox === 1">
+          <label class="diy-checkbox display-align mr-10">
+            <input type="checkbox" lay-ignore  @click="checkAllChange" :checked="isCheckAll" />
+            <font>全选</font>
+          </label>
+        </template>
+        <div class="table-batch-action">
+          <slot name="table-batch-action"></slot>
+        </div>
+      </div>
+
+      <!--region 分页-->
+      <pagination
+          :query="query"
+          :total="tableData.total"
+          @temp-page-event="getTableData"></pagination>
+      <!--endregion-->
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.DIY_TABLE_COMPONENT = {
+    template: '#diy_table_component',
+    components: {
+      'table-setting': COMPONENT.TABLE_SETTING_COMPONENT,
+      'pagination': COMPONENT.PAGINATION_COMPONENT
+    },
+    props: {
+      /**
+       query:{
+        page: 1,
+        limit: 20,
+        field: '',//显示的表格项json串：'filed_val, filed_val,...',   ''||undefined默认全部
+        checkedIds: [], //选择得表格项，checkedParam值
+      }*/
+      query: Object,
+      checkedParam: {
+        type: String,
+        default: 'id'
+      },//checkbox的key，默认id
+      pageOtherH: {
+        type: [String, Number],
+        default: 140
+      },//除去表格外的界面高度
+      is_show_total: {
+        type: [String, Number],
+        default: 0
+      }, //是否显示统计行
+      is_show_checkbox: {
+        type: [String, Number],
+        default: 1
+      }, //是否显示多选
+      is_show_menu: {
+        type: [String, Number],
+        default: 1
+      }, //是否显示表头列表筛选
+      tableFiled: {
+        type: Array,
+        default: function () {
+          return [
+            /*{
+                filed_val: 'id', // 当前表格项filed唯一性 val，类似id，判断唯一性
+                // menu-编辑字段顺序，checkbox-全选，action-操作，
+                th_val: ['id'], // 当前表格显示的字段内容,数组，默认数组长度=1
+                th_name: '序号', // 当前表格项th名称
+                is_fixed_left: 1,//是否固定在左侧0/1
+                is_fixed_right: 0,//是否固定在右侧0/1
+                t_width: 60, //列宽初始值
+                is_setting: 1, //是否可设置显示或不显示,
+                drag: {
+                  is_drag: 0, //是否可拖拽字段顺序,0-不可拖拽，一直显示
+                  drag_sort: 1, //拖拽字段顺序,数值越大越靠后
+                },
+                sort: {
+                  is_sort: 0,  //该字段是否可排序
+                  sort_type: 'desc' //该字段排序值，desc/asc
+                }, //该字段是否有排序
+              },*/
+          ]
+        }
+      },
+      tableTotalFiled: {
+        type: Array,
+        default: function () {
+          return  [
+            /*{
+              property: 'total_num',//el-table里的prop
+              meta_param: 'total_num'//tableData.meta对应的参数
+            },*/
+          ]
+        }
+      },//统计的计算规则
+      tableData: {
+        type: Object,
+        default: function () {
+          return {
+            total: 0,
+            list: [],
+            meta: {}
+          }
+        }
+      },
+      tableRowClass: {
+        type: Array,
+        default: function () {
+          return [
+            /*{
+              rowIndex: 1,//表格key
+              rowName: '' //.class名称
+            }*/
+          ]
+        }
+      }
+    },
+    computed: {
+      isCheckAll: function () {
+        if (this.query.checkedIds && this.tableData.list) {
+          return this.query.checkedIds.length >= this.tableData.list.length
+        }
+      },
+    },
+    mounted: function () {
+      var self = this
+      self.$nextTick(function () {
+        var screenH = document.body.clientHeight
+        self.tableHeight = screenH - (+self.pageOtherH)
+      })
+    },
+    data: function () {
+      return {
+        tableHeight: 500
+      }
+    },
+    methods: {
+      //是否悬浮
+      isFixed: function (th) {
+        if (typeof th.is_fixed_left !== 'undefined' && +th.is_fixed_left === 1) {
+          return 'left'
+        }
+        if (typeof th.is_fixed_right !== 'undefined' && +th.is_fixed_right === 1) {
+          return 'right'
+        }
+      },
+      //是否显示表格列
+      isShowRow: function (item) {
+        if (typeof this.query.field == 'undefined') {
+          this.$set(this.query, 'field', '')
+        }
+        var checkedFields = this.query.field.split(',')
+        return checkedFields.indexOf(item.filed_val) > -1
+      },
+      //是否可排序
+      isSortable: function (item) {
+        if (typeof item.sort !== 'undefined') {
+          return typeof item.sort.is_sort !== 'undefined' && +item.sort.is_sort === 1
+        }
+      },
+      //表格列宽度,当tableFiled的全部子项都设置了width才有横向滚动条，否则自适应100%撑开
+      tableRowWidth: function (th) {
+        if (typeof th.t_width !== 'undefined') {
+          return th.t_width
+        }
+      },
+      /**region 全选*/
+      checkAllChange(val) {
+        var self = this
+        var allIds = []
+        self.tableData.list.forEach(function (value) {
+          allIds.push(value[self.checkedParam])
+        })
+        this.query.checkedIds = val ? allIds : []
+      },
+      /**endregion*/
+      //统计规则
+      getSummaries: function (param) {
+        var self = this
+        var sums = []
+        param.columns.forEach(function (value, index) {
+          sums[index] = ''
+          if (+index === 0) {
+            sums[index] = '合计'
+            return
+          }
+          if (+self.is_show_total === 1) {
+            if (self.tableTotalFiled.length > 0 && typeof self.tableData.meta !== "undefined") {
+              self.tableTotalFiled.forEach(function (val) {
+                if (value.property === val.property) {
+                  sums[index] = self.tableData.meta[val.meta_param]
+                }
+              })
+            }
+          }
+        })
+        return sums
+      },
+      getTableData: function () {
+        this.$emit('get-table-data')
+      },
+      //显示表头弹框
+      tableSettingLayer: function () {
+        this.$refs.settingLayer.showLayer()
+      },
+      //带状态表格，每行显示其他提示背景色
+      tableRowClassName: function ({row, rowIndex}) {
+        var self = this
+        var className = ''
+        if (self.tableRowClass.length > 0) {
+          self.tableRowClass.forEach(function (value) {
+            if (+value.rowIndex === +rowIndex) {
+              className = value.rowName
+            }
+          })
+        }
+        return className
+      },
+      //点击切换排序
+      changeSort: function (th) {
+        if (this.isSortable(th)) {
+          this.$emit('change-sort', th)
+        }
+      }
+    },
+    directives: {}
+  }
+</script>

@@ -1,0 +1,145 @@
+<!--查询账单列表：账单详情-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>账单详情</title>
+  <link rel="stylesheet" type="text/css" href="__DATA__/wap/css/common.css?v={$V}">
+</head>
+<body class="bg-img5">
+<div id="app" v-cloak="">
+  <div class="block-page" style="padding: .2rem .75rem 3rem .75rem;">
+    <div class="dl-list">
+      <p>
+        <span>账单编号</span>
+        <span>2020050143666</span>
+      </p>
+      <p>
+        <span>项目名称</span>
+        <span>车位物业管理费</span>
+      </p>
+      <p>
+        <span>房间号</span>
+        <span>1栋505室</span>
+      </p>
+      <p>
+        <span>手机号码</span>
+        <span>18888888888，18959297669，1859656989</span>
+      </p>
+      <p>
+        <span>账单金额(元)</span>
+        <span class="color-diy">1000.00</span>
+      </p>
+      <p>
+        <span>创建时间</span>
+        <span>2016-10-19 16:34:09</span>
+      </p>
+      <p>
+        <span>缴费状态</span>
+        <span>待缴费||已缴费</span>
+      </p>
+      <!--region 线上账单：已缴费时显示-->
+      <p>
+        <span>缴费类型</span>
+        <span>线上||线下</span>
+      </p>
+      <p>
+        <span>缴费时间</span>
+        <span>2016-10-19 16:34:09</span>
+      </p>
+      <!--region 线下缴费时显示-->
+      <p>
+        <span>缴费操作员</span>
+        <span>操作员姓名</span>
+      </p>
+      <!--endregion 线下缴费时显示-->
+      <p>
+        <span>领取类型</span>
+        <span>线上代金券||线下礼包</span>
+      </p>
+      <p>
+        <span>领取内容</span>
+        <span class="color-diy">10||礼包名称</span>
+      </p>
+      <p>
+        <span>领取状态</span>
+        <span>已领取||未领取</span>
+      </p>
+      <!--region 礼包已领取显示-->
+      <p>
+        <span>领取账号</span>
+        <span>会员账号(昵称)</span>
+      </p>
+      <p>
+        <span>领取时间</span>
+        <span>2016-10-19 16:34:09</span>
+      </p>
+      <!--endregion 礼包已领取显示-->
+
+      <!--region 礼包已核销显示-->
+      <p>
+        <span>核销时间</span>
+        <span>2016-10-19 16:34:09</span>
+      </p>
+      <p>
+        <span>核销员</span>
+        <span>核销员名称</span>
+      </p>
+      <!--endregion 礼包已核销显示-->
+
+      <!--endregion 已缴费时显示-->
+
+    </div>
+  </div>
+  <!--region 线上账单：未缴费时显示-->
+  <a class="diybtn-primary-diy fixed-btn" @click="toPayment">确认缴费</a>
+  <!--endregion-->
+  <!--region 线下账单：领取时显示-->
+  <a class="diybtn-primary-diy fixed-btn" @click="toReceive">确认领取</a>
+  <!--endregion-->
+  <payment-layer ref="paymentLayer"></payment-layer>
+</div>
+<include file="Public:base"/>
+<include file="Public/components/choice_single_layer"/>
+<include file="AdvanceBill/components/payment_layer"/>
+<script>
+  (function (window) {
+    var app = window.AppUtil,
+      rootPath = window.ThinkPHP.APP;
+    var vm = new Vue({
+      el: '#app',
+      components: {
+        'payment-layer': COMPONENTS.PAYMENT_LAYER
+      },
+      data: function () {
+        return {
+        }
+      },
+      mounted: function () {
+      },
+      methods: {
+        //点击【确认缴费】
+        toPayment: function (item) {
+          item = {
+            send_lb_val: '',//选择的礼包
+            send_lb_valKey: '',//选择的礼包
+          }
+          this.$refs.paymentLayer.init(item)
+        },
+        //点击【确认领取】
+        toReceive: function (item) {
+          var html = '<div><p style="color: #9A9A9A;">礼包内容：</p><div>礼包名称礼包名称礼包名称礼包名称礼包名称礼 包名称礼包名称礼包名称</div></div>'
+          publicObj.confirmWap(function (index) {
+            publicObj.layerMsg('核销成功', {icon: 1})
+            layer.close(index)
+          }, {title: '确认领取礼包', btn: [ '确定核销', '取消核销',], content: html})
+        }
+      }
+    })
+    window.vm = vm;
+  })(window);
+</script>
+</body>
+</html>

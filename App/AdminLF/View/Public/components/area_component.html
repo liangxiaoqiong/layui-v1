@@ -1,0 +1,71 @@
+<!--省市区地址组件-->
+<!-- template -->
+<script type="x-template" id="area_component">
+  <!--region 模版-->
+  <div class="form-row row-three">
+    <div class="row-cell">
+      <div class="row-div">
+        <select class="form-control" lay-ignore="" id="province_info" v-model="info.province_id" @change="changeArea('province')">
+          <option value="0">所在省份</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-cell">
+      <div class="row-div">
+        <select class="form-control" lay-ignore="" id="city_info" v-model="info.city_id" @change="changeArea('city')">
+          <option value="0">所在城市</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-cell">
+      <div class="row-div">
+        <select class="form-control" lay-ignore="" id="area_info" v-model="info.area_id" @change="changeArea('area')">
+          <option value="0">所在区域</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script src="__CITY_JS__"></script>
+<script>
+  COMPONENT.AREA_COMPONENT = {
+    template: '#area_component',
+    props: {
+      info: Object
+    },
+    computed: {},
+    mounted: function () {
+    },
+    data: function () {
+      return {
+      }
+    },
+    methods: {
+      changeArea: function (type) {
+        var self = this
+        self.$nextTick(function () {
+          switch (type) {
+            case 'province':
+              setcity('province_info', 'city_info', 'area_info', self.info.province_id, '', '');
+              self.info.city_id = $('#city_info').val();
+              self.info.area_id = $('#area_info').val();
+              break
+            case 'city':
+              setcity('province_info', 'city_info', 'area_info', self.info.province_id, self.info.city_id, '');
+              self.info.area_id = $('#area_info').val();
+              break
+            case 'area':
+              setcity('province_info', 'city_info', 'area_info', self.info.province_id, self.info.city_id, self.info.area_id);
+              break
+            default:
+              break
+          }
+        })
+      },
+    },
+    directives: {}
+  }
+</script>

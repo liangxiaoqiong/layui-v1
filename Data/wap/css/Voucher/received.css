@@ -1,0 +1,213 @@
+.success_fail_page {
+  text-align: center;
+}
+.success_fail_page .page-title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 0 0 0;
+}
+.success_fail_page .page-title .page-icon {
+  width: 3rem;
+  height: 3rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #FB5440;
+}
+.success_fail_page .page-title .page-icon img {
+  width: auto;
+  height: 20px;
+}
+.success_fail_page .page-title .title-text {
+  font-size: .75rem;
+  margin: 1.3rem 0 1.15rem 0;
+  color: #161616;
+  font-weight: bold;
+}
+.success_fail_page .tip {
+  color: #9A9A9A;
+  font-size: .65rem;
+  margin-top: 1.5rem;
+}
+.success_fail_page .btn-div {
+  padding: 1.88rem;
+  margin-top: .6rem;
+}
+.success_fail_page .btn-div a {
+  height: 2.25rem;
+  border-radius: .5rem;
+  font-size: .75rem;
+  background-color: transparent;
+}
+
+/*region diy-list-box 优惠券页面*/
+.diy-list-box {
+  padding: .5rem .5rem 0 .5rem;
+}
+.diy-list-box .box-up {
+  border-radius: .5rem;
+  display: inline-block;
+  width: 100%;
+  background: #FFFFFF;
+  z-index: 2;
+  position: relative;
+  border: none!important;
+  box-shadow: 0px -3px 20px 0px rgba(0, 0, 0, 0.08);
+}
+.diy-list-box .box-info {
+  width: 100%;
+  vertical-align: middle;
+}
+.diy-list-box .box-info .coupon-base {
+  position: absolute;
+  height: 5.5rem;
+  top: 0;
+  width: 5.5rem;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: .5rem 0 0 .5rem;
+  background-color: rgba(251, 84, 64, .1);
+}
+.diy-list-box .box-info .coupon-base .coupon-price font {
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: normal;
+}
+.diy-list-box .box-info .coupon-base .coupon-price b {
+  font-size: 2rem;
+  font-style: normal;
+  margin-left: -8px;
+}
+.diy-list-box .box-info .coupon-base .coupon-limit {
+  font-size: 0.55rem;
+}
+
+.diy-list-box .box-info .present-text {
+  padding-left: .75rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 4rem;
+  width: calc(100% - 5.5rem);
+  float: right;
+  padding-right: .75rem;
+}
+.diy-list-box .box-info .present-text .present-name{
+  font-size: .65rem;
+  color: #343434;
+  margin-bottom: .6rem;
+  text-align: left;
+  min-height: 20px;
+}
+.diy-list-box .box-info .present-text .time-range {
+  display: inline-block;
+  width: 100%;
+  color: #343434;
+  font-size: .56rem;
+  text-align: left;
+}
+.diy-list-box .box-up .box-more-btn {
+  height: 1.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  align-items: center;
+  padding-right: .5rem;
+  color: #999999;
+  font-size: .6rem;
+  position: relative;
+  justify-content: space-between;
+  padding-left: 6.25rem;
+}
+.diy-list-box .box-up .box-more-btn i{
+  font-style: normal;
+  float: right;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.diy-list-box .box-up .box-more-btn:before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  height: 1px;
+  display: inline-block;
+  width: calc(100% - 5.5rem);
+  background-color: #f0f0f0;
+  content: '';
+}
+.diy-list-box .box-more {
+  border-radius: 5px;
+  color: #999999;
+  border: 1px solid rgba(102, 102, 102, 0.3);
+  background-color: rgba(102, 102, 102, 0.03);
+  position: relative;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.3s ease;
+  height: 0;
+  padding: 0;
+  z-index: 1;
+}
+.diy-list-box .box-more p {
+  font-size: .6rem;
+  line-height: 1rem;
+}
+.diy-list-box .box-more p a{
+  font-size: .6rem;
+  color: #999999;
+}
+
+.diy-list-box.is-open-detail .box-more-btn i{
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.diy-list-box.is-open-detail .box-more{
+  transform: scaleY(1);
+  padding: .4rem .8rem;
+  height: initial;
+  background-color: #ffffff!important;
+  border: none!important;
+  border-radius: .5rem;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+/*endregion*/
+

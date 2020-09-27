@@ -7,11 +7,7 @@
   <link rel="stylesheet" href="__ADMIN__/plugins/layui/css/layui.css?v={$V}">
   <link rel="stylesheet" href="__ADMIN__/icon/diy-icon/style.css?v={$V}">
   <link rel="stylesheet" href="__ADMIN__/css/admin.css?v={$V}">
-  <php>
-    $skin = get_cfg_value('CFG_MANAGE_THEMESTYLE');
-    $skin = empty($skin) ? 'skin_1' : $skin;
-  </php>
-  <link rel="stylesheet" href="__ADMIN__/skin/{$skin}/css/style.css?v={$V}"/>
+  <link rel="stylesheet" href="__ADMIN__/css/Login/login.css?v={$V}">
   <script src="__ADMIN__/js/jquery-1.9.1.min.js?v={$V}" type="text/javascript"></script>
   <script src="__ADMIN__/plugins/layui/layui.js?v={$V}" type="text/javascript"></script>
   <script type="text/javascript" src="__VUE__"></script>
@@ -26,10 +22,6 @@
   </div>
   <h2>{:get_cfg_value('CFG_WEBTITLE')}</h2>
   <div class="login">
-    <div class="login-tab" v-if="false">
-      <a :class="{'active': +query.login_type === 1}" @click="query.login_type = 1">管理员登录</a>
-      <a :class="{'active': +query.login_type === 2}" @click="query.login_type = 2">生产商登录</a>
-    </div>
     <h3>登录</h3>
     <form class="layui-form">
       <div class="layui-form-item">
@@ -45,15 +37,14 @@
              style="float:left; cursor:pointer;" alt="captcha"/>
       </div>
       <div class="layui-form-item">
-        <button class="btn-default" type="button" style="background-color: #B0B0B0" v-if="isIe">登录</button>
-        <button class="btn-default" type="button" @click="login" v-else>登录</button>
+        <button class="btn-primary-diy" type="button" style="background-color: #B0B0B0" v-if="isIe">登录</button>
+        <button class="btn-primary-diy" type="button" @click="login" v-else>登录</button>
       </div>
       <div class="login-checkbox flex-between">
-        <label class="xq-checkbox">
-          <input type="checkbox" checked>
-          <font style="font-size: 14px">下次自动登录</font>
+        <label class="diy-checkbox display-align">
+          <input type="checkbox" lay-ignore checked />
+          <font>下次自动登录</font>
         </label>
-        <a style="font-size: 14px" href="{:U('Login/reset_pwd')}" v-if="false">忘记密码</a>
       </div>
     </form>
   </div>
@@ -71,17 +62,11 @@
     data: function () {
       return {
         query: {
-          // login_type: 1, //登录状态：1-管理员登录，2-生产商登录
           username: '',
           password: '',
           code: ''
         },
         isIe: false
-      }
-    },
-    computed: {
-      userNamePlaceholder: function () {
-        return +this.query.login_type === 1 ? '请输入员工账号' : '请输入生产商账号'
       }
     },
     mounted: function () {
@@ -118,7 +103,7 @@
       login: function () {
         var self = this
         var param = [
-          {key: 'username', verify_type: 'required', error_text: self.userNamePlaceholder},
+          {key: 'username', verify_type: 'required', error_text: '请输入您的用户名'},
           {key: 'password', verify_type: 'required', error_text: '请输入密码'},
           {key: 'code', verify_type: 'required', error_text: '请输入图形验证码'}
         ]
@@ -133,7 +118,7 @@
             data.data = data.data || data.url;
             if (data.code === +'{$Think.CODE_LOGIN_SUCCESS}') {
               layer.close('loading');
-              publicObj.layerMsg(data.msg, 1)
+              publicObj.layerMsg(data.msg, {icon: 1})
               setTimeout(function () {
                 location.href = data.data.url;
               },1000)

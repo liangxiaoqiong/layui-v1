@@ -1,0 +1,66 @@
+<!--批量导入/第一步: 选择文件-->
+<style>
+  .import-step1 {
+    padding-top: 30px;
+  }
+  .import-tip {
+    padding: 20px 0;
+    line-height: 40px;
+  }
+</style>
+<!-- template -->
+<script type="x-template" id="import_step1_component">
+  <!--region 模版-->
+  <div class="import-step1">
+    <div>
+      <div class="upload-file-btn display-align">
+        <button class="btn-primary-diy"><i class=""></i>请选择xlsx格式的文件</button>
+        <upload-file v-model="info.file_url"></upload-file>
+      </div>
+      <span class="ml-10 color-diy" v-if="info.file_url !== ''">上传成功</span>
+    </div>
+    <div class="import-tip">
+      <div>导入指引：</div>
+      <div>
+        <span>1、点击</span>
+        <a class="btn-primary-diy display-align ml-10 mr-10">下载</a>
+        <span>固定模板制作您的{{ getImportName }}表格</span>
+      </div>
+      <div>2、点击“请选择xlsx格式的文件”--->点击“打开”--->确定--->成功！</div>
+    </div>
+  </div>
+  <!--endregion-->
+</script>
+
+<!-- JS -->
+<script>
+  COMPONENT.IMPORT_STEP1_COMPONENT = {
+    template: '#import_step1_component',
+    components: {
+      'upload-file': COMPONENT.UPLOAD_FILE_COMPONENT,
+    },
+    props: {
+      info: Object,
+      importType: {
+        type: String,
+        default: 'project'
+      },//批量导入类型。project-项目，bill-账单
+    },
+    computed: {
+      getImportName: function () {
+        var importName = '项目'
+        if (this.importType === 'bill') {
+          importName = '账单'
+        }
+        return importName
+      }
+    },
+    mounted: function () {
+    },
+    data: function () {
+      return {}
+    },
+    methods: {},
+    directives: {}
+  }
+</script>
