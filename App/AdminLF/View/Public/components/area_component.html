@@ -63,6 +63,9 @@
             default:
               break
           }
+          self.info.province = $("#province_info option:selected").text()
+          self.info.city = $("#city_info option:selected").text()
+          self.info.area = $("#area_info option:selected").text()
         })
       },
     },
