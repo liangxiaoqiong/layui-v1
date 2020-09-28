@@ -15,10 +15,10 @@
         @get-table-data="getTableData">
       <!--region td-val-->
       <template v-slot:td-val="slotData">
-        <template v-if="slotData.th.th_val[0] === 'zde'">
+        <template v-if="slotData.th.filed_val === 'zde'">
           <span class="color-red">{{ slotData.item[slotData.th.th_val[0]] }}</span>
         </template>
-        <template v-else-if="slotData.th.th_val[0] === 'lqnr'">
+        <template v-else-if="slotData.th.filed_val === 'lqnr'">
           <span class="color-red">{{ slotData.item[slotData.th.th_val[0]] }}</span>
           <span>礼包名称</span>
         </template>

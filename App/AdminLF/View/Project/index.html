@@ -47,7 +47,7 @@
       <!--region td-val-->
       <template v-slot:td-val="slotData">
         <!--region 项目名称-->
-        <template v-if="slotData.th.th_val[0] === 'xmmc'">
+        <template v-if="slotData.th.filed_val === 'xmmc'">
           <div class="flex-between">
             <span class="line-one" :title="slotData.item[slotData.th.th_val[0]]">{{ slotData.item[slotData.th.th_val[0]] }}</span>
             <a class="color-diy" @click="showInfoLayer">编辑</a>
@@ -55,10 +55,10 @@
         </template>
         <!--endregion-->
         <!--region 收费员管理、核销员管理-->
-        <template v-else-if="slotData.th.th_val[0] === 'sfygl' || slotData.th.th_val[0] === 'hxygl'">
+        <template v-else-if="slotData.th.filed_val === 'sfygl' || slotData.th.filed_val === 'hxygl'">
           <div class="flex-between">
             <span class="line-one">{{ slotData.item[slotData.th.th_val[0]] }}</span>
-            <a class="color-diy" @click="manage(slotData.th.th_val[0], slotData.item)">管理</a>
+            <a class="color-diy" @click="manage(slotData.th.filed_val, slotData.item)">管理</a>
           </div>
         </template>
         <!--endregion-->

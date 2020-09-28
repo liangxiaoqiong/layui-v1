@@ -16,14 +16,14 @@
       <!--region td-val-->
       <template v-slot:td-val="slotData">
         <!--region 操作-->
-        <template v-if="slotData.th.th_val[0] === 'action'">
+        <template v-if="slotData.th.filed_val === 'action'">
           <div class="table-action">
             <a @click="showInfoLayer">编辑</a>
             <a @click="del">删除</a>
           </div>
         </template>
         <!--endregion-->
-        <template v-else-if="slotData.th.th_val[0] === 'zt'">
+        <template v-else-if="slotData.th.filed_val === 'zt'">
           <el-switch
               v-model="slotData.item[slotData.th.th_val[0]]"
               active-value="1"

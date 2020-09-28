@@ -93,7 +93,7 @@
                 :prop="th.th_val[0]"
                 :label="th.th_name"
                 show-overflow-tooltip
-                :align="th.th_val[0] === 'action' ? 'right' : 'left'"
+                :align="th.filed_val === 'action' ? 'right' : 'left'"
                 :fixed="isFixed(th)"
                 :width="tableRowWidth(th)">
               <template slot="header" slot-scope="scope">

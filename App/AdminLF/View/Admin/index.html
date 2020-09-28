@@ -16,7 +16,7 @@
       <!--region td-val-->
       <template v-slot:td-val="slotData">
         <!--region 操作-->
-        <template v-if="slotData.th.th_val[0] === 'action'">
+        <template v-if="slotData.th.filed_val === 'action'">
           <div class="table-action">
             <a>日记</a>
             <a @click="showInfoLayer">编辑</a>
