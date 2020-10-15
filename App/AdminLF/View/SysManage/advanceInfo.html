@@ -88,7 +88,7 @@
       <!--endregion-->
     </div>
     <div style="padding-left: 150px; padding-top: 10px;">
-      <button class="btn-primary-diy">确认提交</button>
+      <button class="btn-primary-diy" @click="save">确认提交</button>
     </div>
   </div>
   <script>
@@ -154,8 +154,22 @@
         //删除礼包里的套餐
         delGiftPackage: function (item, index) {
           item.tc.splice(index, 1)
-        }
+        },
         /**endregion*/
+        save: function () {
+          var self = this
+          var timeRageList = []
+          self.info.jfsj.forEach(function (value) {
+              timeRageList.push({
+                start_time: value.start_time,
+                end_time: value.end_time,
+              })
+          })
+          if (!publicObj.isTimeRepeat(timeRageList)) {
+            publicObj.layerMsg('缴费时间范围不能重复')
+            return false
+          }
+        }
       }
     })
   </script>

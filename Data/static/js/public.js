@@ -171,6 +171,26 @@ var publicObj = new Object({
     });
   },
 
+  //判断多个时间段是否存在重叠的部分
+  isTimeRepeat: function (timeList) {
+    var begin = []
+    var over = []
+    timeList.forEach(function (value) {
+      begin.push(value.start_time)
+      over.push(value.end_time)
+    })
+    begin = begin.sort();
+    over  = over.sort();
+    for(i=1;i<begin.length;i++){
+      if (begin[i] <= over[i-1]){
+        //console.log("时间有重复！");
+        return false;
+      }
+    }
+    //console.log("时间没有重复！");
+    return true;
+  },
+
   /**
    * 判断是否是手机
    * @param value

@@ -1,0 +1,22 @@
+#参考案例：园区、团购、生产系统、智慧工地、联发预缴费
+#对应git项目名：layui-v1
+
+1、jquery版本：jquery-3.2.1.min.js
+
+2、弹框插件：layer.js【官方文档：https://www.layui.com/doc/modules/layer.html】
+（1）、封装的iframe/div弹框方法：publicObj.layerDialog()
+（2）、封装的关闭弹出框口 ifream方法：publicObj.layerFrameClose()
+（3）、封装的消息提示弹框方法：publicObj.layerMsg()
+（4）、封装的删除提示弹框方法：publicObj.confirmDel()【参考页面：accountManage/income_expenditure_list.html】
+
+、element-ui插件：各种样式使用element-ui框架
+（1）、整合element-ui表格
+
+、表单验证：
+（2）、自定义验证方法
+
+
+、上传文件：前端自定义样式
+（1）、单文件上传
+（2）、多文件上传
+
