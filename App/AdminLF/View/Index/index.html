@@ -85,6 +85,7 @@
     <div class="layui-tab layui-tab-brief layout-nav-card" lay-filter="layout-tab"
          style="border: 0; margin: 0;box-shadow: none; height: 100%;">
       <ul class="layui-tab-title" style="padding-left: 0;" id="layui-tab-list">
+        <!--region 注释后，顶部tab关闭全部，仍会保留默认显示的iframe-->
         <li class="layui-this" style="display: none;">
           <a href="javascript:;">
             <!--<i class="fa fa-desktop" aria-hidden="true"></i>-->
@@ -93,11 +94,14 @@
             </cite>
           </a>
         </li>
+        <!--endregion-->
       </ul>
       <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+        <!--region 注释后，顶部tab关闭全部，仍会保留默认显示的iframe-->
         <div class="layui-tab-item layui-show">
           <iframe src=""></iframe><!--{:U('Garden/systemHome')}-->
         </div>
+        <!--endregion-->
       </div>
     </div>
   </div>
