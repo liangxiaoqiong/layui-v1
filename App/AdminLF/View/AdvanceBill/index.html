@@ -66,10 +66,10 @@
             {filed_val: 'fjh', th_val: ['fjh'], th_name: "房间号", t_width: 120},
             {filed_val: 'sjhm', th_val: ['sjhm'], th_name: "手机号码", t_width: 130},
             {filed_val: 'gx', th_val: ['gx'], th_name: "关系", t_width: 130},
-            {filed_val: 'zde', th_val: ['zde'], th_name: "账单额(元)", t_width: 100, sort: {is_sort: 1, sort_type: 'desc'}},
+            {filed_val: 'zde', th_val: ['zde'], th_name: "账单额(元)", t_width: 100},
             {filed_val: 'jfzt', th_val: ['jfzt'], th_name: "缴费状态", t_width: 80},
             {filed_val: 'jflx', th_val: ['jflx'], th_name: "缴费类型", t_width: 80},
-            {filed_val: 'jfsj', th_val: ['jfsj'], th_name: "缴费时间",t_width: 150},
+            {filed_val: 'jfsj', th_val: ['jfsj'], th_name: "缴费时间",t_width: 150, sort: {is_sort: 1, sort_type: 'desc', sort_param: 'sort_pay_time'}},
             {filed_val: 'lqlx', th_val: ['lqlx'], th_name: "领取类型", t_width: 80},
             {filed_val: 'lqnr', th_val: ['lqnr'], th_name: "领取内容", t_width: 100},
             {filed_val: 'lqzh', th_val: ['lqzh'], th_name: "领取账号", t_width: 130},
@@ -77,7 +77,7 @@
             {filed_val: 'hxy', th_val: ['hxy'], th_name: "核销员", t_width: 100},
             {filed_val: 'hxsj', th_val: ['hxsj'], th_name: "核销时间",t_width: 150},
             {filed_val: 'bz', th_val: ['bz'], th_name: "备注",t_width: 150},
-            {filed_val: 'cjsj', th_val: ['cjsj'], th_name: "创建时间",t_width: 150, sort: {is_sort: 1, sort_type: 'desc'}},
+            {filed_val: 'cjsj', th_val: ['cjsj'], th_name: "创建时间",t_width: 150, sort: {is_sort: 1, sort_type: 'desc', sort_param: 'sort_create_time'}},
           ],//表头
           query: {
             page: 1,
@@ -94,6 +94,8 @@
             jf_end_time: '',//
             hx_start_time: '',//核销时间
             hx_end_time: '',//
+            sort_pay_time: 'desc',//缴费时间排序,desc 降序 ，asc 升序
+            sort_create_time: 'desc',//创建时间排序,desc 降序 ，asc 升序
           },
           tableData: {
             total: '0',
@@ -118,10 +120,11 @@
         //切换排序
         changeSort: function (th) {
           var self = this
-          console.log(th)
           self.query.page = 1
+          var sort_result = th.sort.sort_type === 'desc' ? 'asc' : (th.sort.sort_type === 'asc' ? '' : 'desc')
+          th.sort.sort_type = sort_result
+          self.query[th.sort.sort_param] = th.sort.sort_type
           self.getTableData()
-          th.sort.sort_type = th.sort.sort_type === 'desc' ? 'asc' : 'desc'
         },
         getTableData: function (current) {
           var self = this

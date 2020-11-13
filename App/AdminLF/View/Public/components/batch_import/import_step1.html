@@ -15,15 +15,17 @@
     <div>
       <div class="upload-file-btn display-align">
         <button class="btn-primary-diy"><i class=""></i>请选择xlsx格式的文件</button>
-        <upload-file v-model="info.file_url"></upload-file>
+        <input type="file" name="upload_file" id="upload_file" @change="uploadFile">
       </div>
-      <span class="ml-10 color-diy" v-if="info.file_url !== ''">上传成功</span>
+      <span class="ml-10 color-diy" v-if="info.file_name !== ''">上传成功</span>
     </div>
     <div class="import-tip">
       <div>导入指引：</div>
       <div>
         <span>1、点击</span>
-        <a class="btn-primary-diy display-align ml-10 mr-10">下载</a>
+        <a class="btn-primary-diy display-align ml-10 mr-10" target="_blank" download="模板.xls"
+           :href="downloadXLS"
+        >下载</a>
         <span>固定模板制作您的{{ getImportName }}表格</span>
       </div>
       <div>2、点击“请选择xlsx格式的文件”--->点击“打开”--->确定--->成功！</div>
@@ -36,9 +38,6 @@
 <script>
   COMPONENT.IMPORT_STEP1_COMPONENT = {
     template: '#import_step1_component',
-    components: {
-      'upload-file': COMPONENT.UPLOAD_FILE_COMPONENT,
-    },
     props: {
       info: Object,
       importType: {
@@ -53,6 +52,13 @@
           importName = '账单'
         }
         return importName
+      },
+      downloadXLS: function () {
+        var url = 'http://dl.wlsd.com.cn/apps/project_example.xls'
+        if (this.importType === 'bill') {
+          url = 'http://dl.wlsd.com.cn/apps/bill_example.xls'
+        }
+        return url
       }
     },
     mounted: function () {
@@ -60,7 +66,12 @@
     data: function () {
       return {}
     },
-    methods: {},
+    methods: {
+      uploadFile: function (event) {
+        var file = $("#upload_file")[0].files[0];
+        this.info.file_name = file.name
+      }
+    },
     directives: {}
   }
 </script>

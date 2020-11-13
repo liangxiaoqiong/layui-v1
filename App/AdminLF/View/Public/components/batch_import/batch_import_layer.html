@@ -6,18 +6,24 @@
     <div class="common-layer-body pl-30">
       <div class="tab-box" style="padding-top: 20px">
         <ul>
-          <li :class="{'active': +step === 1}" @click="changeTab(1)">第一步: 选择文件</li>
-          <li :class="{'active': +step === 2}" @click="changeTab(2)">第二步: 数据确认</li>
+          <li :class="{'active': +step === 1}">第一步: 选择文件</li>
+          <li :class="{'active': +step === 2}">第二步: 数据确认</li>
         </ul>
       </div>
       <div>
         <import-step1 :info="info" :import-type="importType" v-show="+step === 1"></import-step1>
-        <import-step2 ref="step2" :info="info" :import-type="importType" :table-filed="importTableFiled" v-show="+step === 2"></import-step2>
+        <import-step2
+            ref="step2"
+            :info="info"
+            :import-type="importType"
+            :table-filed="importTableFiled"
+            v-show="+step === 2"></import-step2>
       </div>
     </div>
     <div class="common-layer-btn">
+      <a class="btn-primary-diy" @click="importData" v-if="+step === 1">导入</a>
       <a class="btn-primary-diy" @click="confirmImport" v-if="+step === 2">确定</a>
-      <a class="btn-grey" @click="hideLayer">取消</a>
+      <a class="btn-grey ml-10" @click="hideLayer">取消</a>
     </div>
   </div>
   <!--endregion-->
@@ -45,26 +51,39 @@
         default: 'project'
       },//批量导入类型。project-项目，bill-账单
     },
-    computed: {},
+    computed: {
+      getImportName: function () {
+        var importName = '项目'
+        if (this.importType === 'bill') {
+          importName = '账单'
+        }
+        return importName
+      }
+    },
     mounted: function () {
     },
     data: function () {
       return {
         step: 1,//1-第一步，2-第二步
         info: {
-          file_url: ''
-        },
+          file_name: '',
+          im_num: '',
+          all_num: '',
+          fail_num: '',
+        }
       }
     },
     methods: {
       init: function () {
+        this.info.file_name = ''
+        this.step = 1
         this.showLayer()
       },
       showLayer: function () {
         var self = this
         publicObj.layerDialog({
           type: 1,
-          title: '批量导入项目',
+          title: '批量导入' + self.getImportName,
           area: ['950px', '95%'],
           content: $('#batch-import-layer')
         })
@@ -72,23 +91,59 @@
       hideLayer: function () {
         layer.closeAll()
       },
-      changeTab: function (tid) {
-        if (+tid === 2) {
-          if (this.info.file_url === '') {
-            publicObj.layerMsg('请先上传文件')
-            return false
+      //导入数据
+      importData: function () {
+        var self = this
+        // 上传文件
+        var id = "";
+        var form = new FormData();
+        var file = $("#upload_file")[0].files[0];
+        if (typeof file === 'undefined') {
+          publicObj.layerMsg('请上传批量发货文件')
+          return false;
+        }
+        form.append('file', file);
+        form.append('id', id);
+
+        var result = {
+          data: {
+            im_num: 2,
+            all_num: 4,
+            fail_num: 2
           }
         }
-        this.step = tid
-        if (+this.step === 2) {
-          this.$refs.step2.init()
+        self.info.im_num = result.data.im_num
+        self.info.all_num = result.data.all_num
+        self.info.fail_num = result.data.fail_num
+        self.step = 2
+        self.$refs.step2.init()
+        return false
+        var url = "{:U('Project/importProjectList')}"
+        if (self.importType === 'bill') {
+          url = "{:U('AdvanceBill/importBillList')}"
         }
+        AppUtil.ajaxRequest({
+          url: url,
+          processData: false,
+          contentType: false,
+          data: form,
+          type: 'POST',
+          timeout: 1000 * 600,
+        }).then(function (result) {
+          self.info.im_num = result.data.im_num
+          self.info.all_num = result.data.all_num
+          self.info.fail_num = result.data.fail_num
+          self.step = 2
+          self.$refs.step2.init()
+        })
       },
-      //确定导出
+      //确定导入
       confirmImport: function () {
         var self = this
-        var html = '<div>导入成功<span class="color-diy">40</span>条！导入失败<span class="color-red">50</span>条！</div>';
+        var success_num = (+self.info.all_num - (+self.info.fail_num))
+        var html = '<div>导入成功<span class="color-diy">'+success_num+'</span>条！导入失败<span class="color-red">'+self.info.fail_num+'</span>条！</div>';
         publicObj.confirmDel(function (index) {
+          self.$emit('syncdata')
           self.hideLayer()
         }, {
           title: html,

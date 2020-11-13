@@ -172,15 +172,20 @@ var publicObj = new Object({
   },
 
   //判断多个时间段是否存在重叠的部分
-  isTimeRepeat: function (timeList) {
+  isTimeRepeat: function (timeList, type) {
     var begin = []
     var over = []
     timeList.forEach(function (value) {
       begin.push(value.start_time)
       over.push(value.end_time)
     })
-    begin = begin.sort();
-    over  = over.sort();
+    if (typeof type !== 'undefined' && type === 'num') {
+      begin = begin.sort(function(a,b){return a-b})
+      over = over.sort(function(a,b){return a-b});
+    } else {
+      begin = begin.sort();
+      over = over.sort();
+    }
     for(i=1;i<begin.length;i++){
       if (begin[i] <= over[i-1]){
         //console.log("时间有重复！");

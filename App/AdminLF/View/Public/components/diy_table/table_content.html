@@ -37,6 +37,38 @@
   .table-batch-action {
     display: inline-block;
   }
+  .sort-box {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    height: 34px;
+    width: 12px;
+    vertical-align: middle;
+    cursor: pointer;
+    overflow: initial;
+    position: relative;
+  }
+  .sort-box i {
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    position: absolute;
+    left: 0px;
+  }
+  .sort-box .sort-t {
+    border-bottom-color: #c0c4cc;
+    top: 5px;
+  }
+  .sort-box .sort-b {
+    border-top-color: #c0c4cc;
+    bottom: 7px;
+  }
+  .sort-box.sort-asc .sort-t {
+    border-bottom-color: #409eff;
+  }
+  .sort-box.sort-desc .sort-b {
+    border-top-color: #409eff;
+  }
 </style>
 <script type="x-template" id="diy_table_component">
   <!--region 模版-->
@@ -55,34 +87,34 @@
           <!--多选，设置显示隐藏弹框按钮-->
           <template v-if="+is_show_checkbox === 1 || +is_show_menu === 1">
             <el-table-column
-                :width="+is_show_checkbox === 1 && +is_show_menu === 1 ? '76' : '50'"
+                :width="+is_show_checkbox === 1 && +is_show_menu === 1 ? '100' : '80'"
                 :align="+is_show_checkbox === 1 && +is_show_menu === 1 ? 'left' : 'center'"
                 fixed="left"
                 class-name="row-menu">
 
-                <template slot="header" slot-scope="scope">
-                  <template v-if="+is_show_checkbox === 1">
-                    <label class="diy-checkbox display-align">
-                      <input type="checkbox" lay-ignore  @click="checkAllChange"
+              <template slot="header" slot-scope="scope">
+                <template v-if="+is_show_checkbox === 1">
+                  <label class="diy-checkbox display-align">
+                    <input type="checkbox" lay-ignore  @click="checkAllChange"
                            :checked="isCheckAll" />
-                    </label>
-                  </template>
-                  <template v-if="+is_show_menu === 1">
-                    <i class="diyicon-table-setting" @click="tableSettingLayer"></i>
-                  </template>
+                  </label>
+                </template>
+                <template v-if="+is_show_menu === 1">
+                  <i class="diyicon-table-setting" @click="tableSettingLayer"></i>
+                </template>
+              </template>
+
+              <template slot-scope="scope">
+                <template v-if="+is_show_checkbox === 1">
+                  <label class="diy-checkbox display-align">
+                    <input type="checkbox" lay-ignore :value="scope.row[checkedParam]" v-model="query.checkedIds"/>
+                  </label>
                 </template>
 
-                <template slot-scope="scope">
-                  <template v-if="+is_show_checkbox === 1">
-                    <label class="diy-checkbox display-align">
-                      <input type="checkbox" lay-ignore :value="scope.row[checkedParam]" v-model="query.checkedIds" />
-                    </label>
-                  </template>
-
-                  <template v-if="+is_show_menu === 1">
-                    <div class="display-align">{{ (query.page - 1) * query.limit + (scope.$index + 1) }}</div>
-                  </template>
+                <template v-if="+is_show_menu === 1">
+                  <div class="display-align">{{ menuValue(scope) }}</div>
                 </template>
+              </template>
 
             </el-table-column>
           </template>
@@ -99,7 +131,10 @@
               <template slot="header" slot-scope="scope">
                 <div @click="changeSort(th)" :style="isSortable(th) ? 'cursor: pointer;' : ''">
                   {{ th.th_name }}
-                  <i :class="'diyicon-sort-'+th.sort.sort_type" v-if="isSortable(th)"></i>
+                  <span class="sort-box" :class="'sort-'+th.sort.sort_type" v-if="isSortable(th)">
+                      <i class="sort-t"></i>
+                      <i class="sort-b"></i>
+                  </span>
                 </div>
               </template>
               <template slot-scope="scope">
@@ -175,6 +210,10 @@
         type: [String, Number],
         default: 1
       }, //是否显示表头列表筛选
+      menuParam: {
+        type: String,
+        default: 'index'
+      }, //列表筛选字段，默认递增
       tableFiled: {
         type: Array,
         default: function () {
@@ -282,14 +321,24 @@
           return th.t_width
         }
       },
+      //
+      menuValue: function (scope) {
+        if (this.menuParam !== 'index' && typeof scope.row[this.menuParam] !== 'undefined') {
+          return scope.row[this.menuParam]
+        } else {
+          return (this.query.page - 1) * this.query.limit + (scope.$index + 1)
+        }
+      },
       /**region 全选*/
-      checkAllChange(val) {
+      checkAllChange() {
         var self = this
         var allIds = []
-        self.tableData.list.forEach(function (value) {
-          allIds.push(value[self.checkedParam])
-        })
-        this.query.checkedIds = val ? allIds : []
+        if (!self.isCheckAll) {
+          self.tableData.list.forEach(function (value) {
+            allIds.push(value[self.checkedParam])
+          })
+        }
+        this.query.checkedIds = allIds
       },
       /**endregion*/
       //统计规则
