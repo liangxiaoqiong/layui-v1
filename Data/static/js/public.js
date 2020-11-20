@@ -8,45 +8,6 @@
 var publicObj = new Object({
   bodyScroll: '',
 
-  /*点击复制文字*/
-  copyContent: function (text, id, doMsg) {
-    if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-      //ios
-      var copyDOM = document.querySelector('#' + id);  //要复制文字的节点
-      var range = document.createRange();
-      // 选中需要复制的节点
-      range.selectNode(copyDOM);
-      // 执行选中元素
-      window.getSelection().addRange(range);
-      // 执行 copy 操作
-      var successful = document.execCommand('copy');
-      try {
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.log('copy is' + msg);
-      } catch (err) {
-        console.log('Oops, unable to copy');
-      }
-      // 移除选中的元素
-      window.getSelection().removeAllRanges();
-    } else {
-      // 创建元素用于复制
-      var aux = document.createElement("input");
-      // 设置元素内容
-      aux.setAttribute("value", text);
-      // 将元素插入页面进行调用
-      document.body.appendChild(aux);
-      // 复制内容
-      aux.select();
-      // 将内容复制到剪贴板
-      document.execCommand("copy");
-      // 删除创建元素
-      document.body.removeChild(aux);
-    }
-    doMsg = !(doMsg === 0)
-    if (doMsg) {
-      layer.msg('已复制内容到剪贴板');
-    }
-  },
 
   /**
    * 质朴长存法 =>不足位步0 by lifesinger
@@ -61,47 +22,6 @@ var publicObj = new Object({
     return num;
   },
 
-  /**
-   * 正则，只允许正整数
-   * @param value
-   * limitVal{
-   *  "maxVal":"限制最大数"，"maxMsg":"超过最大数限制说明",
-   *  "minVal":"限制最小数"，"minMsg":"超过最小数限制说明"}
-   * @returns {number}
-   */
-  numInt: function (obj, limitVal) {
-    if (obj.value.length == 1) {
-      obj.value = obj.value.replace(/[^0-9]/g, '')
-    } else {
-      obj.value = obj.value.replace(/\D/g, '')
-    }
-    if (typeof (limitVal) !== 'undefined') {
-      if (obj.value > +limitVal.maxVal) {
-        layer.msg(limitVal.maxMsg);//'该商品最大售量9999件！'
-        obj.value = +limitVal.maxVal;
-      }
-    }
-    return obj.value;
-  },
-
-  /**
-   * 浮点小数(最多精确到2位)
-   * @param value
-   * limitVal{
-   *  "maxVal":"限制最大数"，"maxMsg":"超过最大数限制说明",
-   *  "minVal":"限制最小数"，"minMsg":"超过最小数限制说明"}
-   * @returns {number}
-   */
-  numPoint2: function (obj, limitVal) {
-    obj.value = obj.value.match(/\d+(\.\d{0,2})?/) ? obj.value.match(/\d+(\.\d{0,2})?/)[0] : '';
-    if (typeof (limitVal) !== 'undefined') {
-      if (obj.value > +limitVal.maxVal) {
-        layer.msg(limitVal.maxMsg);
-        obj.value = +limitVal.maxVal;
-      }
-    }
-    return obj.value;
-  },
 
   /**
    * 点击图片查看大图
@@ -352,17 +272,20 @@ var publicObj = new Object({
 
   //layer.confirm弹框
   layerConfirm: function (config, callbackYes, callbackCancel, callbackEnd) {
+    var overflow = ''
     layer.confirm(config.content, {
       type: 1,
       title: config.title,
       skin: 'layer-confirm',
       shadeClose: config.shadeClose || true,
-      area: config.area || 'auto',
-      offset: config.offset || 'auto',
+      area: config.area || ['', ''],
+      offset: config.offset || ['', ''],
       success: function (layero) {
         //兼容弹框div在滚动条下面，弹框显示内容偏下（代码正常）
         config.self.$nextTick(function () {
-          $("#layerModel").parents('html, body').css({'overflow': 'auto'})
+          overflow = $("#layerModel").parents('html, body').css('overflow')
+          var overflow_ = overflow == 'hidden' ? 'auto' : 'hidden'
+          $("#layerModel").parents('html, body').css({'overflow': overflow_})
         })
         // layer弹层遮罩挡住窗体解决
         var mask = $(".layui-layer-shade");
@@ -370,7 +293,7 @@ var publicObj = new Object({
       },
       end: function (index) {
         config.self.$nextTick(function () {
-          $("#layerModel").parents('html, body').css({'overflow': 'hidden'})
+          $("#layerModel").parents('html, body').css({'overflow': overflow})
         })
         if (typeof callbackEnd !== 'undefined') {
           callbackEnd(index)//取消后的回调

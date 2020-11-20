@@ -282,8 +282,10 @@
     mounted: function () {
       var self = this
       self.$nextTick(function () {
-        var screenH = document.body.clientHeight
-        self.tableHeight = screenH - (+self.pageOtherH)
+        self.syncTableAuto()
+        window.onresize = function () {
+          self.syncTableAuto()
+        }
       })
     },
     data: function () {
@@ -292,6 +294,15 @@
       }
     },
     methods: {
+      //同步表格高度
+      syncTableAuto: function () {
+        var self = this
+        self.$nextTick(function () {
+          var screenH = document.body.clientHeight
+          console.log('screenH='+screenH)
+          self.tableHeight = screenH - (+self.pageOtherH) - 50 - 50
+        })
+      },
       //是否悬浮
       isFixed: function (th) {
         if (typeof th.is_fixed_left !== 'undefined' && +th.is_fixed_left === 1) {
