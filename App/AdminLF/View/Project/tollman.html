@@ -64,6 +64,7 @@
           query: {
             page: 1,
             limit: 20,
+            load: false
           },
           tableData: {
             total: '0',
@@ -82,6 +83,7 @@
       methods: {
         getTableData: function (current) {
           var self = this
+          self.query.load = true
           if (typeof current !== 'undefined') {
             if (typeof current.page !== 'undefined') {
               self.query.page = current.page
@@ -93,7 +95,12 @@
             type: 'get',
             showLoad: false
           }).then(function (result) {
-            self.tableData = result.data
+            setTimeout(function () {
+              self.tableData = result.data
+              self.query.load = false
+            },1000)
+          }).catch(function () {
+            self.query.load = false
           })
         },
         showInfoLayer: function () {

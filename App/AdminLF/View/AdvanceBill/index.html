@@ -4,6 +4,8 @@
   <div class="admin-main" id="app" v-cloak>
     <table-search :query="query" @search="getTableData" @import-bill="importBill"></table-search>
     <diy-table
+        ref="diyTable"
+        table-type="2"
         :query="query"
         :table-total-filed="tableTotalFiled"
         :table-filed="tableFiled"
@@ -14,7 +16,7 @@
         @change-sort="changeSort"
         @get-table-data="getTableData">
       <!--region td-val-->
-      <template v-slot:td-val="slotData">
+      <template v-slot:td-val2="slotData">
         <template v-if="slotData.th.filed_val === 'zde'">
           <span class="color-red">{{ slotData.item[slotData.th.th_val[0]] }}</span>
         </template>
@@ -61,7 +63,7 @@
             {property: 'lqnr', meta_param: 'lqnr_total'}
           ],
           tableFiled: [
-            {filed_val: 'zdbh', th_val: ['zdbh'], th_name: "账单编号",t_width: 140},
+            {filed_val: 'zdbh', th_val: ['zdbh'], th_name: "账单编号",t_width: 140,is_setting_show: 2},
             {filed_val: 'xmmc', th_val: ['xmmc'], th_name: "项目名称", t_width: 130},
             {filed_val: 'fjh', th_val: ['fjh'], th_name: "房间号", t_width: 120},
             {filed_val: 'sjhm', th_val: ['sjhm'], th_name: "手机号码", t_width: 130},
@@ -82,6 +84,7 @@
           query: {
             page: 1,
             limit: 20,
+            field: 'xmmc,hxy,hxsj',
             checkedIds: [],
             xmmc: '',//项目名称
             jfzt: '0',//缴费状态：0-全部，1-待缴费，2-已缴费
@@ -96,6 +99,7 @@
             hx_end_time: '',//
             sort_pay_time: 'desc',//缴费时间排序,desc 降序 ，asc 升序
             sort_create_time: 'desc',//创建时间排序,desc 降序 ，asc 升序
+            load: false,
           },
           tableData: {
             total: '0',
@@ -128,6 +132,7 @@
         },
         getTableData: function (current) {
           var self = this
+          self.query.load = true
           if (typeof current !== 'undefined') {
             if (typeof current.page !== 'undefined') {
               self.query.page = current.page
@@ -139,7 +144,15 @@
             type: 'get',
             showLoad: false
           }).then(function (result) {
-            self.tableData = result.data
+            setTimeout(function () {
+              self.tableData = result.data
+              self.query.load = false
+              self.$nextTick(function () {
+                self.$refs.diyTable.init()
+              })
+            }, 1000)
+          }).catch(function () {
+            self.query.load = false
           })
         },
         //批量删除

@@ -69,6 +69,11 @@
   .sort-box.sort-desc .sort-b {
     border-top-color: #409eff;
   }
+  /*region 解决element-ui的table表格控件表头与内容列不对齐问题*/
+  .el-table th.gutter{
+    display: table-cell!important;
+  }
+  /*endregion*/
 </style>
 <script type="x-template" id="diy_table_component">
   <!--region 模版-->
@@ -82,7 +87,7 @@
             :show-summary="+is_show_total === 1"
             :summary-method="getSummaries"
             :row-class-name="tableRowClassName"
-            empty-text="数据为空哦">
+            :empty-text="query.load ? '加载中...' : '数据为空哦'">
 
           <!--多选，设置显示隐藏弹框按钮-->
           <template v-if="+is_show_checkbox === 1 || +is_show_menu === 1">
@@ -112,7 +117,12 @@
                 </template>
 
                 <template v-if="+is_show_menu === 1">
-                  <div class="display-align">{{ menuValue(scope) }}</div>
+                  <template v-if="+is_diy_menu === 1">
+                    <slot :name="'menu-val'+tableType" :item="scope.row" :index="scope.$index"></slot>
+                  </template>
+                  <template v-else>
+                    {{ menuValue(scope) }}
+                  </template>
                 </template>
               </template>
 
@@ -130,7 +140,7 @@
                 :width="tableRowWidth(th)">
               <template slot="header" slot-scope="scope">
                 <div @click="changeSort(th)" :style="isSortable(th) ? 'cursor: pointer;' : ''">
-                  {{ th.th_name }}
+                  <span v-html="th.th_name"></span>
                   <span class="sort-box" :class="'sort-'+th.sort.sort_type" v-if="isSortable(th)">
                       <i class="sort-t"></i>
                       <i class="sort-b"></i>
@@ -138,14 +148,15 @@
                 </div>
               </template>
               <template slot-scope="scope">
-                <slot name="td-val" :th="th" :item="scope.row" :index="scope.$index"></slot>
+                <slot :name="'td-val'+tableType" :th="th" :item="scope.row" :index="scope.$index"></slot>
               </template>
             </el-table-column>
 
           </template>
         </el-table>
 
-        <table-setting ref="settingLayer" :query="query" :table-filed="tableFiled"></table-setting>
+        <table-setting ref="settingLayer" :query="query" :table-filed="tableFiled"
+                       @sync-table-auto="init"></table-setting>
       </div>
     </div>
     <div class="table-bottom flex-between">
@@ -182,12 +193,17 @@
       'pagination': COMPONENT.PAGINATION_COMPONENT
     },
     props: {
+      tableType: {
+        type: [Number, String],
+        default: ''
+      },//用于标识当前表格组件唯一性，当一个html引入多个diy-table组件时，表格项都会=1
       /**
        query:{
         page: 1,
         limit: 20,
-        field: '',//显示的表格项json串：'filed_val, filed_val,...',   ''||undefined默认全部
+        field: '',//显示的表格项json串：'filed_val, filed_val,...',   ''||undefined默认全部,is_setting_show!=2
         checkedIds: [], //选择得表格项，checkedParam值
+        load: false, // 数据是否加载中
       }*/
       query: Object,
       checkedParam: {
@@ -210,6 +226,10 @@
         type: [String, Number],
         default: 1
       }, //是否显示表头列表筛选
+      is_diy_menu: {
+        type: [String, Number],
+        default: 0
+      },//首列表项index是否用slot,具体例子看迅信erp
       menuParam: {
         type: String,
         default: 'index'
@@ -226,7 +246,7 @@
                 is_fixed_left: 1,//是否固定在左侧0/1
                 is_fixed_right: 0,//是否固定在右侧0/1
                 t_width: 60, //列宽初始值
-                is_setting: 1, //是否可设置显示或不显示,
+                is_setting_show: 1, //是否可设置显示或不显示，1[undefined]-显示；0-不显示；2-一直显示，不可再切换成0
                 drag: {
                   is_drag: 0, //是否可拖拽字段顺序,0-不可拖拽，一直显示
                   drag_sort: 1, //拖拽字段顺序,数值越大越靠后
@@ -274,8 +294,10 @@
     },
     computed: {
       isCheckAll: function () {
-        if (this.query.checkedIds && this.tableData.list) {
-          return this.query.checkedIds.length >= this.tableData.list.length
+        if (this.tableData.list.length > 0) {
+          if (this.query.checkedIds && this.tableData.list) {
+            return this.query.checkedIds.length >= this.tableData.list.length
+          }
         }
       },
     },
@@ -294,12 +316,14 @@
       }
     },
     methods: {
-      //同步表格高度
+      init: function () {
+        this.tableHeight = this.tableHeight + 1 //防止初始化表格底部统计行样式错乱，
+      },
+      //同步表格高度,一个页面引入>=2个改组件时，pageOtherH会错乱
       syncTableAuto: function () {
         var self = this
         self.$nextTick(function () {
           var screenH = document.body.clientHeight
-          console.log('screenH='+screenH)
           self.tableHeight = screenH - (+self.pageOtherH) - 50 - 50
         })
       },
@@ -314,11 +338,9 @@
       },
       //是否显示表格列
       isShowRow: function (item) {
-        if (typeof this.query.field == 'undefined') {
-          this.$set(this.query, 'field', '')
-        }
-        var checkedFields = this.query.field.split(',')
-        return checkedFields.indexOf(item.filed_val) > -1
+        return (typeof item.is_setting_show === 'undefined') ||
+          (typeof item.is_setting_show !== 'undefined' &&
+            (+item.is_setting_show === 1 || +item.is_setting_show === 2))
       },
       //是否可排序
       isSortable: function (item) {

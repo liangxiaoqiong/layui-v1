@@ -57,7 +57,10 @@
     <div class="table-setting-layer" id="table-setting-layer">
       <div class="set-layer-title">设置列表项</div>
       <div class="set-layer-main">
-        <el-checkbox-group v-model="checkFieldIds">
+        <el-checkbox v-for="(item, index) in tableFiled" :label="item.filed_val" :key="index" disabled checked v-if="!isSetting(item)">
+          {{ item.th_name }}
+        </el-checkbox>
+        <el-checkbox-group style="display: contents;" v-model="checkFieldIds">
           <el-checkbox v-for="(item, index) in tableFiled" :label="item.filed_val" :key="index" v-if="isSetting(item)">
             {{ item.th_name }}
           </el-checkbox>
@@ -83,7 +86,7 @@
     data: function () {
       return {
         isShowLayer: false,
-        checkFieldIds: [] //显示的表格项数组，[filed_val, filed_val, ...]
+        checkFieldIds: [] //显示的表格项数组is_setting_show=1，[filed_val, filed_val, ...]
       }
     },
     mounted: function () {
@@ -107,19 +110,24 @@
     methods: {
       //判断是否可设置显示||不显示
       isSetting: function (item) {
-        return typeof item.is_setting ==='undefined' ||
-          (typeof item.is_setting !== 'undefined' && +item.is_setting === 1)
+        return typeof item.is_setting_show ==='undefined' ||
+          (typeof item.is_setting_show !== 'undefined' && (+item.is_setting_show === 1 || +item.is_setting_show === 0))
+      },
+      isSettingShow: function (item) {
+        return typeof item.is_setting_show ==='undefined' ||
+          (typeof item.is_setting_show !== 'undefined' && +item.is_setting_show === 1)
       },
       init: function () {
         var self = this
         var field = []
-        if (typeof self.query.field === 'undefined' || self.query.field !== '') {
+        if (typeof self.query.field !== 'undefined' && self.query.field !== '') {
           self.checkFieldIds = self.query.field.split(',')
+          self.setTableFieldShow()
         } else {
           //为空时默认全选中
           if (self.tableFiled) {
             self.tableFiled.forEach(function (value) {
-              if (self.isSetting(value)) {
+              if (self.isSettingShow(value)) {
                 field.push(value.filed_val)
               }
             })
@@ -150,9 +158,24 @@
           self.checkFieldIds = ids
         }
       },
+      setTableFieldShow: function () {
+        var self = this
+        self.tableFiled.forEach(function (value) {
+          if (+value.is_setting_show !== 2) {
+            if (self.checkFieldIds.indexOf(value.filed_val) > -1) {
+              self.$set(value, 'is_setting_show', 1)
+            } else {
+              self.$set(value, 'is_setting_show', 0)
+            }
+          }
+        })
+      },
       submitSet: function () {
-        this.query.field = this.checkFieldIds.join(',')
-        this.hideLayer()
+        var self = this
+        self.query.field = self.checkFieldIds.join(',')
+        self.setTableFieldShow()
+        this.$emit('sync-table-auto')
+        self.hideLayer()
       }
     }
   }
