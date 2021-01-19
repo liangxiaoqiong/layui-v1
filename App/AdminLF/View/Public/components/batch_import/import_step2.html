@@ -11,6 +11,7 @@
 
     <diy-table
         style="width: calc(100% + 20px);margin: 0 -10px;"
+        table-type="3"
         :query="query"
         :table-filed="tableFiled"
         :table-data="tableData"
@@ -20,7 +21,7 @@
         :table-row-class="tableRowClassData"
         @get-table-data="getTableData">
       <!--region td-val-->
-      <template v-slot:td-val="slotData">
+      <template v-slot:td-val3="slotData">
         <template>
           {{ slotData.item[slotData.th.th_val[0]] }}
         </template>

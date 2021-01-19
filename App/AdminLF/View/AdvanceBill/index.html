@@ -13,11 +13,10 @@
         is_show_total="1"
         is_show_checkbox="1"
         is_show_menu="1"
-        @change-sort="changeSort"
         @get-table-data="getTableData">
       <!--region td-val-->
       <template v-slot:td-val2="slotData">
-        <template v-if="slotData.th.filed_val === 'zde'">
+        <template v-if="slotData.th.filed_val === 'zdew'">
           <span class="color-red">{{ slotData.item[slotData.th.th_val[0]] }}</span>
         </template>
         <template v-else-if="slotData.th.filed_val === 'lqnr'">
@@ -39,7 +38,7 @@
     </diy-table>
 
     <!--弹框-->
-    <batch-import ref="batchImportLayer" import-type="bill" :import-table-filed="importTableFiled"></batch-import>
+   <!-- <batch-import ref="batchImportLayer" import-type="bill" :import-table-filed="importTableFiled"></batch-import>-->
   </div>
   <!--region diy-table引入-->
   <include file="Public/components/diy_table/table_setting"/>
@@ -68,7 +67,7 @@
             {filed_val: 'fjh', th_val: ['fjh'], th_name: "房间号", t_width: 120},
             {filed_val: 'sjhm', th_val: ['sjhm'], th_name: "手机号码", t_width: 130},
             {filed_val: 'gx', th_val: ['gx'], th_name: "关系", t_width: 130},
-            {filed_val: 'zde', th_val: ['zde'], th_name: "账单额(元)", t_width: 100},
+            {filed_val: 'zdew', th_val: ['zde'], th_name: "账单额(元)", t_width: 100},
             {filed_val: 'jfzt', th_val: ['jfzt'], th_name: "缴费状态", t_width: 80},
             {filed_val: 'jflx', th_val: ['jflx'], th_name: "缴费类型", t_width: 80},
             {filed_val: 'jfsj', th_val: ['jfsj'], th_name: "缴费时间",t_width: 150, sort: {is_sort: 1, sort_type: 'desc', sort_param: 'sort_pay_time'}},
@@ -121,15 +120,6 @@
         this.getTableData()
       },
       methods: {
-        //切换排序
-        changeSort: function (th) {
-          var self = this
-          self.query.page = 1
-          var sort_result = th.sort.sort_type === 'desc' ? 'asc' : (th.sort.sort_type === 'asc' ? '' : 'desc')
-          th.sort.sort_type = sort_result
-          self.query[th.sort.sort_param] = th.sort.sort_type
-          self.getTableData()
-        },
         getTableData: function (current) {
           var self = this
           self.query.load = true

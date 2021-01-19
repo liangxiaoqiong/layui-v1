@@ -1,6 +1,11 @@
 <!--系统管理/管理员列表-->
 <extend name="Public:base"/>
 <block name="content">
+  <style>
+    .bg-red {
+      background: #FF5722!important;
+    }
+  </style>
   <div class="admin-main" id="app" v-cloak>
     <div class="search-content">
       <div class="search-container">
@@ -11,7 +16,8 @@
         :query="query"
         :table-filed="tableFiled"
         :table-data="tableData"
-        is_show_checkbox="0"
+        is_show_checkbox="1"
+        :table-row-class="tableRowClass"
         @get-table-data="getTableData">
       <!--region td-val-->
       <template v-slot:td-val="slotData">
@@ -48,6 +54,16 @@
       },
       data: function () {
         return {
+          tableRowClass: [
+            {
+              rowIndex: 1,//表格key
+              rowName: 'bg-red' //.class名称
+            },
+            {
+              rowIndex: 3,//表格key
+              rowName: 'bg-red' //.class名称
+            },
+          ],
           tableFiled: [
             {filed_val: 'yhm', th_val: ['yhm'], th_name: "用户名"},
             {filed_val: 'jb', th_val: ['jb'], th_name: "级别"},
@@ -59,6 +75,7 @@
           query: {
             page: 1,
             limit: 20,
+            checkedIds: []
           },
           tableData: {
             total: '0',
@@ -72,6 +89,7 @@
       methods: {
         getTableData: function () {
           var self = this
+          self.checkedIds = [];
           AppUtil.ajaxRequest({
             url: '/Data/json/admin/Admin/index.json',
             dataType: 'json',

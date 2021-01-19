@@ -1,4 +1,6 @@
-<!--diy表格，可滑动，可拖动设置表格宽度，可悬浮-->
+<!--diy表格，可滑动，可拖动设置表格宽度，可悬浮
+说明文档：https://docs.qq.com/doc/DWXdOaWZaY0h0dXhC
+-->
 <!-- template -->
 <style>
   .el-table-diy {
@@ -87,6 +89,7 @@
             :show-summary="+is_show_total === 1"
             :summary-method="getSummaries"
             :row-class-name="tableRowClassName"
+            :span-method="arraySpanMethod"
             :empty-text="query.load ? '加载中...' : '数据为空哦'">
 
           <!--多选，设置显示隐藏弹框按钮-->
@@ -111,7 +114,7 @@
 
               <template slot-scope="scope">
                 <template v-if="+is_show_checkbox === 1">
-                  <label class="diy-checkbox display-align">
+                  <label class="diy-checkbox display-align" v-if="noCheckList && noCheckList.indexOf(scope.row[checkedParam]) === -1">
                     <input type="checkbox" lay-ignore :value="scope.row[checkedParam]" v-model="query.checkedIds"/>
                   </label>
                 </template>
@@ -134,7 +137,7 @@
                 v-if="isShowRow(th)"
                 :prop="th.th_val[0]"
                 :label="th.th_name"
-                show-overflow-tooltip
+                :show-overflow-tooltip="showOverflowTooltip(th)"
                 :align="th.filed_val === 'action' ? 'right' : 'left'"
                 :fixed="isFixed(th)"
                 :width="tableRowWidth(th)">
@@ -145,6 +148,7 @@
                       <i class="sort-t"></i>
                       <i class="sort-b"></i>
                   </span>
+                  <a class="el-icon-error" :title="th.tip_text" v-if="th.tip_text"></a>
                 </div>
               </template>
               <template slot-scope="scope">
@@ -174,7 +178,7 @@
       </div>
 
       <!--region 分页-->
-      <pagination
+      <pagination v-if="+is_show_page === 1"
           :query="query"
           :total="tableData.total"
           @temp-page-event="getTableData"></pagination>
@@ -222,6 +226,12 @@
         type: [String, Number],
         default: 1
       }, //是否显示多选
+      noCheckList: {
+        type: Array,
+        default: function () {
+          return []
+        }
+      }, // 不可选数组，值为[checkedParam]对应的数据
       is_show_menu: {
         type: [String, Number],
         default: 1
@@ -230,6 +240,10 @@
         type: [String, Number],
         default: 0
       },//首列表项index是否用slot,具体例子看迅信erp
+      is_show_page: {
+        type: [String, Number],
+        default: 1
+      }, // 是否显示表格右下角分页
       menuParam: {
         type: String,
         default: 'index'
@@ -252,9 +266,12 @@
                   drag_sort: 1, //拖拽字段顺序,数值越大越靠后
                 },
                 sort: {
-                  is_sort: 0,  //该字段是否可排序
-                  sort_type: 'desc' //该字段排序值，desc/asc
+                  is_sort: 0,  //该字段是否可排序,默认0
+                  sort_type: 'desc', //该字段排序值，desc/asc
+                  sort_param: 'sort_create_time' //query{}里的变量名
                 }, //该字段是否有排序
+               tip_text: '',//该字段的提示
+               show_overflow_tooltip: true,//当内容过长被隐藏时显示 tooltip[默认true]
               },*/
           ]
         }
@@ -295,8 +312,9 @@
     computed: {
       isCheckAll: function () {
         if (this.tableData.list.length > 0) {
-          if (this.query.checkedIds && this.tableData.list) {
-            return this.query.checkedIds.length >= this.tableData.list.length
+          if (this.query.checkedIds && this.tableData.list && this.noCheckList) {
+            var len = (this.query.checkedIds.length) + (this.noCheckList.length);
+            return len >= this.tableData.list.length
           }
         }
       },
@@ -312,12 +330,28 @@
     },
     data: function () {
       return {
-        tableHeight: 500
+        tableHeight: 500,
+        isInit: true
       }
     },
     methods: {
       init: function () {
-        this.tableHeight = this.tableHeight + 1 //防止初始化表格底部统计行样式错乱，
+        var self = this
+        self.$nextTick(function () {
+          if (self.isInit) {
+            self.tableHeight = self.tableHeight + 1 //防止初始化表格底部统计行样式错乱，
+            self.isInit = false
+          }
+        })
+      },
+      tableHeightLess: function () {
+        var self = this
+        self.$nextTick(function () {
+          if (self.isInit) {
+            self.tableHeight = self.tableHeight - 1
+            self.isInit = false
+          }
+        })
       },
       //同步表格高度,一个页面引入>=2个改组件时，pageOtherH会错乱
       syncTableAuto: function () {
@@ -368,7 +402,9 @@
         var allIds = []
         if (!self.isCheckAll) {
           self.tableData.list.forEach(function (value) {
-            allIds.push(value[self.checkedParam])
+            if (self.noCheckList.indexOf(value[self.checkedParam]) === -1) {
+              allIds.push(value[self.checkedParam])
+            }
           })
         }
         this.query.checkedIds = allIds
@@ -387,6 +423,7 @@
           if (+self.is_show_total === 1) {
             if (self.tableTotalFiled.length > 0 && typeof self.tableData.meta !== "undefined") {
               self.tableTotalFiled.forEach(function (val) {
+                console.log(value.property)
                 if (value.property === val.property) {
                   sums[index] = self.tableData.meta[val.meta_param]
                 }
@@ -416,11 +453,28 @@
         }
         return className
       },
+      //合并行||列param={row, column, rowIndex, columnIndex}
+      arraySpanMethod: function (options) {
+        return {
+          rowspan: 1,
+          colspan: 1
+        };
+      },
       //点击切换排序
       changeSort: function (th) {
-        if (this.isSortable(th)) {
-          this.$emit('change-sort', th)
+        var self = this
+        if (self.isSortable(th)) {
+          self.query.page = 1
+          var sort_result = th.sort.sort_type === 'desc' ? 'asc' : (th.sort.sort_type === 'asc' ? '' : 'desc')
+          th.sort.sort_type = sort_result
+          self.query[th.sort.sort_param] = th.sort.sort_type
+          self.getTableData()
         }
+      },
+      //当内容过长被隐藏时显示 tooltip
+      showOverflowTooltip: function (th) {
+        return (typeof th.show_overflow_tooltip === 'undefined' && th.filed_val !== 'action')
+          || (typeof th.show_overflow_tooltip !== 'undefined' && th.show_overflow_tooltip === 1);
       }
     },
     directives: {}
