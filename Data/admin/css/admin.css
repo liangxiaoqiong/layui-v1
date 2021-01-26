@@ -314,7 +314,7 @@
 /*endregion*/
 
 /*region 滚动条样式*/
-::-webkit-scrollbar {width:6px;border-radius: 3px}
+/*::-webkit-scrollbar {width:6px;border-radius: 3px}
 
 ::-webkit-scrollbar-button:vertical {background-color:#e2e2e2}
 
@@ -325,7 +325,7 @@
 
 ::-webkit-scrollbar-thumb:vertical:hover {background-color:#e0e0e0}
 
-::-webkit-scrollbar-thumb:vertical:active {background-color:#e0e0e0}
+::-webkit-scrollbar-thumb:vertical:active {background-color:#e0e0e0}*/
 /*endregion*/
 
 [v-cloak] {display: none !important;}

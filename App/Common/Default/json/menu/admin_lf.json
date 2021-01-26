@@ -163,9 +163,9 @@
     "child": [
       {
         "id": "1001",
-        "name": "测试1",
+        "name": "合计左侧悬浮，左侧底部的滚动条无法拖动",
         "pid": "1000",
-        "module": "Test",
+        "module": "Index",
         "action": "test1",
         "parameter": "",
         "quick": "0",
@@ -174,7 +174,7 @@
         "icon": "",
         "menu_type": "0",
         "short_name": "",
-        "url": "/admin.php?s=/Test/test1",
+        "url": "/admin.php?s=/Index/test1",
         "child": []
       },
       {

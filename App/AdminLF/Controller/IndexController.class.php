@@ -35,5 +35,9 @@ class IndexController extends CommonController
         $menu_json = json_encode($menu_list);
         exit($menu_json);
     }
+    public function test1()
+    {
+        $this->display('Test/test1');
+    }
 
 }

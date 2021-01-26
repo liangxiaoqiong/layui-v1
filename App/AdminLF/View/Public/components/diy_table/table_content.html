@@ -18,7 +18,7 @@
   }
   .el-table-diy .el-table th {
     background-color: #FAFAFA;
-    height: 50px;
+    height: 41px;
   }
   .el-table-diy .el-table th>.cell {
     white-space: nowrap;
@@ -31,7 +31,7 @@
     color: #FF0000;
   }
   .el-table__fixed-footer-wrapper tbody td {
-    padding: 12px 0!important;
+    padding: 8px 0!important;
   }
   .table-bottom {
     padding: 0 10px;
@@ -74,6 +74,43 @@
   /*region 解决element-ui的table表格控件表头与内容列不对齐问题*/
   .el-table th.gutter{
     display: table-cell!important;
+  }
+  /*endregion*/
+
+  /*region demo[Test/test1.html]*/
+  /*//之前写elementUI表格 没太关注这个问题
+  //直到前段时间由于固定合计列太宽 而合计列滚动条无法拖动
+  //所以在网上查了很多相关知识 在此做下记录
+  //本项目测试可用
+
+    原因：是因为el-table在列添加fixed时，实际上是在这个table上方添加一个类名为el-table__fixed的相对定位的div，
+    　　她会根据下方拖动的表格实时进行重绘，因为盖住了所以无法拖动。
+    解决方法：*/
+      /*滚动条覆盖*/
+  .el-table--scrollable-x .el-table__body-wrapper {
+    z-index: 2;
+    border-right: 1px solid #E0E0E0;
+    box-sizing: border-box;
+  }
+  .el-table__fixed-right::after,
+  .el-table__fixed::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    z-index: 4;
+  }
+  .el-table__fixed-right::after {
+    left: 0;
+    box-shadow: inset 9px 0px 8px 7px rgba(0,0,0,.12);
+  }
+  .el-table__fixed::after {
+    right: 0;
+    box-shadow: 2px 0px 15px 1px rgba(0,0,0,.12);
+  }
+  .el-table__fixed {
+    padding-right: 3px;
   }
   /*endregion*/
 </style>
