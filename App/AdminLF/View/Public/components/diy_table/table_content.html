@@ -120,6 +120,7 @@
     <div class="el-table-diy">
       <div class="position-r">
         <el-table
+            :ref="'elTable'+tableType"
             :data="tableData.list"
             border
             :height="tableHeight"
@@ -387,6 +388,8 @@
             self.tableHeight = self.tableHeight + 1 //防止初始化表格底部统计行样式错乱，
             self.isInit = false
           }
+          var el = self.$refs['elTable'+self.tableType].$el;
+          el.querySelector('.el-table__body-wrapper').scrollTop = 0;
         })
       },
       tableHeightLess: function () {
@@ -468,7 +471,6 @@
           if (+self.is_show_total === 1) {
             if (self.tableTotalFiled.length > 0 && typeof self.tableData.meta !== "undefined") {
               self.tableTotalFiled.forEach(function (val) {
-                console.log(value.property)
                 if (value.property === val.property) {
                   sums[index] = self.tableData.meta[val.meta_param]
                 }
