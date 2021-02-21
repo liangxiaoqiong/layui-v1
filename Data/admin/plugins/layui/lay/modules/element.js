@@ -28,6 +28,12 @@
             $(this).addClass('layui-this')
           }
         })
+        /*region 点击事件判断[修复点击三级菜单的空白区域导致选中第一个bug]*/
+        $this.find('dl').on('click', function () {
+          event.preventDefault()
+          event.stopPropagation()
+        })
+        /*endregion*/
       }
     })
   o.addClass(e).siblings().removeClass(e),
