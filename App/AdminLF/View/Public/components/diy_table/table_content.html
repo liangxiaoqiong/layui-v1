@@ -181,7 +181,10 @@
                 :width="tableRowWidth(th)">
               <template slot="header" slot-scope="scope">
                 <div @click="changeSort(th)" :style="isSortable(th) ? 'cursor: pointer;' : ''">
-                  <span v-html="th.th_name"></span>
+                  <template v-if="th.is_th_slot && +th.is_th_slot === 1">
+                    <slot :name="'th-val'+tableType" :th="th"></slot>
+                  </template>
+                  <template v-else><span v-html="th.th_name"></span></template>
                   <span class="sort-box" :class="'sort-'+th.sort.sort_type" v-if="isSortable(th)">
                       <i class="sort-t"></i>
                       <i class="sort-b"></i>
@@ -301,6 +304,7 @@
                 // menu-编辑字段顺序，checkbox-全选，action-操作，
                 th_val: ['id'], // 当前表格显示的字段内容,数组，默认数组长度=1
                 th_name: '序号', // 当前表格项th名称
+                is_th_slot: 0, // 当前表格项th是否使用slot赋值，默认0
                 is_fixed_left: 1,//是否固定在左侧0/1
                 is_fixed_right: 0,//是否固定在右侧0/1
                 t_width: 60, //列宽初始值

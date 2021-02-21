@@ -11,6 +11,11 @@
         :table-data="tableData"
         is_show_total="1"
         @get-table-data="getTableData">
+      <template v-slot:th-val="thSlotData">
+        <template v-if="thSlotData.th.filed_val === 'yhm'">
+          用户名{{ thTotal }}
+        </template>
+      </template>
       <!--region td-val-->
       <template v-slot:td-val="slotData">
         <!--region 操作-->
@@ -48,7 +53,7 @@
             {property: 'num2', meta_param: 'total_num2'}
           ],
           tableFiled: [
-            {filed_val: 'yhm', th_val: ['yhm'], th_name: "用户名", t_width: 240, is_fixed_left: 1},
+            {filed_val: 'yhm', th_val: ['yhm'], th_name: "用户名", is_th_slot: 1, t_width: 240, is_fixed_left: 1},
             {filed_val: 'jb', th_val: ['jb'], th_name: "级别", t_width: 200, is_fixed_left: 1},
             {filed_val: 'email', th_val: ['email'], th_name: "Email地址", t_width: 240, is_fixed_left: 1},
             {filed_val: 'num1', th_val: ['num1'], th_name: "数量1", t_width: 440},
@@ -68,7 +73,7 @@
             list: [],
             meta: {},
           },
-
+          thTotal: 122
         }
       },
       mounted: function () {
