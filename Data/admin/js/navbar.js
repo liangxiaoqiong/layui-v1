@@ -253,6 +253,7 @@ layui.define(['element', 'common'], function(exports) {
 	 * 获取html字符串
 	 * @param {Object} data
 	 */
+	//【一级菜单：顶部(暂隐藏)，二级菜单：左侧黑色区域，三级菜单：左侧白色区域】
 	function getHtml(data) {
 		console.log(data);
 		var ulHtml = '<ul class="layui-nav layui-nav-tree beg-navbar">';
@@ -261,6 +262,7 @@ layui.define(['element', 'common'], function(exports) {
 			//alert(data[i].pid);
 			//if(data[i].spread || i==0  || i==1) {
 			if(i==0) {
+				// 默认二级菜单第一个选中
 				ulHtml += '<li class="layui-nav-item layui-this-parent">';
 			} else {
 				ulHtml += '<li class="layui-nav-item">';

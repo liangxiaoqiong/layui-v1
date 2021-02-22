@@ -42,6 +42,19 @@
      elem: c,
      index: t
     })
+
+    /*region 点击顶部tab，实时切换左侧的二级菜单*/
+    $('#side').find('.layui-nav-tree li').each(function () {
+      var $this_li = $(this);
+      $this_li.find('.layui-nav-child dd').each(function () {
+        var isActive = $(this).hasClass('layui-this');
+        if (isActive) {
+          $this_li.parents('ul').find('.layui-nav-item').removeClass('layui-this-parent');
+          $this_li.addClass('layui-this-parent');
+        }
+      })
+    })
+    /*endregion*/
  },tabDelete:function(i,t){var l=t||a(this).parent(),n=l.index(),s=l.parents(".layui-tab").eq(0),o=s.children(".layui-tab-content").children(".layui-tab-item");l.hasClass(e)&&(l.next()[0]?f.tabClick.call(l.next()[0],null,n+1):l.prev()[0]&&f.tabClick.call(l.prev()[0],null,n-1)),l.remove(),o.eq(n).remove(),setTimeout(function(){f.tabAuto()},50)},
   tabAuto: function () {
     var i = "layui-tab-more",
